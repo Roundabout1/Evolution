@@ -1,12 +1,9 @@
 #include <iostream>
-#include <vector>#include <iostream>
 #include <vector>
-#include <cstdlib> //для rand() и srand()
-#include <ctime> //для time()
 #include <algorithm>
+#include "random generators/random.cpp"
 using namespace std;
 int getRandomNumber(int min, int max);
-
 //ген - это минимальная единица генома
 class Gen{
 private:
@@ -20,13 +17,13 @@ public:
     }
 
     void setValue(Gen gen){
-        this->value = gen->value;
+        this->value = gen.value;
     }
     string toString(){
         return std::to_string(value);
     }
     Gen mutation(){
-        return this;
+        return Gen();
     }
 };
 
@@ -63,7 +60,7 @@ Genome(){
         return ans;
     }
     Genome mutation(){
-        return this;
+        return Genome(chrom.size());
     }
 };
 //популяция - это множество генов
@@ -71,14 +68,17 @@ class Population{
 private:
     vector<Genome> genomes;
 public:
-    Population(int num_population, num_genes){
+    Population(){
+
+    }
+    Population(int num_population, int num_genes){
         genomes.resize(num_population, Genome(num_genes));
     }
     Genome get(int index){
-        return genomes[i];
+        return genomes[index];
     }
     Genome set(int index, Genome genome){
-        genomes[i] = genome;
+        genomes[index] = genome;
     }
 };
 //критерий остановки
@@ -90,6 +90,9 @@ private:
     size_t max_iterations;
 
 public:
+    Terminator(){
+        
+    }
     Terminator(size_t max_iterations){
         cur_iteration = 0;
         this->max_iterations = max_iterations;
@@ -103,7 +106,7 @@ public:
     }
 };
 //Процесс эволюции
-class Evolution(){
+class Evolution{
 private:
     //кол-во особей в одном поколении
     int num_population;
@@ -112,24 +115,27 @@ private:
     Terminator terminator;
     Population population;
 public:
-    Evolution(){
-
+    Evolution(int num_population, int num_genes, Terminator terminator, Population population){
+        this->num_population = num_population;
+        this->num_genes = num_genes;
+        this->terminator = terminator;
+        this->population = population;
     }
     //инициализация
-    vector<Genome> init(){
-
+    Population init(){
+        return Population();
     }
     //скрещивание
-    vector<Genome> crossover(){
-
+    Population crossover(){
+        return Population();
     }
     //мутация
-    vector<Genome> mutation(){
-
+    Population mutation(){
+        return Population();
     }
     //селекция
-    vector <Genome> selection(){
-
+    Population selection(){
+        return Population();
     }
 
     //запуск эволюционного алгоритма
@@ -139,45 +145,6 @@ public:
 };
 
 int main(){
-    srand(time(0));
-    rand();
-
-    int popSize = 100, genSize = 1000;
-    vector <Genome> population = vector<Genome>(popSize, Genome(genSize));
-    for(int i = 0; i < popSize; i++){
-        population[i].randomize();
-    }
-
-    for(int i = 0; i < 100; i++){
-        vector <Genome> newPopulation = newGen(population);
-        population = newPopulation;
-        cout << "gen " << i << endl;
-        cout << population[0].toString() << endl;
-        cout << "fitness = " << population[0].fit() << endl;
-    }
-    /*cout << population[0].toString() << endl;
-    cout << "fitness = " << population[0].fit() << endl;*/
+    cout << "Hello, world!\n";    
     return 0;
-}
-
-int getRandomNumber(int min, int max){
-    static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
-    // ���������� ������������ ��������� ����� � ����� ���������
-    return static_cast<int>(rand() * fraction * (max - min + 1) + min);
-}
-Genome crossover(Genome ind1, Genome ind2, int mutationChance){
-    //srand(time(0));
-    int n = min(ind1.size(), ind2.size());
-    //cout << "CROS " << ind1.size() << ' ' << ind2.size() << endl;
-    Genome child = Genome(n);
-    for(int i = 0; i < n; i++){
-        bool a = rand()%2;
-        if(a){
-            child.setGen(i, ind1.getGen(i));
-        }else{
-            child.setGen(i, ind2.getGen(i));
-        }
-        child.getGen(i).mutation(mutationChance);
-    }
-    return child;
 }
