@@ -1,17 +1,16 @@
 #include <iostream>
 #include <vector>#include <iostream>
 #include <vector>
-#include <cstdlib> // для функций rand() и srand()
-#include <ctime> // для функции time()
+#include <cstdlib> //РґР»СЏ rand() Рё srand()
+#include <ctime> //РґР»СЏ time()
 #include <algorithm>
 using namespace std;
 int getRandomNumber(int min, int max);
 
-//ген - минимальная единица хромосомы
+//РіРµРЅ - СЌС‚Рѕ РјРёРЅРёРјР°Р»СЊРЅР°СЏ РµРґРёРЅРёС†Р° РіРµРЅРѕРјР°
 class Gen{
 private:
     int value;
-
 public:
     Gen(){
         this->value = 0;
@@ -31,11 +30,11 @@ public:
     }
 };
 
-//генотип особи
+//РіРµРЅРѕРј - СЌС‚Рѕ Р·Р°РєРѕРґРёСЂРѕРІР°РЅРЅРѕРµ СЂРµС€РµРЅРёРµ Р·Р°РґР°С‡Рё
 class Genome{
 
 private:
-    //хромосома
+    //С…СЂРѕРјРѕСЃРѕРјР°
     vector <Gen> chrom;
 
 public:
@@ -67,7 +66,7 @@ Genome(){
         return this;
     }
 };
-//множество особей
+//РїРѕРїСѓР»СЏС†РёСЏ - СЌС‚Рѕ РјРЅРѕР¶РµСЃС‚РІРѕ РіРµРЅРѕРІ
 class Population{
 private:
     vector<Genome> genomes;
@@ -82,12 +81,12 @@ public:
         genomes[i] = genome;
     }
 };
-//критерий остановки (вариант с итерациями)
+//РєСЂРёС‚РµСЂРёР№ РѕСЃС‚Р°РЅРѕРІРєРё
 class Terminator{
 private:
-    //текущая итерация
+    //С‚РµРєСѓС‰Р°СЏ РёС‚РµСЂР°С†РёСЏ
     size_t cur_iteration;
-    //количество итераций
+    //РєРѕР»РёС‡РµСЃС‚РІРѕ РёС‚РµСЂР°С†РёР№
     size_t max_iterations;
 
 public:
@@ -95,7 +94,7 @@ public:
         cur_iteration = 0;
         this->max_iterations = max_iterations;
     }
-    //выполнен ли критерий останвки?
+    //РґРѕСЃС‚РёРіРЅСѓС‚Рѕ Р»Рё СѓСЃР»РѕРІРёРµ?
     bool isSatisfied(){
         return cur_iteration > max_iterations;
     }
@@ -103,39 +102,37 @@ public:
         cur_iteration++;
     }
 };
-//эволюционное решение
+//РџСЂРѕС†РµСЃСЃ СЌРІРѕР»СЋС†РёРё
 class Evolution(){
 private:
-    //количество особей в одном поколении
+    //РєРѕР»-РІРѕ РѕСЃРѕР±РµР№ РІ РѕРґРЅРѕРј РїРѕРєРѕР»РµРЅРёРё
     int num_population;
-    //количество генов в одной особи
+    //РєРѕР»-РІРѕ РіРµРЅРѕРІ РІ РѕРґРЅРѕР№ РѕСЃРѕР±Рё
     int num_genes;
-    //критерий остановки
     Terminator terminator;
-    //популяция
     Population population;
 public:
     Evolution(){
 
     }
-    //инициализация
+    //РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
     vector<Genome> init(){
 
     }
-    //скрещивание
+    //СЃРєСЂРµС‰РёРІР°РЅРёРµ
     vector<Genome> crossover(){
 
     }
-    //мутация
+    //РјСѓС‚Р°С†РёСЏ
     vector<Genome> mutation(){
 
     }
-    //селекция
+    //СЃРµР»РµРєС†РёСЏ
     vector <Genome> selection(){
 
     }
 
-    //запуск поиска решения
+    //Р·Р°РїСѓСЃРє СЌРІРѕР»СЋС†РёРѕРЅРЅРѕРіРѕ Р°Р»РіРѕСЂРёС‚РјР°
     void run(){
 
     }
@@ -165,7 +162,7 @@ int main(){
 
 int getRandomNumber(int min, int max){
     static const double fraction = 1.0 / (static_cast<double>(RAND_MAX) + 1.0);
-    // Равномерно распределяем рандомное число в нашем диапазоне
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     return static_cast<int>(rand() * fraction * (max - min + 1) + min);
 }
 Genome crossover(Genome ind1, Genome ind2, int mutationChance){
