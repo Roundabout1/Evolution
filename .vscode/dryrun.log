@@ -1,5 +1,4 @@
-make.exe --dry-run --keep-going --print-directory
-make.exe: Entering directory 'd:/Program Files/EvolutionProject/Evolution'
-g++ src/main.cpp -o bin/main.exe 
-make.exe: Leaving directory 'd:/Program Files/EvolutionProject/Evolution'
- 
+make.exe --dry-run --always-make --keep-going --print-directory
+"make.exe" �� ���� ����७��� ��� ���譥�
+��������, �ᯮ��塞�� �ணࠬ��� ��� ������ 䠩���.
+

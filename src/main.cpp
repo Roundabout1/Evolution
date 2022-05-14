@@ -1,29 +1,35 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include <algorithm>
-#include "random generators/random.cpp"
+#include <random>
+#include <map>
+#include "header.hpp"
 using namespace std;
-int getRandomNumber(int min, int max);
+/*int getRandomNumber(int min, int max);
 //ген - это минимальная единица генома
 class Gen{
 private:
-    int value;
+    int type;
 public:
     Gen(){
-        this->value = 0;
+        this->type = 0;
     }
     Gen(int value){
-       this->value = value;
+       this->type = value;
     }
 
     void setValue(Gen gen){
-        this->value = gen.value;
+        this->type = gen.type;
     }
     string toString(){
-        return std::to_string(value);
+        return std::to_string(type);
     }
-    Gen mutation(){
-        return Gen();
+    bool equal(Gen gen){
+        return gen.type == this->type;
+    }
+    int getType(){
+        return type;
     }
 };
 
@@ -35,7 +41,7 @@ private:
     vector <Gen> chrom;
 
 public:
-Genome(){
+    Genome(){
         chrom = vector<Gen>();
     }
 
@@ -59,10 +65,31 @@ Genome(){
         }
         return ans;
     }
-    Genome mutation(){
-        return Genome(chrom.size());
+    void mutation(){
+        int l = getRandomNumber(0, size()-2);
+        int r = getRandomNumber(1, size()-1);
+        std::swap(chrom[l], chrom[r]);
     }
 };
+
+//функции, реализация которых зависит от поставленной задачи
+
+//возвращает исправленный геном, если он содержал недопустимые ошибки
+Genome fix(Genome genome, int maxType){
+    Genome fixed_genome = Genome(genome.size());
+    map<Gen, bool> used;
+    vector<size_t> mistakes;
+    for(size_t i = 0; i < genome.size(); i++){
+        bool u = used[genome.getGen(i)];
+        if(u){
+            mistakes.push_back(i);
+        }else{
+            used[genome.getGen(i)] = true;
+        }
+    }
+    
+}
+
 //популяция - это множество генов
 class Population{
 private:
@@ -77,8 +104,14 @@ public:
     Genome get(int index){
         return genomes[index];
     }
-    Genome set(int index, Genome genome){
+    size_t size(){
+        return genomes.size();
+    }
+    void set(int index, Genome genome){
         genomes[index] = genome;
+    }
+    void merge(Population other){
+        genomes.insert(other.genomes.end(), other.genomes.begin(), other.genomes.end());
     }
 };
 //критерий остановки
@@ -115,14 +148,17 @@ private:
     Terminator terminator;
     Population population;
 public:
-    Evolution(int num_population, int num_genes, Terminator terminator, Population population){
-        this->num_population = num_population;
+    Evolution(int num_population, int num_genes, Terminator terminator){
         this->num_genes = num_genes;
         this->terminator = terminator;
         this->population = population;
     }
     //инициализация
     Population init(){
+        Population res = Population(num_population, num_genes);
+        for(int i = 0; i < res.size(); i++){
+            res.get(i).mutation();
+        }
         return Population();
     }
     //скрещивание
@@ -140,11 +176,19 @@ public:
 
     //запуск эволюционного алгоритма
     void run(){
-
+        population = init();
+        while(!terminator.isSatisfied()){
+            Population children = crossover();
+            Population mutants = mutation();
+            population.merge(children);
+            population.merge(mutants);
+            population = selection();
+            terminator.update();
+        }
     }
 };
-
+*/
 int main(){
-    cout << "Hello, world!\n";    
+    Genome population;
     return 0;
 }
