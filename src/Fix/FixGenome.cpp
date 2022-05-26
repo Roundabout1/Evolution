@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include "Fix.h"
-#include "Random.h"
+#include "../Random/Random.h"
 
 void fix(Genome &genome, Genome &example) {
     int n = genome.size();

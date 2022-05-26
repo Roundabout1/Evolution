@@ -1,21 +1,21 @@
 
-#ifndef EVOLUTIONALGORITHM_GEN_H
-#define EVOLUTIONALGORITHM_GEN_H
+#ifndef EVOLUTIONALGORITHM_GENE_H
+#define EVOLUTIONALGORITHM_GENE_H
 
 
 #include <vector>
-#include "Point.h"
+#include "../Other/Point.h"
 
-class Gen {
+class Gene {
 private:
     int type;
     Point point;
 public:
-    Gen(int type, const Point &point);
+    Gene(int type, const Point &point);
 
-    Gen();
+    Gene();
 
-    Gen(Gen const &gen);
+    Gene(Gene const &gen);
 
     int getType() const;
 
@@ -27,8 +27,8 @@ public:
 
 };
 
-#define Genome std::vector<Gen>
+#define Genome std::vector<Gene>
 #define Population std::vector<Genome>
 
 Population concat(std::vector<Population> &populations);
-#endif //EVOLUTIONALGORITHM_GEN_H
+#endif //EVOLUTIONALGORITHM_GENE_H

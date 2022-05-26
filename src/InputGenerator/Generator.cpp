@@ -1,5 +1,5 @@
 #include <fstream>
-#include "Random.h"
+#include "../Random/Random.h"
 
 int main(){
     std::ifstream conf("data/input/conf.txt");

@@ -2,7 +2,7 @@
 
 #include <algorithm>
 #include "Selection.h"
-#include "Fitness.h"
+#include "../Fitness/Fitness.h"
 //элитарный отбор, отбираются лучшие select особей
 Population selection(Population &population, int num_selected){
     int num_population = population.size();

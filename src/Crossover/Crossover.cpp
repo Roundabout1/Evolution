@@ -1,9 +1,9 @@
 #include "Crossover.h"
-#include "Random.h"
+#include "../Random/Random.h"
 
 //begin - минимальное количество генов, которые гарантированно достанутся первому родителю
 //end - второму
-Population crossover(std::vector<std::vector<Gen>> &population, int begin, int end) {
+Population crossover(std::vector<std::vector<Gene>> &population, int begin, int end) {
     int num_population = population.size();
     int num_genes = population[0].size();
     Population offspring(num_population*2, Genome(num_genes));

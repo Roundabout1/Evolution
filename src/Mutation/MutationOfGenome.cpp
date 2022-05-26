@@ -1,6 +1,6 @@
 
 #include "Mutation.h"
-Genome mutation(std::vector<Gen> &genome, double probability) {
+Genome mutation(std::vector<Gene> &genome, double probability) {
     int num_genes = genome.size();
     Genome mutant = Genome(num_genes);
     for(int i = 0; i < num_genes; i++){

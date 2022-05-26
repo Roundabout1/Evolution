@@ -1,8 +1,5 @@
-
-
 #include <vector>
 #include "Fitness.h"
-#include "Gen.h"
 //оценка для задачи Коммивояжёра
 double fitness(Genome genome) {
     double sum = genome[0].getPoint().distance(genome[genome.size()-1].getPoint());

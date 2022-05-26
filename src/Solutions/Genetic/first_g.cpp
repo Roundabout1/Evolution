@@ -3,14 +3,14 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
-#include "Gen.h"
-#include "Init.h"
-#include "Terminator.h"
-#include "Mutation.h"
-#include "Fitness.h"
-#include "Crossover.h"
-#include "Fix.h"
-#include "Selection.h"
+#include "../../Gene/Gene.h"
+#include "../../Initialization/Init.h"
+#include "../../Termination/Terminator.h"
+#include "../../Mutation/Mutation.h"
+#include "../../Fitness/Fitness.h"
+#include "../../Crossover/Crossover.h"
+#include "../../Fix/Fix.h"
+#include "../../Selection/Selection.h"
 
 std::string print(Genome &genome){
     std::string output = "";
@@ -60,7 +60,7 @@ int main() {
         double x, y;
         p >> x >> y;
         Point point = Point(x, y);
-        points[i] = Gen(i, point);
+        points[i] = Gene(i, point);
     }
     p.close();
 

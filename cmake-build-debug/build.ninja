@@ -49,89 +49,89 @@ cmake_ninja_workdir = D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/cmake-bui
 
 build cmake_object_order_depends_target_EvolutionAlgorithm: phony || CMakeFiles/EvolutionAlgorithm.dir
 
-build CMakeFiles/EvolutionAlgorithm.dir/main.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/main.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\main.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Solutions/Genetic/first_g.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Solutions/Genetic/first_g.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Solutions\Genetic\first_g.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Solutions\Genetic
 
-build CMakeFiles/EvolutionAlgorithm.dir/Gen.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Gen.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\Gen.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Gene/Gene.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Gene/Gene.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Gene\Gene.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Gene
 
-build CMakeFiles/EvolutionAlgorithm.dir/Point.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Point.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\Point.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Other/Point.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Other/Point.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Other\Point.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Other
 
-build CMakeFiles/EvolutionAlgorithm.dir/Random.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Random.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\Random.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Random/Random.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Random/Random.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Random\Random.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Random
 
-build CMakeFiles/EvolutionAlgorithm.dir/Init.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Init.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\Init.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Initialization/Init.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Initialization/Init.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Initialization\Init.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Initialization
 
-build CMakeFiles/EvolutionAlgorithm.dir/Terminator.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Terminator.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\Terminator.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Termination/Terminator.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Termination/Terminator.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Termination\Terminator.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Termination
 
-build CMakeFiles/EvolutionAlgorithm.dir/MutationOfPopulation.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/MutationOfPopulation.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\MutationOfPopulation.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Mutation/MutationOfPopulation.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Mutation/MutationOfPopulation.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Mutation\MutationOfPopulation.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Mutation
 
-build CMakeFiles/EvolutionAlgorithm.dir/Crossover.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Crossover.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\Crossover.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Crossover/Crossover.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Crossover/Crossover.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Crossover\Crossover.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Crossover
 
-build CMakeFiles/EvolutionAlgorithm.dir/Selection.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Selection.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\Selection.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Selection/Selection.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Selection/Selection.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Selection\Selection.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Selection
 
-build CMakeFiles/EvolutionAlgorithm.dir/FitnessOfGenome.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/FitnessOfGenome.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\FitnessOfGenome.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Fitness/Euclidean.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Fitness/Euclidean.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Fitness\Euclidean.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Fitness
 
-build CMakeFiles/EvolutionAlgorithm.dir/MutationOfGenome.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/MutationOfGenome.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\MutationOfGenome.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Mutation/MutationOfGenome.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Mutation/MutationOfGenome.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Mutation\MutationOfGenome.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Mutation
 
-build CMakeFiles/EvolutionAlgorithm.dir/FitnessOfPopulation.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/FitnessOfPopulation.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\FitnessOfPopulation.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Fitness/FitnessOfPopulation.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Fitness/FitnessOfPopulation.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Fitness\FitnessOfPopulation.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Fitness
 
-build CMakeFiles/EvolutionAlgorithm.dir/FixGenome.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/FixGenome.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\FixGenome.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Fix/FixGenome.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Fix/FixGenome.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Fix\FixGenome.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Fix
 
-build CMakeFiles/EvolutionAlgorithm.dir/FixPopulation.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/FixPopulation.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
-  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\FixPopulation.cpp.obj.d
+build CMakeFiles/EvolutionAlgorithm.dir/src/Fix/FixPopulation.cpp.obj: CXX_COMPILER__EvolutionAlgorithm_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Fix/FixPopulation.cpp || cmake_object_order_depends_target_EvolutionAlgorithm
+  DEP_FILE = CMakeFiles\EvolutionAlgorithm.dir\src\Fix\FixPopulation.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
-  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir
+  OBJECT_FILE_DIR = CMakeFiles\EvolutionAlgorithm.dir\src\Fix
 
 
 # =============================================================================
@@ -141,7 +141,7 @@ build CMakeFiles/EvolutionAlgorithm.dir/FixPopulation.cpp.obj: CXX_COMPILER__Evo
 #############################################
 # Link the executable EvolutionAlgorithm.exe
 
-build EvolutionAlgorithm.exe: CXX_EXECUTABLE_LINKER__EvolutionAlgorithm_Debug CMakeFiles/EvolutionAlgorithm.dir/main.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/Gen.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/Point.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/Random.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/Init.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/Terminator.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/MutationOfPopulation.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/Crossover.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/Selection.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/FitnessOfGenome.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/MutationOfGenome.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/FitnessOfPopulation.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/FixGenome.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/FixPopulation.cpp.obj
+build EvolutionAlgorithm.exe: CXX_EXECUTABLE_LINKER__EvolutionAlgorithm_Debug CMakeFiles/EvolutionAlgorithm.dir/src/Solutions/Genetic/first_g.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Gene/Gene.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Other/Point.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Random/Random.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Initialization/Init.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Termination/Terminator.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Mutation/MutationOfPopulation.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Crossover/Crossover.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Selection/Selection.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Fitness/Euclidean.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Mutation/MutationOfGenome.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Fitness/FitnessOfPopulation.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Fix/FixGenome.cpp.obj CMakeFiles/EvolutionAlgorithm.dir/src/Fix/FixPopulation.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\EvolutionAlgorithm.dir
@@ -160,17 +160,17 @@ build EvolutionAlgorithm.exe: CXX_EXECUTABLE_LINKER__EvolutionAlgorithm_Debug CM
 
 build cmake_object_order_depends_target_Generator: phony || CMakeFiles/Generator.dir
 
-build CMakeFiles/Generator.dir/Generator.cpp.obj: CXX_COMPILER__Generator_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Generator.cpp || cmake_object_order_depends_target_Generator
-  DEP_FILE = CMakeFiles\Generator.dir\Generator.cpp.obj.d
+build CMakeFiles/Generator.dir/src/InputGenerator/Generator.cpp.obj: CXX_COMPILER__Generator_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/InputGenerator/Generator.cpp || cmake_object_order_depends_target_Generator
+  DEP_FILE = CMakeFiles\Generator.dir\src\InputGenerator\Generator.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\Generator.dir
-  OBJECT_FILE_DIR = CMakeFiles\Generator.dir
+  OBJECT_FILE_DIR = CMakeFiles\Generator.dir\src\InputGenerator
 
-build CMakeFiles/Generator.dir/Random.cpp.obj: CXX_COMPILER__Generator_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/Random.cpp || cmake_object_order_depends_target_Generator
-  DEP_FILE = CMakeFiles\Generator.dir\Random.cpp.obj.d
+build CMakeFiles/Generator.dir/src/Random/Random.cpp.obj: CXX_COMPILER__Generator_Debug D$:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/src/Random/Random.cpp || cmake_object_order_depends_target_Generator
+  DEP_FILE = CMakeFiles\Generator.dir\src\Random\Random.cpp.obj.d
   FLAGS = -g
   OBJECT_DIR = CMakeFiles\Generator.dir
-  OBJECT_FILE_DIR = CMakeFiles\Generator.dir
+  OBJECT_FILE_DIR = CMakeFiles\Generator.dir\src\Random
 
 
 # =============================================================================
@@ -180,7 +180,7 @@ build CMakeFiles/Generator.dir/Random.cpp.obj: CXX_COMPILER__Generator_Debug D$:
 #############################################
 # Link the executable Generator.exe
 
-build Generator.exe: CXX_EXECUTABLE_LINKER__Generator_Debug CMakeFiles/Generator.dir/Generator.cpp.obj CMakeFiles/Generator.dir/Random.cpp.obj
+build Generator.exe: CXX_EXECUTABLE_LINKER__Generator_Debug CMakeFiles/Generator.dir/src/InputGenerator/Generator.cpp.obj CMakeFiles/Generator.dir/src/Random/Random.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Generator.dir

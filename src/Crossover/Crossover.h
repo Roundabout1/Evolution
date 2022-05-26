@@ -1,7 +1,7 @@
 
 #ifndef EVOLUTIONALGORITHM_CROSSOVER_H
 #define EVOLUTIONALGORITHM_CROSSOVER_H
-#include "Gen.h"
+#include "../Gene/Gene.h"
 #include <vector>
 //begin - минимальное количество генов, которые гарантированно достанутся первому родителю
 //end - второму

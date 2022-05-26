@@ -1,7 +1,7 @@
 
 #ifndef EVOLUTIONALGORITHM_FIX_H
 #define EVOLUTIONALGORITHM_FIX_H
-#include "Gen.h"
+#include "../Gene/Gene.h"
 #include <vector>
 void fix(Population &population, Genome &example);
 //genome - геном, который требуется исправить

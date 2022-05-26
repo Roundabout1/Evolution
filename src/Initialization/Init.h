@@ -3,8 +3,8 @@
 #define EVOLUTIONALGORITHM_INIT_H
 
 #include <vector>
-#include "Gen.h"
-#include "Random.h"
+#include "../Gene/Gene.h"
+#include "../Random/Random.h"
 
 //num_genes - количество генов в одной хромосоме
 Population init(Genome &possible_genes, int num_population);
