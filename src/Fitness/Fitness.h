@@ -4,6 +4,7 @@
 
 #include "../Gene/Gene.h"
 
-double fitness(Genome genome);
-std::vector<double> fitness(Population population);
+double fitness(Genome &genome);
+std::vector<double> fitness(Population &population);
+double distance(const Point &a, const Point &b);
 #endif //EVOLUTIONALGORITHM_FITNESS_H

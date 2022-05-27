@@ -1,7 +1,7 @@
 
 #include <algorithm>
 #include "Mutation.h"
-Population mutation(std::vector<std::vector<Gene>> &population, int num_mutants, double probability) {
+Population mutation(std::vector<std::vector<Gene>> &population, int num_mutants, double probability, int begin, int end) {
     int num_genes = population[0].size();
     int num_population = population.size();
     Population mutants = Population(num_mutants);

@@ -9,8 +9,8 @@ Population init(Genome &possible_genes, int num_population){
             population[i][j] = possible_genes[j];
         }
         //переставляем случайным гены
-        for(int j = 1; j < num_genes; j++){
-            int k = getRandomNumber(1, num_genes-1);
+        for(int j = 0; j < num_genes; j++){
+            int k = getRandomNumber(0, num_genes-1);
             std::swap(population[i][j], population[i][k]);
         }
     }
