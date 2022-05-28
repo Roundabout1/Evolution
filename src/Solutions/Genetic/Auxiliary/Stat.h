@@ -21,7 +21,7 @@ public:
     void gatherFitness(std::vector<double> &fit_vec);
     void gatherFitnessStats(std::vector<double> &fit_vec);
     void gatherConvergence(Population &population);
-    void createFiles();
+    void createFolders();
 };
 
 

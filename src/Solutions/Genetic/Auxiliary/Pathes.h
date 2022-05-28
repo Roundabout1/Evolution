@@ -9,5 +9,6 @@ std::string const file_genomes = "genomes.txt";
 std::string const conf_path = "data/input/conf.txt";
 std::string const points_path = "data/input/points.txt";
 std::string const generation_name= "generation";
+std::string const file_convergence = "convergence.txt";
 #define ln std::cout << '\n';
 #endif //EVOLUTIONALGORITHM_PATHES_H

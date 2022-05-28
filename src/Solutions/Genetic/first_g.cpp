@@ -11,10 +11,10 @@
 #include "../../Crossover/Crossover.h"
 #include "../../Fix/Fix.h"
 #include "../../Selection/Selection.h"
-#include "Pathes.h"
-#include "Stat.h"
-#include "ReadData.h"
-#include "Prints.h"
+#include "Auxiliary/Pathes.h"
+#include "Auxiliary/Stat.h"
+#include "Auxiliary/ReadData.h"
+#include "Auxiliary/Prints.h"
 
 int main() {
 
