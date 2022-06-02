@@ -4,13 +4,30 @@
 #include <vector>
 #include "../Pathes.h"
 #include "../Other/FileOperations.h"
-#include "../Solutions/Genetic/Auxiliary/ReadData.h"
+#include "../Solutions/Auxiliary/ReadData.h"
 #include "../Solutions/Genetic/First/first_evolution.h"
 #include "../Solutions/Genetic/Second/second_evolution.h"
 #include "../Fitness/Fitness.h"
+#include "../Solutions/Auxiliary/Prints.h"
+#include "../Solutions/Non-genetic/nearest.h"
+
+void test(Genome (*solution)(int, int, Genome&), int num_population, int num_iterations, Genome &points, std::ofstream &time, std::ofstream &result){
+    clock_t start = clock();
+    Genome res =  solution(num_population, num_iterations, points);
+    clock_t end = clock();
+    time << end - start << '\n';
+    result << fitness(res) << '\n';
+}
+void test(Genome (*solution)(Genome&), Genome &points, std::ofstream &time, std::ofstream &result){
+    clock_t start = clock();
+    Genome res =  solution(points);
+    clock_t end = clock();
+    time << end - start << '\n';
+    result << fitness(res) << '\n';
+}
 
 int main(){
-    int num_tests = 30, num_solutions = 2;
+    int num_tests = 30, num_solutions = 3;
     std::vector<std::string> results(num_solutions);
     std::vector<std::ofstream> ofstreams;
     std::vector<std::ofstream> time;
@@ -24,21 +41,17 @@ int main(){
         Genome points;
         std::string cur_path = tests_path + "/" + test_folder_pattern + std::to_string(i+1) + "/points.txt";
         readData(num_population, num_iterations, points, conf_path, cur_path);
-        clock_t start = clock();
-        Genome res1 = first_evolution(num_population, num_iterations, points);
-        clock_t end = clock();
-        time[0] << end - start << '\n';
-        start = clock();
-        Genome res2 = second_evolution(num_population, num_iterations, points);
-        end = clock();
-        time[1] << end - start << '\n';
-        ofstreams[0] << fitness(res1) << '\n';
-        ofstreams[1] << fitness(res2) << '\n';
+        //std::cout << points[0].getPoint().getX() << std::endl;
+        test(first_evolution, num_population, num_iterations, points, time[0], ofstreams[0]);
+        test(second_evolution, num_population, num_iterations, points, time[1], ofstreams[1]);
+        test(nearest,points, time[2], ofstreams[2]);
         num_points << points.size() << '\n';
     }
     num_points.close();
-    for(int i = 0; i < num_solutions; i++)
+    for(int i = 0; i < num_solutions; i++){
         ofstreams[i].close();
+        time[i].close();
+    }
     return 0;
 }
 /*

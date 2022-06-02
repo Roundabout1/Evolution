@@ -7,8 +7,9 @@
 
 #include <vector>
 #include <fstream>
-#include "../../../Gene/Gene.h"
-#include "../../../Pathes.h"
+#include "../../Gene/Gene.h"
+#include "../../Pathes.h"
 void readData(int &num_population, int &num_iterations, std::vector<Gene> &points,
               std::string conf_dest=conf_path, std::string points_dest=points_path);
+void readData(Genome &points, std::string points_dest=points_path);
 #endif //EVOLUTIONALGORITHM_READDATA_H

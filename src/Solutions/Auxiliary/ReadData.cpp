@@ -6,6 +6,10 @@ void readData(int &num_population, int &num_iterations, std::vector<Gene> &point
     std::ifstream conf(conf_dest);
     conf >> num_population >> num_iterations;
     conf.close();
+    readData(points, points_dest);
+}
+
+void readData(std::vector<Gene> &points, std::string points_dest) {
     std::ifstream poi(points_dest);
     float x, y;
     int i = 0;
@@ -13,4 +17,5 @@ void readData(int &num_population, int &num_iterations, std::vector<Gene> &point
         points.push_back(Gene(i, Point(x, y)));
         i++;
     }
+    poi.close();
 }

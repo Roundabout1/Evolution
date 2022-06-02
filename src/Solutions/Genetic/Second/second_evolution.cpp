@@ -8,7 +8,7 @@
 #include "../../../Crossover/Crossover.h"
 #include "../../../Fix/Fix.h"
 #include "../../../Selection/Selection.h"
-#include "../Auxiliary/Other.h"
+#include "../../Auxiliary/Other.h"
 #include "second_evolution.h"
 Genome second_evolution(int num_population, int num_iterations, std::vector<Gene> &points) {
     int num_points = points.size();

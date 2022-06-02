@@ -15,6 +15,7 @@ test_path = data_path + '/tests'
 num_points = test_path + '/num_points.txt'
 results_file1 = test_path + '/results1.txt'
 results_file2 = test_path + '/results2.txt'
+results_file3 = test_path + '/results3.txt'
 
 def read_results(results_file):
     f = open(results_file)
@@ -29,6 +30,7 @@ points_int = points_string.astype(np.int)
 
 results1 = read_results(results_file1)
 results2 = read_results(results_file2)
+results3 = read_results(results_file3)
 
 plt.xlabel('Количество точек')
 plt.ylabel('Результат')
@@ -36,5 +38,6 @@ plt.ylabel('Результат')
 #ax.set_xlim([3, 33])
 plt.plot(points_int, results1, label='Первое решение')
 plt.plot(points_int, results2, label='Второе решение')
+plt.plot(points_int, results3, label='Неэволюционное решение')
 plt.legend()
 plt.show()

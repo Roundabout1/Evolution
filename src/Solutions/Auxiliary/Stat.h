@@ -1,7 +1,7 @@
 #ifndef EVOLUTIONALGORITHM_STAT_H
 #define EVOLUTIONALGORITHM_STAT_H
 #include "Prints.h"
-#include "../../../Pathes.h"
+#include "../../Pathes.h"
 
 class Stat {
 private:

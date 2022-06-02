@@ -9,7 +9,7 @@
 #include <vector>
 #include "Stat.h"
 #include "Other.h"
-#include "../../../Other/FileOperations.h"
+#include "../../Other/FileOperations.h"
 Stat::Stat(int numIterations) : num_iterations(numIterations) {
     cur_iteration = 0;
     createFolders(output_path, generation_name, numIterations);

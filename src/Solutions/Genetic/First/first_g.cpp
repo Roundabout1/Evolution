@@ -2,8 +2,8 @@
 #include <algorithm>
 #include "../../../Gene/Gene.h"
 #include "../../../Fitness/Fitness.h"
-#include "../Auxiliary/Stat.h"
-#include "../Auxiliary/ReadData.h"
+#include "../../Auxiliary/Stat.h"
+#include "../../Auxiliary/ReadData.h"
 #include "first_evolution.h"
 int main() {
 
