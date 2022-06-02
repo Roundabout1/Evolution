@@ -13,22 +13,26 @@ mn = []
 mx = []
 avg = []
 f = open(conf_path, 'r')
-generations = f.read().split()[2]
+generations = f.read().split()[1]
 f.close()
 for i in range(1, int(generations)):
     f = open(generation_folder + str(i) + '/' + fitness_stats_file, 'r')
     stats = f.read().split()
-    mn.append(stats[0])
-    mx.append(stats[1])
-    avg.append(stats[2])
+    mn.append(float(stats[0]))
+    mx.append(float(stats[1]))
+    avg.append(float(stats[2]))
 
 vertical = 3
 horizontal = 1
 
-plt.subplot(vertical, horizontal, 1).yaxis.set_major_locator(ticker.MultipleLocator(3))
-plt.plot(mn,  color='blue')
-plt.subplot(vertical, horizontal, 2).yaxis.set_major_locator(ticker.MultipleLocator(3))
-plt.plot(mx, color='red')
-plt.subplot(vertical, horizontal, 3).yaxis.set_major_locator(ticker.MultipleLocator(5))
-plt.plot(avg, color='green')
+#plt.subplot(vertical, horizontal, 1).yaxis.set_major_locator(ticker.MultipleLocator(3))
+#plt.subplot(vertical, horizontal, 1)
+plt.xlabel('Поколение')
+plt.ylabel('Расстояние')
+plt.plot(mn,  color='blue', label='Лучший результат')
+#plt.subplot(vertical, horizontal, 2)
+plt.plot(mx, color='red', label='Худший результат')
+#plt.subplot(vertical, horizontal, 3)
+plt.plot(avg, color='green', label='Средний результат')
+plt.legend()
 plt.show()

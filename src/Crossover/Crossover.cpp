@@ -11,7 +11,7 @@ Population crossover(std::vector<std::vector<Gene>> &population, int begin, int 
         int p2 = getRandomNumber(0, num_population - 1);
         if(p1 == p2)
             p2 = (p1 + 1)%num_population;
-        int cross_point = getRandomNumber(begin, num_population- 1 - end);
+        int cross_point = getRandomNumber(begin, num_genes- 1 - end);
         for(int i = 0; i < num_genes; i++){
             if(i < cross_point){
                 offspring[p1][i] = population[p1][i];

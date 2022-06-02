@@ -8,9 +8,11 @@ conf_path = input_path + '/conf.txt'
 output_path = data_path + '/output'
 generation_folder = output_path + '/generation '
 best_solution_file = 'best_solution.txt'
+solution_file = output_path + '/solution.txt'
+fitness_value_file = output_path + '/fitness_value.txt'
 
-def print_solution(generations):
-    f = open(generation_folder + generations + '/' + best_solution_file)
+def print_solution(file_name):
+    f = open(file_name)
     best_solution = [int(x) for x in f.read().split()]
     f.close()
     n = len(best_solution)
@@ -20,6 +22,7 @@ def print_solution(generations):
         plt.plot([p1[0], p2[0]], [p1[1], p2[1]])
         plt.scatter(p1[0], p1[1])
         plt.scatter(p2[0], p2[1])
+    #plt.plot([points[0][0], points[best_solution[n-1]][0]], [points[0][1], points[best_solution[n-1]][1]])
 
 f = open(points_path, 'r')
 coordinates = [float(x) for x in f.read().split()]
@@ -35,9 +38,16 @@ horizontal = 1
 plt.subplot(vertical, horizontal, 1)
 print_solution('1')
 '''
+'''
 f = open(conf_path, 'r')
 generations = f.read().split()[2]
 f.close()
-plt.subplot(vertical, horizontal, 1)
-print_solution(generations)
+'''
+#plt.subplot(vertical, horizontal, 1)
+#generation_folder + generations + '/' + best_solution_file
+f = open(fitness_value_file)
+length = f.read()
+f.close()
+plt.title('Расстояние = ' + length)
+print_solution(solution_file)
 plt.show()

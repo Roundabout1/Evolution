@@ -1,8 +1,8 @@
 #include <fstream>
 #include "../Random/Random.h"
-
+#include "../Pathes.h"
 int main(){
-    std::ifstream conf("data/input/conf.txt");
+    std::ifstream conf(num_points_path);
     size_t num_cities;
     conf >> num_cities;
     conf.close();

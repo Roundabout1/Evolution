@@ -11,13 +11,14 @@ fitness_stats_file = 'fitness_stats.txt'
 convergence_file = 'convergence.txt'
 
 f = open(conf_path, 'r')
-generations = f.read().split()[2]
+generations = f.read().split()[1]
 f.close()
 convergece = []
 for i in range(1, int(generations)):
     f = open(generation_folder + str(i) + '/' + convergence_file, 'r')
     c = float(f.read().split()[0])
     convergece.append(c)
-
+plt.xlabel('Поколение')
+plt.ylabel('Схожесть')
 plt.plot(convergece)
 plt.show()

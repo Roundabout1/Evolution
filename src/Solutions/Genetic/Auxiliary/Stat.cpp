@@ -8,10 +8,11 @@
 #include <fstream>
 #include <vector>
 #include "Stat.h"
-
+#include "Other.h"
+#include "../../../Other/FileOperations.h"
 Stat::Stat(int numIterations) : num_iterations(numIterations) {
     cur_iteration = 0;
-    createFolders();
+    createFolders(output_path, generation_name, numIterations);
 }
 
 void Stat::gatherAll(std::vector<std::vector<Gene>> &population, std::vector<double> fit_vec) {
@@ -32,12 +33,7 @@ void Stat::gatherGenomes(std::vector<std::vector<Gene>> &population) {
 
 void Stat::gatherBestGenome(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec) {
     std::ofstream out(cur_output_path + file_best_solution);
-    int min = 0;
-    for(int i = 1; i < fit_vec.size(); i++){
-        if(fit_vec[i] < fit_vec[min])
-            min = i;
-    }
-    out << print(population[min]);
+    out << print(population[getBest(population, fit_vec)]);
     out.close();
 }
 
@@ -81,11 +77,15 @@ void Stat::gatherConvergence(std::vector<std::vector<Gene>> &population) {
     out.close();
 }
 
-void Stat::createFolders() {
-    //создание папок для выходных данных
-    std::string bat_name = "createFolders.bat";
-    std::string number = std::to_string(num_iterations);
-    /*system((bat_name + " " + output_path + " " + number +  " " + generation_name + " " +
-            file_best_solution + " " + file_genomes + " " + file_fitness_stats + " " + file_fitness).c_str());*/
-    system((bat_name + " " + output_path + " " + number + " " + generation_name).c_str());
+
+void Stat::gatherGenome(std::vector<Gene> &genome) {
+    std::ofstream out(solution_path);
+    out << print(genome);
+    out.close();
+}
+
+void Stat::gatherFitness(double fitness_value) {
+    std::ofstream out(fitness_value_path);
+    out << fitness_value;
+    out.close();
 }

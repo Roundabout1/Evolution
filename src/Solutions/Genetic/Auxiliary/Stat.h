@@ -1,7 +1,7 @@
 #ifndef EVOLUTIONALGORITHM_STAT_H
 #define EVOLUTIONALGORITHM_STAT_H
 #include "Prints.h"
-#include "Pathes.h"
+#include "../../../Pathes.h"
 
 class Stat {
 private:
@@ -21,7 +21,9 @@ public:
     void gatherFitness(std::vector<double> &fit_vec);
     void gatherFitnessStats(std::vector<double> &fit_vec);
     void gatherConvergence(Population &population);
-    void createFolders();
+
+    static void gatherGenome(Genome &genome);
+    static void gatherFitness(double fitness_value);
 };
 
 
