@@ -19,17 +19,16 @@ Genome third_evolution(int num_population, int num_iterations, std::vector<Gene>
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     Genome best = population[best_index];
+    std::cout << fit_vec[0] << std::endl;
     //Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
-    //std::cout << mutation_chance << std::endl;
-    //std::cout << "a\n";
     while(!terminator.isSatisfied()){
+        std::cout << terminator.getCurIteration() << std::endl;
         Population mutants = mutation(population, num_population);
-        //fit_vec = fitness(population);
-        //sort(population, fit_vec);
-        Population offspring = crossover_random_parents(population, 2);
+        sort(population, fit_vec, false);
+        Population offspring = multi_fit_crossover(population, fit_vec, num_population);
         fix(offspring, points);
-        std::vector<Population> populations = std::vector<Population> {mutants, offspring};
+        std::vector<Population> populations = std::vector<Population> {population, mutants, offspring};
         Population united = concat(populations);
         fit_vec = fitness(united);
         int cur_best = getBest(united, fit_vec);
@@ -39,6 +38,7 @@ Genome third_evolution(int num_population, int num_iterations, std::vector<Gene>
             best_fit = fit_vec[cur_best];
             //std::cout << terminator.getCurIteration() << std::endl;
         }
+        //population = rank(united, num_population, fit_vec);
         truncation(united, num_population, fit_vec);
         population = united;
         terminator.update();

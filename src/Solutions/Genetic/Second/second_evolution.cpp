@@ -27,9 +27,10 @@ Genome second_evolution(int num_population, int num_iterations, std::vector<Gene
     //std::cout << "a\n";
     while(!terminator.isSatisfied()){
         Population mutants = mutation(population, num_population);
-        //fit_vec = fitness(population);
-        //sort(population, fit_vec);
-        Population offspring = crossover_random_parents(population, 2);
+        fit_vec = fitness(population);
+        sort(population, fit_vec, true);
+        Population offspring = crossover_different2(population, fit_vec, 2);
+        //Population offspring = crossover_random_parents(population,  2);
         fix(offspring, points);
         std::vector<Population> populations = std::vector<Population> {mutants, offspring};
         Population united = concat(populations);
@@ -43,6 +44,7 @@ Genome second_evolution(int num_population, int num_iterations, std::vector<Gene
         }
         truncation(united, num_population, fit_vec);
         population = united;
+        //population = rank(united, num_population, fit_vec);
         terminator.update();
         //stat.gatherAll(population, fitness(population));
     }

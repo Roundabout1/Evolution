@@ -13,4 +13,7 @@ Population crossover_different(Population &population, std::vector<double> &fit_
 Population crossover(Genome &parent1, Genome &parent2, int k=1, int begin=1, int end=1);
 Population uniform_crossover(Population &population);
 Population uniform_crossover(Genome &parent1, Genome &parent2);
+Population crossover_different2(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec, int k=1, int begin=0, int end=0);
+//population отсортирован по функции приспособленности
+Population multi_fit_crossover(Population &population, std::vector<double> &fit_vec, int num_offspring);
 #endif //EVOLUTIONALGORITHM_CROSSOVER_H

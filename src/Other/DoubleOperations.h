@@ -1,0 +1,8 @@
+//
+// Created by mrsiv on 06.06.2022.
+//
+
+#ifndef EVOLUTIONALGORITHM_DOUBLEOPERATIONS_H
+#define EVOLUTIONALGORITHM_DOUBLEOPERATIONS_H
+bool isEqual(double a, double b);
+#endif //EVOLUTIONALGORITHM_DOUBLEOPERATIONS_H

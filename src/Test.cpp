@@ -11,15 +11,17 @@
 #include "Fitness/Fitness.h"
 #include "Mutation/Mutation.h"
 #include "Other/PopulationSort.h"
+#include "Other/Roulette.h"
 
 int main(){
-    Genome points;
     int num_population, num_iterations;
+    Genome points;
     readData(num_population, num_iterations, points);
-    Population pop = greedy_init(points, num_population);
-    std::cout << print(pop);
+    Genome n = nearest(points);
+    double fit = fitness(n);
+    std::cout << print(n);
     ln
-    std::cout << print(fitness(pop));
+    std::cout << fit;
     return 0;
 }
 /*std::cout << print(ini);

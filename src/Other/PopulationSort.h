@@ -7,5 +7,5 @@
 
 #include "../Gene/Gene.h"
 
-void sort(Population &population, std::vector<double> &fit_vec);
+void sort(Population &population, std::vector<double> &fit_vec, bool increase);
 #endif //EVOLUTIONALGORITHM_POPULATIONSORT_H

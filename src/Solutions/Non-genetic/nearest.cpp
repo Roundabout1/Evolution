@@ -20,7 +20,7 @@ Genome nearest(std::vector<Gene> &points, int start_point, double &result) {
     Genome cur(points);
     std::swap(cur[0], cur[start_point]);
     double cur_result = 0.0;
-    for(int i = 1; i < points.size() - 1; i++){
+    for(int i = 1; i < points.size(); i++){
         double res = distance(cur[i-1].getPoint(), cur[i].getPoint());
         for(int j = i + 1; j < points.size(); j++){
             double dis = distance(cur[i-1].getPoint(), cur[j].getPoint());
@@ -28,7 +28,7 @@ Genome nearest(std::vector<Gene> &points, int start_point, double &result) {
                 res = dis;
                 std::swap(cur[i], cur[j]);
             }
-            res = std::min(res, distance(cur[i-1].getPoint(), cur[j].getPoint()));
+            //res = std::min(res, distance(cur[i-1].getPoint(), cur[j].getPoint()));
         }
         cur_result += res;
     }

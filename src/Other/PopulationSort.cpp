@@ -5,12 +5,15 @@
 #include <algorithm>
 #include "PopulationSort.h"
 
-void sort(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec) {
+void sort(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec, bool increase) {
     std::vector<int> indexes(population.size());
     for(int i = 0; i < population.size(); i++)
         indexes[i] = i;
     std::sort(indexes.begin(), indexes.end(),[&](int &a, int &b){
-        return fit_vec[a] < fit_vec[b];
+        if(increase)
+            return fit_vec[a] < fit_vec[b];
+        else
+            return fit_vec[a] > fit_vec[b];
     });
     Population sorted;
     std::vector<double> sorted_fit;
