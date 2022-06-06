@@ -27,11 +27,11 @@ void test(Genome (*solution)(Genome&), Genome &points, std::ofstream &time, std:
 }
 
 int main(){
-    int num_tests = 30, num_solutions = 3;
+    int num_tests = 50, num_solutions = 2;
     std::vector<std::string> results(num_solutions);
     std::vector<std::ofstream> ofstreams;
     std::vector<std::ofstream> time;
-    for(int i = 1; i <= num_solutions; i++) {
+    for(int i = 0; i < num_solutions; i++) {
         ofstreams.push_back(std::ofstream(tests_path + "/results" + std::to_string(i) + ".txt"));
         time.push_back(std::ofstream(tests_path + "/time" + std::to_string(i) + ".txt"));
     }
@@ -40,11 +40,12 @@ int main(){
         int num_population, num_iterations;
         Genome points;
         std::string cur_path = tests_path + "/" + test_folder_pattern + std::to_string(i+1) + "/points.txt";
-        readData(num_population, num_iterations, points, conf_path, cur_path);
-        //std::cout << points[0].getPoint().getX() << std::endl;
-        test(first_evolution, num_population, num_iterations, points, time[0], ofstreams[0]);
-        test(second_evolution, num_population, num_iterations, points, time[1], ofstreams[1]);
-        test(nearest,points, time[2], ofstreams[2]);
+        readData(points, cur_path);
+        test(nearest,points, time[0], ofstreams[0]);
+        test(second_evolution, points.size()*3, points.size()*3, points, time[1], ofstreams[1]);
+        //test(second_evolution, points.size()*3, points.size()*3, points, time[2], ofstreams[2]);
+        std::cout << points.size() << std::endl;
+        //test(second_evolution, num_population, num_iterations, points, time[2], ofstreams[2]);
         num_points << points.size() << '\n';
     }
     num_points.close();

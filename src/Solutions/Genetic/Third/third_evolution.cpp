@@ -1,4 +1,4 @@
-#include "second_evolution.h"
+#include "third_evolution.h"
 #include <vector>
 #include <algorithm>
 #include <iostream>
@@ -12,8 +12,7 @@
 #include "../../Auxiliary/Other.h"
 #include "../../Auxiliary/Stat.h"
 #include "../../../Other/PopulationSort.h"
-
-Genome second_evolution(int num_population, int num_iterations, std::vector<Gene> &points) {
+Genome third_evolution(int num_population, int num_iterations, std::vector<Gene> &points) {
     int num_points = points.size();
     Population population = greedy_init(points, num_population);
     std::vector<double> fit_vec = fitness(population);
@@ -22,7 +21,6 @@ Genome second_evolution(int num_population, int num_iterations, std::vector<Gene
     Genome best = population[best_index];
     //Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
-    double mutation_chance = 0.1;
     //std::cout << mutation_chance << std::endl;
     //std::cout << "a\n";
     while(!terminator.isSatisfied()){

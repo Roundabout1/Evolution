@@ -13,6 +13,7 @@ convergence_file = 'convergence.txt'
 test_path = data_path + '/tests'
 
 num_points = test_path + '/num_points.txt'
+time0 = test_path + '/time0.txt'
 time1 = test_path + '/time1.txt'
 time2 = test_path + '/time2.txt'
 
@@ -27,6 +28,7 @@ points_string = np.array(f.read().split())
 f.close()
 points_int = points_string.astype(np.int)
 
+results0 = read_results(time0)
 results1 = read_results(time1)
 results2 = read_results(time2)
 
@@ -34,7 +36,8 @@ plt.xlabel('Количество точек')
 plt.ylabel('Время выполнения программы в мс')
 #ax = plt.gca()
 #ax.set_xlim([3, 33])
-plt.plot(points_int, results1, label='Первое решение')
-plt.plot(points_int, results2, label='Второе решение')
+plt.plot(points_int, results0, label='АБС')
+plt.plot(points_int, results2, label='ГА со старой инициализацией')
+plt.plot(points_int, results1, label='ГА с новой инициализацией')
 plt.legend()
 plt.show()

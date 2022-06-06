@@ -7,4 +7,6 @@
 #include <vector>
 #include "../../Gene/Gene.h"
 Genome nearest(Genome &points);
+Genome nearest(Genome &points, int start_point);
+Genome nearest(Genome &points, int start_point, double &result);
 #endif //EVOLUTIONALGORITHM_NEAREST_H

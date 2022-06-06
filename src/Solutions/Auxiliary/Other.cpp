@@ -1,7 +1,3 @@
-//
-// Created by mrsiv on 28.05.2022.
-//
-
 #include "Other.h"
 int getBest(Population &population, std::vector<double> &fit_vec){
     int best = 0;

@@ -5,4 +5,5 @@
 std::string print(Genome &genome);
 std::string print(Population &population);
 std::string print(std::vector<double> v);
+#define ln std::cout << '\n';
 #endif //EVOLUTIONALGORITHM_PRINTS_H

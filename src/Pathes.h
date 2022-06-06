@@ -20,5 +20,4 @@ std::string const first_solution = "first_solution.exe";
 std::string const second_solution = "second_solution.exe";
 std::string const generator = "Second_generator.exe";
 std::string const test_folder_pattern = "test ";
-#define ln std::cout << '\n';
 #endif //EVOLUTIONALGORITHM_PATHES_H

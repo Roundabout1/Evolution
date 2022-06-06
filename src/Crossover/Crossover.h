@@ -1,9 +1,16 @@
-
 #ifndef EVOLUTIONALGORITHM_CROSSOVER_H
 #define EVOLUTIONALGORITHM_CROSSOVER_H
 #include "../Gene/Gene.h"
 #include <vector>
 //begin - минимальное количество генов, которые гарантированно достанутся первому родителю
 //end - второму
-Population crossover(Population &population,int begin=1, int end=1);
+Population crossover_random_parents(Population &population, int k=1, int begin= 1, int end= 1);
+//если similar = true, то подбираются наиболее похожие друг на друга партнеры, иначе наиболее отличающиеся друг от друга
+Population crossover_similar(Population &population, std::vector<double> &fit_vec, int k=1, int begin= 1, int end= 1);
+Population crossover_different(Population &population, std::vector<double> &fit_vec, int k=1, int begin= 1, int end= 1);
+//скрещивание двух родителей, вовзращает двух потомков
+//k - количество точек разрыва
+Population crossover(Genome &parent1, Genome &parent2, int k=1, int begin=1, int end=1);
+Population uniform_crossover(Population &population);
+Population uniform_crossover(Genome &parent1, Genome &parent2);
 #endif //EVOLUTIONALGORITHM_CROSSOVER_H

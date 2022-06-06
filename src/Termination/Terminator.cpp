@@ -26,3 +26,7 @@ unsigned int Terminator::getCurIteration() const {
 unsigned int Terminator::getMaxIterations() const {
     return max_iterations;
 }
+
+void Terminator::update(bool isProgressed) {
+    cur_iteration = (isProgressed) ? 0 : cur_iteration + 1;
+}
