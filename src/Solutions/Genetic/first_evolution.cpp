@@ -1,15 +1,15 @@
-#include "first_evolution.h"
+#include "GeneticSolutions.h"
 #include <vector>
-#include "../../../Other/Point.h"
-#include "../../../Gene/Gene.h"
-#include "../../../Termination/Terminator.h"
-#include "../../../Crossover/Crossover.h"
-#include "../../../Fix/Fix.h"
-#include "../../../Selection/Selection.h"
-#include "../../../Mutation/Mutation.h"
-#include "../../../Initialization/Init.h"
-#include "../../../Fitness/Fitness.h"
-#include "../../Auxiliary/Stat.h"
+#include "../../Other/Point.h"
+#include "../../Gene/Gene.h"
+#include "../../Termination/Terminator.h"
+#include "../../Crossover/Crossover.h"
+#include "../../Fix/Fix.h"
+#include "../../Selection/Selection.h"
+#include "../../Mutation/Mutation.h"
+#include "../../Initialization/Init.h"
+#include "../../Fitness/Fitness.h"
+#include "../Auxiliary/Stat.h"
 
 Genome first_evolution(int num_population, int num_iterations, Genome &points){
     int num_points = points.size();

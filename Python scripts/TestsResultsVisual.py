@@ -50,6 +50,18 @@ for i in range(0, len(results0)):
     mx = max(mx, p)
     mean += p
 mean /= l
-print("min = ", mn, "max = ", mx, "mean = ", mean)
+print("1: min = ", mn, "max = ", mx, "mean = ", mean)
+
+mn = 100.0
+mx = 0.0
+mean = 0.0
+l = len(results0)
+for i in range(0, len(results0)):
+    p = (results0[i] - results2[i])/(results0[i]*0.01)
+    mn = min(mn, p)
+    mx = max(mx, p)
+    mean += p
+mean /= l
+print("2: min = ", mn, "max = ", mx, "mean = ", mean)
 plt.legend()
 plt.show()

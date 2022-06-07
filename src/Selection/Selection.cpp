@@ -7,6 +7,7 @@
 #include "../Random/Random.h"
 #include "../Solutions/Auxiliary/Prints.h"
 #include "../Pathes.h"
+#include "../Other/Roulette.h"
 //элитарный отбор, отбираются лучшие select особей
 Population selection(Population population, int num_selected){
     std::sort(population.begin(), population.end(),[&](Genome &a, Genome &b){
@@ -69,7 +70,7 @@ void tournament(std::vector<std::vector<Gene>> &population, int num_participated
 //ранговая селекция
 Population rank(std::vector<std::vector<Gene>> &population, int num_selected, std::vector<double> &fit_vec) {
     int num_population = population.size();
-    //здесь храняться ранги
+    //здесь хранятся ранги
     std::vector<int> indexes(num_population);
     for(int i = 0; i < num_population; i++)
         indexes[i] = i;
@@ -108,4 +109,14 @@ Population rank(std::vector<std::vector<Gene>> &population, int num_selected, st
     return selected;
 }
 
+Population rank2(std::vector<std::vector<Gene>> &population, int num_selected, std::vector<double> &fit_vec) {
+    std::vector<int> rank = get_rank(fit_vec);
+    std::vector<double> prefix = get_prefix(rank);
+    Population selected;
+    for(int i = 0; i < num_selected; i++){
+        int p = roulette(prefix);
+        selected.push_back(population[p]);
+    }
+    return selected;
+}
 

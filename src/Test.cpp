@@ -12,16 +12,24 @@
 #include "Mutation/Mutation.h"
 #include "Other/PopulationSort.h"
 #include "Other/Roulette.h"
+#include "Fix/Fix.h"
 
 int main(){
     int num_population, num_iterations;
     Genome points;
     readData(num_population, num_iterations, points);
     Genome n = nearest(points);
+    Genome m = mutation(points, 0.5);
     double fit = fitness(n);
-    std::cout << print(n);
-    ln
-    std::cout << fit;
+    double fit2 = fitness(m);
+    std::cout << print(n) << '\n' << print(m) << '\n';
+    std::cout << fit << ' ' << fit2 << '\n';
+    Population c = crossover(n, m);
+    std::cout << print(c) << std::endl;
+    fix(c, points, fix_greedy2);
+    std::cout << print(c) << std::endl;
+    std::vector<double> fit_vec = fitness(c);
+    std::cout << print(fit_vec) << std::endl;
     return 0;
 }
 /*std::cout << print(ini);

@@ -28,7 +28,7 @@ void test(Genome (*solution)(Genome&), Genome &points, std::ofstream &time, std:
 }
 
 int main(){
-    int num_tests = 50, num_solutions = 2;
+    int num_tests = 50, num_solutions = 3;
     std::vector<std::string> results(num_solutions);
     std::vector<std::ofstream> ofstreams;
     std::vector<std::ofstream> time;
@@ -43,8 +43,8 @@ int main(){
         std::string cur_path = tests_path + "/" + test_folder_pattern + std::to_string(i+1) + "/points.txt";
         readData(points, cur_path);
         test(nearest,points, time[0], ofstreams[0]);
-        test(third_evolution, points.size()*5, points.size()*5, points, time[1], ofstreams[1]);
-        //test(second_evolution, points.size()*3, points.size()*3, points, time[2], ofstreams[2]);
+        test(second_evolution, points.size()*5, points.size()*5, points, time[1], ofstreams[1]);
+        test(third_evolution, points.size()*5, points.size()*5, points, time[2], ofstreams[2]);
         std::cout << points.size() << std::endl;
         //test(second_evolution, num_population, num_iterations, points, time[2], ofstreams[2]);
         num_points << points.size() << '\n';

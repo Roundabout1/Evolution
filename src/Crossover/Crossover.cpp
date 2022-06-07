@@ -124,3 +124,17 @@ Population multi_fit_crossover(Population &population, std::vector<double> &fit_
     return offspring;
 }
 
+Population rank_fit_crossover(Population &population, std::vector<double> &fit_vec, int num_pairs_offspring){
+    std::vector<int> rank = get_rank(fit_vec);
+    std::vector<double> prefix = get_prefix(rank);
+    Population offspring;
+    for(int i = 0; i < num_pairs_offspring; i++){
+        int k = roulette(prefix);
+        if(k == i)
+            k = (k+1)%population.size();
+        Population children = crossover(population[i], population[k]);
+        offspring.push_back(children[0]);
+        offspring.push_back(children[1]);
+    }
+    return offspring;
+}
