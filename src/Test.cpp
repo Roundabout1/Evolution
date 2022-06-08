@@ -13,26 +13,38 @@
 #include "Other/PopulationSort.h"
 #include "Other/Roulette.h"
 #include "Fix/Fix.h"
+#include "K-means/k-means.h"
 
 int main(){
-    int num_population, num_iterations;
     Genome points;
+    int num_population, num_iterations;
     readData(num_population, num_iterations, points);
-    Genome n = mutation(points, 1.0);
-    Genome m = mutation(points, 1.0);
-    double fit = fitness(n);
-    double fit2 = fitness(m);
-    std::cout << print(n) << '\n' << print(m) << '\n';
-    std::cout << fit << ' ' << fit2 << '\n';
-    //Population c = collision(n, m, getRandomNumber(1.0, fit), getRandomNumber(1.0, fit2));
-    Population c = ordered(n, m);
-    std::cout << print(c) << std::endl;
-    fix(c, points, fix_greedy2);
-    std::cout << print(c) << std::endl;
-    std::vector<double> fit_vec = fitness(c);
-    std::cout << print(fit_vec) << std::endl;
+    int k = std::round(std::sqrt(points.size()) + 0.5);
+    std::vector<int> cluster = k_means(points, k, 10);
+    std::ofstream c("data/clusters.txt");
+    for(auto i : cluster)
+        c << i << ' ';
+    c.close();
+    std::cout << k << std::endl;
     return 0;
 }
+
+/*int num_population, num_iterations;
+Genome points;
+readData(num_population, num_iterations, points);
+Genome n = mutation(points, 1.0);
+Genome m = mutation(points, 1.0);
+double fit = fitness(n);
+double fit2 = fitness(m);
+std::cout << print(n) << '\n' << print(m) << '\n';
+std::cout << fit << ' ' << fit2 << '\n';
+//Population c = collision(n, m, getRandomNumber(1.0, fit), getRandomNumber(1.0, fit2));
+Population c = ordered(n, m);
+std::cout << print(c) << std::endl;
+fix(c, points, fix_greedy2);
+std::cout << print(c) << std::endl;
+std::vector<double> fit_vec = fitness(c);
+std::cout << print(fit_vec) << std::endl;*/
 /*std::cout << print(ini);
 ln
 

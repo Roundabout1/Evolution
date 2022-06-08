@@ -14,6 +14,8 @@ public:
 
     Point();
 
+    Point(Point const &p);
+
     double getX() const;
 
     void setX(double x);

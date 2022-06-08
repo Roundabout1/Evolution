@@ -20,3 +20,8 @@ void Point::setY(double y) {
 }
 
 Point::Point() {}
+
+Point::Point(const Point &p) {
+    Point::x = p.x;
+    Point::y = p.y;
+}
