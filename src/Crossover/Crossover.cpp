@@ -3,6 +3,8 @@
 #include "Crossover.h"
 #include "../Random/Random.h"
 #include "../Other/Roulette.h"
+#include "../Fitness/Fitness.h"
+#include "../Other/DoubleOperations.h"
 
 //begin - минимальное количество генов, которые гарантированно достанутся первому родителю
 //end - второму
@@ -135,6 +137,99 @@ Population rank_fit_crossover(Population &population, std::vector<double> &fit_v
         Population children = crossover(population[i], population[k]);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
+    }
+    return offspring;
+}
+
+Population collision(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec) {
+    Population offspring;
+    int num_population = population.size();
+    for(int p1 = 0; p1 < num_population; p1++){
+        int p2 = getRandomNumber(0, num_population - 1);
+        if(p1 == p2)
+            p2 = (p1 + 1)%num_population;
+        //Population children = collision(population[p1], population[p2], getRandomNumber(1.0, fit_vec[p1]), getRandomNumber(1.0, fit_vec[p2]));
+        Population children = collision(population[p1], population[p2], 1.0, 1.0);
+        offspring.push_back(children[0]);
+        offspring.push_back(children[1]);
+    }
+    return offspring;
+}
+
+Population collision(std::vector<Gene> &g1, std::vector<Gene> &g2, double velocity1, double velocity2) {
+    velocity2 = -velocity2;
+    Population offspring(2, Genome(g1.size()));
+    for(int i = 0; i < g1.size(); i++){
+        double mass1 = get_distance(g1, i);
+        double mass2 = get_distance(g2, i);
+        double sum = mass1 + mass2;
+        double dif = mass1 - mass2;
+        double v1 = dif/sum*velocity1 + 2*mass2/sum*velocity2;
+        double v2 = 2*mass1/sum*velocity1 - dif/sum*velocity2;
+        //std::cout << sum << ' ' <<dif << '\n';
+        //std::cout << mass1 << ' ' << mass2 << '\n';
+        if(v1 < 0.0 || isEqual(v1, 0)){
+            offspring[0][i] = g1[i];
+        }else{
+            offspring[0][i] = g2[0];
+        }
+        if(v2 > 0.0 || isEqual(v1, 0)){
+            offspring[1][i] = g2[i];
+        }else{
+            offspring[1][i] = g1[0];
+        }
+    }
+    return offspring;
+}
+
+Population ordered(std::vector<std::vector<Gene>> &population) {
+    int num_population = population.size();
+    Population offspring;
+    for(int p1 = 0; p1 < num_population; p1++){
+        int p2 = getRandomNumber(0, num_population - 1);
+        if(p1 == p2)
+            p2 = (p1 + 1)%num_population;
+        //Population children = collision(population[p1], population[p2], getRandomNumber(1.0, fit_vec[p1]), getRandomNumber(1.0, fit_vec[p2]));
+        Population children = ordered(population[p1], population[p2]);
+        offspring.push_back(children[0]);
+        offspring.push_back(children[1]);
+    }
+    return offspring;
+}
+
+Population ordered(std::vector<Gene> &g1, std::vector<Gene> &g2) {
+    Population offspring(2, Genome(g1.size()));
+    int l = getRandomNumber(1, g1.size()-2);
+    int r = getRandomNumber(1, g1.size()-2);
+    if(l == r)
+        r = (l+1)%g1.size();
+    if(l > r)
+        std::swap(l, r);
+    std::vector<bool> used1(g1.size()), used2(g2.size());
+    for(int i = l; i <= r; i++){
+        offspring[0][i] = g1[i];
+        offspring[1][i] = g2[i];
+        used1[g1[i].getType()] = 1;
+        used2[g2[i].getType()] = 1;
+    }
+    Genome unused1, unused2;
+    for(int i = 0; i < g1.size(); i++){
+        if(!used1[g2[i].getType()]){
+            unused1.push_back(g2[i]);
+        }
+        if(!used2[g1[i].getType()]){
+            unused2.push_back(g1[i]);
+        }
+    }
+    //std::cout << "l r " << l << ' ' << r << '\n';
+    //std::cout << "unused " << unused1.size() << '\n';
+    for(int i = 0, j = 0; i < g1.size(); i++){
+        //std::cout << i << ' ' << j << std::endl;
+        offspring[0][i] = unused1[j];
+        offspring[1][i] = unused2[j];
+        j++;
+        if(i == l-1)
+            i = r;
     }
     return offspring;
 }

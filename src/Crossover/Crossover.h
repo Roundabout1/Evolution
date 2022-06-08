@@ -17,4 +17,8 @@ Population crossover_different2(std::vector<std::vector<Gene>> &population, std:
 //population отсортирован по функции приспособленности
 Population multi_fit_crossover(Population &population, std::vector<double> &fit_vec, int num_offspring);
 Population rank_fit_crossover(Population &population, std::vector<double> &fit_vec, int num_pairs_offspring);
+Population collision(Population &population, std::vector<double> &fit_vec);
+Population collision(Genome &g1, Genome &g2, double velocity1, double velocity2);
+Population ordered(Population &population);
+Population ordered(Genome &g1, Genome &g2);
 #endif //EVOLUTIONALGORITHM_CROSSOVER_H

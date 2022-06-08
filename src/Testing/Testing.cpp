@@ -5,12 +5,10 @@
 #include "../Pathes.h"
 #include "../Other/FileOperations.h"
 #include "../Solutions/Auxiliary/ReadData.h"
-#include "../Solutions/Genetic/First/first_evolution.h"
-#include "../Solutions/Genetic/Second/second_evolution.h"
 #include "../Fitness/Fitness.h"
 #include "../Solutions/Auxiliary/Prints.h"
 #include "../Solutions/Non-genetic/nearest.h"
-#include "../Solutions/Genetic/Third/third_evolution.h"
+#include "../Solutions/Genetic/GeneticSolutions.h"
 
 void test(Genome (*solution)(int, int, Genome&), int num_population, int num_iterations, Genome &points, std::ofstream &time, std::ofstream &result){
     clock_t start = clock();
@@ -44,7 +42,7 @@ int main(){
         readData(points, cur_path);
         test(nearest,points, time[0], ofstreams[0]);
         test(second_evolution, points.size()*5, points.size()*5, points, time[1], ofstreams[1]);
-        test(third_evolution, points.size()*5, points.size()*5, points, time[2], ofstreams[2]);
+        test(mutation_based, points.size()*5, points.size()*5, points, time[2], ofstreams[2]);
         std::cout << points.size() << std::endl;
         //test(second_evolution, num_population, num_iterations, points, time[2], ofstreams[2]);
         num_points << points.size() << '\n';

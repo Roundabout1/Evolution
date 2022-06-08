@@ -18,13 +18,14 @@ int main(){
     int num_population, num_iterations;
     Genome points;
     readData(num_population, num_iterations, points);
-    Genome n = nearest(points);
-    Genome m = mutation(points, 0.5);
+    Genome n = mutation(points, 1.0);
+    Genome m = mutation(points, 1.0);
     double fit = fitness(n);
     double fit2 = fitness(m);
     std::cout << print(n) << '\n' << print(m) << '\n';
     std::cout << fit << ' ' << fit2 << '\n';
-    Population c = crossover(n, m);
+    //Population c = collision(n, m, getRandomNumber(1.0, fit), getRandomNumber(1.0, fit2));
+    Population c = ordered(n, m);
     std::cout << print(c) << std::endl;
     fix(c, points, fix_greedy2);
     std::cout << print(c) << std::endl;

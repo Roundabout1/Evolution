@@ -134,14 +134,3 @@ void fix_greedy2(std::vector<Gene> &genome, std::vector<Gene> &example) {
     }
 }
 
-double get_distance(Genome &genome, Genome &example, int pos_genome, int pos_example) {
-    double res = 0.0;
-    if(pos_genome != 0){
-        res += distance(genome[pos_genome-1].getPoint(), example[pos_example].getPoint());
-    }
-    if(pos_genome != genome.size()-1){
-        res += distance(genome[pos_genome+1].getPoint(), example[pos_example].getPoint());
-    }
-    return res;
-}
-

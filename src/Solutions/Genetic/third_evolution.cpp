@@ -20,7 +20,7 @@ Genome mutation_based(int num_population, int num_iterations, std::vector<Gene> 
     double best_fit = fit_vec[best_index];
     Genome best = population[best_index];
     //std::cout << fit_vec[0] << std::endl;
-    Stat stat = Stat(num_iterations);
+    //Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
     while(!terminator.isSatisfied()){
         //std::cout << terminator.getCurIteration() << std::endl;
@@ -44,7 +44,7 @@ Genome mutation_based(int num_population, int num_iterations, std::vector<Gene> 
         truncation(united, num_population, fit_vec);
         population = united;
         terminator.update();
-        stat.gatherAll(population, fitness(population));
+        //stat.gatherAll(population, fitness(population));
     }
     //std::cout << "b\n";
     return best;
