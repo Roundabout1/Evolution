@@ -26,4 +26,5 @@ std::string const k_means_labels = input_path+"/k-meansPy.txt";
 std::string const k_means_script = python_scripts+"/k-means.py";
 std::string const k_medoids_labels = input_path+"/k-medoidsPy.txt";
 std::string const k_medoids_script = python_scripts+"/k-medoids.py";
+std::string const k_medoids_centers = input_path+"/k-centersPy.txt";
 #endif //EVOLUTIONALGORITHM_PATHES_H

@@ -8,10 +8,9 @@ conf_path = input_path + '/conf.txt'
 output_path = data_path + '/output'
 generation_folder = output_path + '/generation '
 best_solution_file = 'best_solution.txt'
-#solution_file = output_path + '/solution.txt'
-solution_file = output_path + '/nearest_answer.txt'
-#fitness_value_file = output_path + '/fitness_value.txt'
-fitness_value_file = output_path + '/nearest_fit.txt'
+solution_file = output_path + '/solution.txt'
+fitness_value_file = output_path + '/fitness_value.txt'
+
 
 def print_solution(file_name):
     f = open(file_name)

@@ -1,6 +1,8 @@
 #include "Fitness.h"
 double distance(const Point &a, const Point &b) {
     return std::abs(a.getX() - b.getX()) + std::abs(a.getY() - b.getY());
+    //std::cout << p1.getX() - p2.getX())*(p1.getX() - p2.getX()) + (p1.getY() - p2.getY())*(p1.getY() - p2.getY() << '\n';
+    //return sqrt((p1.getX() - p2.getX())*(p1.getX() - p2.getX()) + (p1.getY() - p2.getY())*(p1.getY() - p2.getY()));
 }
 double get_distance(Genome &genome, Genome &example, int pos_genome, int pos_example) {
     double res = 0.0;

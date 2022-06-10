@@ -37,9 +37,17 @@ for i in range(tries):
     if(best_labels == "" or inertia < best_inertia):
         best_labels = labels
         best_inertia = inertia
-    print(kmedoids.n_iter_)
-    print(inertia)
+    #print(kmedoids.n_iter_)
+    #print(inertia)
 print(best_inertia)
 with open("../cmake-build-debug/data/input/k-medoidsPy.txt", "w") as external_file:
     print(best_labels[1:-1], file=external_file)
+    external_file.close()
+centers = kmedoids.cluster_centers_
+centers_str = ''
+for i in range(k):
+    centers_str += str(centers[i][0]) + ' ' + str(centers[i][1]) + '\n'
+print(centers)
+with open("../cmake-build-debug/data/input/k-centersPy.txt", "w") as external_file:
+    print(centers_str, file=external_file)
     external_file.close()
