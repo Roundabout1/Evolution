@@ -14,7 +14,7 @@
 Genome first_evolution(int num_population, int num_iterations, Genome &points){
     int num_points = points.size();
     Population population = random_init(points, num_population);
-    Stat stat = Stat(num_iterations);
+    //Stat stat = Stat(num_iterations);
     //double best_fit = fitness(population[0]);
     Terminator terminator = Terminator(num_iterations);
     while(!terminator.isSatisfied()){
@@ -28,7 +28,7 @@ Genome first_evolution(int num_population, int num_iterations, Genome &points){
         population = rank(united, num_population, fit_vec);
         //population = united;
         terminator.update();
-        stat.gatherAll(population, fitness(population));
+        //stat.gatherAll(population, fitness(population));
     }
     return population[0];
 }

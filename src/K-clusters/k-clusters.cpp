@@ -3,10 +3,11 @@
 //
 
 #include <iostream>
-#include "k-means.h"
+#include <fstream>
+#include "k-clusters.h"
 #include "../Random/Random.h"
 #include "../Other/DoubleOperations.h"
-
+#include "../Pathes.h"
 std::vector<int> k_means(std::vector<Point> &points, int k, int num_iterations) {
     //принадлежность к кластеру
     std::vector<int> cluster(points.size());
@@ -74,4 +75,27 @@ std::vector<int> k_means(std::vector<Gene> &points, int k, int num_iterations) {
     for(int i = 0; i < points.size(); i++)
         p.push_back(points[i].getPoint());
     return k_means(p, k, num_iterations);
+}
+
+std::vector<int> k_medoidsPY() {
+    std::cout << py_exe + " " + k_medoids_script << std::endl;
+    system((py_exe + " " + k_medoids_script).c_str());
+    std::ifstream read(k_medoids_labels);
+    std::vector<int> ans;
+    int i;
+    while(read >> i){
+        ans.push_back(i);
+    }
+    return ans;
+}
+
+std::vector<int> k_meansPY() {
+    system(k_means_script.c_str());
+    std::ifstream read(k_means_labels);
+    std::vector<int> ans;
+    int i;
+    while(read >> i){
+        ans.push_back(i);
+    }
+    return ans;
 }

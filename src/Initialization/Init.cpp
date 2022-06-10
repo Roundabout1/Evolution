@@ -30,6 +30,10 @@ Population greedy_init(std::vector<Gene> &possible_genes, int num_population) {
     }
     return population;
 }
+
+Population k_cluster_init(std::vector<Gene> &possible_genes, int num_population) {
+    return std::vector<std::vector<Gene>>();
+}
 /*
  #include "Init.h"
 Population init(Genome &possible_genes, int num_population){

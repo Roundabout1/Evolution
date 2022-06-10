@@ -11,4 +11,6 @@ void fix(Population &population, Genome &example, void (*fix_operator)(Genome &g
 void fix_random(Genome &genome, Genome &example);
 void fix_greedy(Genome &genome, Genome &example);
 void fix_greedy2(Genome &genome, Genome &example);
+//жадно чинит гены, смотря только на левую сторону
+void fix_greedy_left(std::vector<Gene> &genome, std::vector<Gene> &example);
 #endif //EVOLUTIONALGORITHM_FIX_H

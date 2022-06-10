@@ -13,22 +13,29 @@
 #include "Other/PopulationSort.h"
 #include "Other/Roulette.h"
 #include "Fix/Fix.h"
-#include "K-means/k-means.h"
+#include "K-clusters/k-clusters.h"
+#include "Solutions/Genetic/GeneticSolutions.h"
 
 int main(){
     Genome points;
     int num_population, num_iterations;
     readData(num_population, num_iterations, points);
-    int k = std::round(std::sqrt(points.size()) + 0.5);
-    std::vector<int> cluster = k_means(points, k, 10);
-    std::ofstream c("data/clusters.txt");
-    for(auto i : cluster)
-        c << i << ' ';
-    c.close();
-    std::cout << k << std::endl;
+    //k_clusters_evolution(num_population, num_iterations, points);
+    std::cout << print(points);
+    inversion(points);
+    std::cout << print(points) << ' ';
     return 0;
 }
-
+/*Genome points;
+   int num_population, num_iterations;
+   readData(num_population, num_iterations, points);
+   int k = std::round(std::sqrt(points.size()) + 0.5);
+   std::vector<int> cluster = k_means(points, k, 10);
+   std::ofstream c("data/clusters.txt");
+   for(auto i : cluster)
+       c << i << ' ';
+   c.close();
+   std::cout << k << std::endl;*/
 /*int num_population, num_iterations;
 Genome points;
 readData(num_population, num_iterations, points);

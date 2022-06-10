@@ -36,29 +36,39 @@ void truncation(std::vector<std::vector<Gene>> &population, int num_selected, st
     fit_vec.resize(num_selected);
 }
 
-void tournament(std::vector<std::vector<Gene>> &population, int num_participated, std::vector<double> &fit_vec) {
+void tournament(std::vector<std::vector<Gene>> &population, int num_selected, std::vector<double> &fit_vec) {
     int num_population = population.size();
+    int num_participated = num_population/num_selected;
     int rounds = num_population/num_participated;
     if(num_population%num_participated != 0)
         rounds++;
     for(int l = 0, r = num_population-1; l < rounds; l++){
         int i = r;
         while(l <= i && r - i < num_participated){
+            //std::cout << "selected: ";
             int j = getRandomNumber(l, i);
+            //std::cout << "(index = " << j << " fit = " << fit_vec[j] << ")\n";
             std::swap(population[j], population[i]);
             std::swap(fit_vec[j], fit_vec[i]);
+            //std::cout << "index = " << i << " fit = " << fit_vec[i] << ") ";
             i--;
         }
-        std::swap(population[i], population[l]);
-        std::swap(fit_vec[i], fit_vec[l]);
-        int best = l;
-        for(int j = i+1; j < r; j++){
+        i++;
+        //std::cout << '\n';
+        //std::swap(population[i], population[l]);
+        //std::swap(fit_vec[i], fit_vec[l]);
+        int best = i;
+        for(int j = i+1; j <= r; j++){
+            //std::cout << "!\n";
             if(fit_vec[j] < fit_vec[best])
                 best = j;
         }
-        std::swap(population[best], population[l]);
-        std::swap(fit_vec[best], fit_vec[l]);
-        r = r - num_participated + 1;
+        std::swap(population[best], population[i]);
+        std::swap(fit_vec[best], fit_vec[i]);
+        std::swap(population[l], population[i]);
+        std::swap(fit_vec[l], fit_vec[i]);
+        r = i;
+        //std::cout << "best fit = " << fit_vec[l] << '\n';
         /*std::cout << l << std::endl;
         std::cout <<print(fit_vec);
         ln*/

@@ -19,7 +19,7 @@ Genome mutation_based(int num_population, int num_iterations, std::vector<Gene> 
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     Genome best = population[best_index];
-    std::cout << best_fit << std::endl;
+    //std::cout <<"before " << best_fit << std::endl;
     //Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
     while(!terminator.isSatisfied()){
@@ -47,5 +47,6 @@ Genome mutation_based(int num_population, int num_iterations, std::vector<Gene> 
         //stat.gatherAll(population, fitness(population));
     }
     //std::cout << "b\n";
+    std::cout << best_fit << std::endl;
     return best;
 }

@@ -23,3 +23,11 @@ double get_distance(std::vector<Gene> &genome, int pos) {
     }
     return res;
 }
+
+double get_left_distance(Genome &genome, Genome &example, int pos_genome, int pos_example) {
+    double res = 0.0;
+    if(pos_genome != 0){
+        res += distance(genome[pos_genome-1].getPoint(), example[pos_example].getPoint());
+    }
+    return res;
+}
