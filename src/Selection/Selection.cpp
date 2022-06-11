@@ -9,22 +9,22 @@
 #include "../Pathes.h"
 #include "../Other/Roulette.h"
 //элитарный отбор, отбираются лучшие select особей
-Population selection(Population population, int num_selected){
-    std::sort(population.begin(), population.end(),[&](Genome &a, Genome &b){
+PopulationPoint selection(PopulationPoint population, int num_selected){
+    std::sort(population.begin(), population.end(),[&](GenomePoint &a, GenomePoint &b){
         return fitness(a) < fitness(b);
     });
     population.resize(num_selected);
     return population;
 }
 
-void truncation(std::vector<std::vector<Gene>> &population, int num_selected, std::vector<double> &fit_vec) {
+void truncation(std::vector<std::vector<GenePoint>> &population, int num_selected, std::vector<double> &fit_vec) {
     std::vector<int> indexes(population.size());
     for(int i = 0; i < population.size(); i++)
         indexes[i] = i;
     std::sort(indexes.begin(), indexes.end(),[&](int &a, int &b){
         return fit_vec[a] < fit_vec[b];
     });
-    Population sorted;
+    PopulationPoint sorted;
     std::vector<double> sorted_fit;
     for(int i = 0; i < population.size(); i++){
         sorted.push_back(population[indexes[i]]);
@@ -36,7 +36,7 @@ void truncation(std::vector<std::vector<Gene>> &population, int num_selected, st
     fit_vec.resize(num_selected);
 }
 
-void tournament(std::vector<std::vector<Gene>> &population, int num_selected, std::vector<double> &fit_vec) {
+void tournament(std::vector<std::vector<GenePoint>> &population, int num_selected, std::vector<double> &fit_vec) {
     int num_population = population.size();
     int num_participated = num_population/num_selected;
     int rounds = num_population/num_participated;
@@ -78,7 +78,7 @@ void tournament(std::vector<std::vector<Gene>> &population, int num_selected, st
 }
 
 //ранговая селекция
-Population rank(std::vector<std::vector<Gene>> &population, int num_selected, std::vector<double> &fit_vec) {
+PopulationPoint rank(std::vector<std::vector<GenePoint>> &population, int num_selected, std::vector<double> &fit_vec) {
     int num_population = population.size();
     //здесь хранятся ранги
     std::vector<int> indexes(num_population);
@@ -95,7 +95,7 @@ Population rank(std::vector<std::vector<Gene>> &population, int num_selected, st
     for(int i = 1; i < num_population; i++) {
         prefix[i] = prefix[i - 1] + (i+1) / sum;
     }
-    Population selected;
+    PopulationPoint selected;
     for(int i = 0; i < num_selected; i++){
         //программа выбирает случайное число в диапазоне от 0 до 1,
         //после чего при помощи бинарного поиска она находит наиболее близкое к загаданному числу элемент массива prefix
@@ -119,10 +119,10 @@ Population rank(std::vector<std::vector<Gene>> &population, int num_selected, st
     return selected;
 }
 
-Population rank2(std::vector<std::vector<Gene>> &population, int num_selected, std::vector<double> &fit_vec) {
+PopulationPoint rank2(std::vector<std::vector<GenePoint>> &population, int num_selected, std::vector<double> &fit_vec) {
     std::vector<int> rank = get_rank(fit_vec);
     std::vector<double> prefix = get_prefix(rank);
-    Population selected;
+    PopulationPoint selected;
     for(int i = 0; i < num_selected; i++){
         int p = roulette(prefix);
         selected.push_back(population[p]);

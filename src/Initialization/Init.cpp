@@ -1,10 +1,11 @@
+#include <iostream>
 #include "Init.h"
 #include "../Solutions/Non-genetic/nearest.h"
 #include "../Mutation/Mutation.h"
 
-Population random_init(Genome &possible_genes, int num_population){
+PopulationPoint random_init(GenomePoint &possible_genes, int num_population){
     int num_genes = possible_genes.size();
-    Population population(num_population, Genome(num_genes));
+    PopulationPoint population(num_population, GenomePoint(num_genes));
     for(int i = 0; i < num_population; i++){
         //копируем гены
         for(int j = 0; j < num_genes; j++){
@@ -19,9 +20,10 @@ Population random_init(Genome &possible_genes, int num_population){
     return population;
 }
 
-Population greedy_init(std::vector<Gene> &possible_genes, int num_population) {
+PopulationPoint greedy_init(std::vector<GenePoint> &possible_genes, int num_population) {
+    //std::cout << 1 << '\n';
     int num_genes = possible_genes.size();
-    Population population;
+    PopulationPoint population;
     for(int i = 0; i < num_population && i < num_genes; i++)
         population.push_back(nearest(possible_genes, i));
     for(int i = num_genes; i < num_population; i++){
@@ -31,8 +33,8 @@ Population greedy_init(std::vector<Gene> &possible_genes, int num_population) {
     return population;
 }
 
-Population k_cluster_init(std::vector<Gene> &possible_genes, int num_population) {
-    return std::vector<std::vector<Gene>>();
+PopulationPoint k_cluster_init(std::vector<GenePoint> &possible_genes, int num_population) {
+    return std::vector<std::vector<GenePoint>>();
 }
 /*
  #include "Init.h"

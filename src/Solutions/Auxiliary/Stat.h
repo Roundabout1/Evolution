@@ -15,14 +15,14 @@ public:
 
     Stat(int numIterations);
 
-    void gatherAll(Population &population, std::vector<double> fit_vec);
-    void gatherGenomes(Population &population);
-    void gatherBestGenome(Population &population, std::vector<double> &fit_vec);
+    void gatherAll(PopulationPoint &population, std::vector<double> &fit_vec);
+    void gatherGenomes(PopulationPoint &population);
+    void gatherBestGenome(PopulationPoint &population, std::vector<double> &fit_vec);
     void gatherFitness(std::vector<double> &fit_vec);
     void gatherFitnessStats(std::vector<double> &fit_vec);
-    void gatherConvergence(Population &population);
+    void gatherConvergence(PopulationPoint &population);
 
-    static void gatherGenome(Genome &genome);
+    static void gatherGenome(GenomePoint &genome);
     static void gatherFitness(double fitness_value);
 };
 

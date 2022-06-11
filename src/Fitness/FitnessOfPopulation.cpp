@@ -1,6 +1,6 @@
 #include <vector>
 #include "Fitness.h"
-std::vector<double> fitness(Population &population){
+std::vector<double> fitness(PopulationPoint &population){
     std::vector<double> fitness_population;
     for(auto i : population){
         fitness_population.push_back(fitness(i));

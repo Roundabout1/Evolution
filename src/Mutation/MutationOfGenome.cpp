@@ -2,9 +2,9 @@
 #include <iostream>
 #include <algorithm>
 #include "Mutation.h"
-Genome mutation(std::vector<Gene> &genome, double probability, int begin, int end) {
+GenomePoint mutation(std::vector<GenePoint> &genome, double probability, int begin, int end) {
     int num_genes = genome.size();
-    Genome mutant = Genome(num_genes);
+    GenomePoint mutant = GenomePoint(num_genes);
     for(int i = 0; i < num_genes; i++){
         mutant[i] = genome[i];
     }
@@ -18,14 +18,14 @@ Genome mutation(std::vector<Gene> &genome, double probability, int begin, int en
 }
 
 //выбирается случайный отрезок, который затем перворачивается
-Genome mutation(std::vector<Gene> &genome, int begin, int end) {
+GenomePoint mutation(std::vector<GenePoint> &genome, int begin, int end) {
     int a = getRandomNumber(begin, genome.size()-1-end);
     int b = getRandomNumber(begin, genome.size()-1-end);
     if(a == b)
         b = (a + 1)%genome.size();
     if(a > b)
         std::swap(a, b);
-    Genome mutant = Genome(genome.size());
+    GenomePoint mutant = GenomePoint(genome.size());
     for(int i = 0; i < genome.size(); i++)
         mutant[i] = genome[i];
     for(int i = 0; i <= b-a; i++){
@@ -35,7 +35,7 @@ Genome mutation(std::vector<Gene> &genome, int begin, int end) {
 }
 
 
-Genome migration(Genome &genome, int begin, int end){
+GenomePoint migration(GenomePoint &genome, int begin, int end){
     /*Genome mutant = Genome(genome);
     int ending = genome.size()-1-end;
     //количество мигрирующих генов
@@ -50,7 +50,7 @@ Genome migration(Genome &genome, int begin, int end){
             std::swap(mutant[cur], mutant[next]);
         }
     }*/
-    Genome mutant = Genome(genome);
+    GenomePoint mutant = GenomePoint(genome);
     int ending = genome.size()-1-end;
     //позиция откуда мигрируют гены
     int pos_from = getRandomNumber(begin+1, ending-1);
@@ -94,8 +94,8 @@ Genome migration(Genome &genome, int begin, int end){
     return mutant;
 }
 
-Genome single_migration(Genome &genome, int begin, int end){
-    Genome mutant = Genome(genome);
+GenomePoint single_migration(GenomePoint &genome, int begin, int end){
+    GenomePoint mutant = GenomePoint(genome);
     int ending = genome.size()-1-end;
     int dir = getRandomNumber(0, 1) ? 1 : -1;
     //позиция откуда мигрируют гены
@@ -118,11 +118,11 @@ Genome single_migration(Genome &genome, int begin, int end){
     return mutant;
 }
 
-void inversion(std::vector<Gene> &genome) {
+void inversion(std::vector<GenePoint> &genome) {
     std::reverse(genome.begin(), genome.end());
 }
 
-Genome randomChoice(std::vector<Gene> &genome, int begin, int end) {
+GenomePoint randomChoice(std::vector<GenePoint> &genome, int begin, int end) {
     bool mut = getRandomNumber(0, 1);
     if(mut){
         return mutation(genome, begin, end);

@@ -8,23 +8,23 @@
 
 //begin - минимальное количество генов, которые гарантированно достанутся первому родителю
 //end - второму
-Population crossover_random_parents(std::vector<std::vector<Gene>> &population, int k, int begin, int end) {
+PopulationPoint crossover_random_parents(std::vector<std::vector<GenePoint>> &population, int k, int begin, int end) {
     int num_population = population.size();
-    Population offspring;
+    PopulationPoint offspring;
     for(int p1 = 0; p1 < num_population; p1++){
         int p2 = getRandomNumber(0, num_population - 1);
         if(p1 == p2)
             p2 = (p1 + 1)%num_population;
-        Population children = crossover(population[p1], population[p2], k, begin, end);
+        PopulationPoint children = crossover(population[p1], population[p2], k, begin, end);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
 
-Population crossover(std::vector<Gene> &parent1, std::vector<Gene> &parent2, int k, int begin, int end) {
+PopulationPoint crossover(std::vector<GenePoint> &parent1, std::vector<GenePoint> &parent2, int k, int begin, int end) {
     int num_genes = parent1.size();
-    Population offspring(2, Genome (num_genes));
+    PopulationPoint offspring(2, GenomePoint (num_genes));
     std::vector<int> cross_points;
     for(int i = 0; i < k; i++){
         cross_points.push_back(getRandomNumber(begin, num_genes - 1 - end));
@@ -45,22 +45,22 @@ Population crossover(std::vector<Gene> &parent1, std::vector<Gene> &parent2, int
     return offspring;
 }
 
-Population uniform_crossover(std::vector<std::vector<Gene>> &population) {
+PopulationPoint uniform_crossover(std::vector<std::vector<GenePoint>> &population) {
     int num_population = population.size();
-    Population offspring;
+    PopulationPoint offspring;
     for (int p1 = 0; p1 < num_population; p1++) {
         int p2 = getRandomNumber(0, num_population - 1);
         if (p1 == p2)
             p2 = (p1 + 1) % num_population;
-        Population children = uniform_crossover(population[p1], population[p2]);
+        PopulationPoint children = uniform_crossover(population[p1], population[p2]);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
-Population uniform_crossover(std::vector<Gene> &parent1, std::vector<Gene> &parent2){
+PopulationPoint uniform_crossover(std::vector<GenePoint> &parent1, std::vector<GenePoint> &parent2){
     int num_genes = parent1.size();
-    Population offspring(2, Genome (num_genes));
+    PopulationPoint offspring(2, GenomePoint (num_genes));
 
     for (int i = 0; i < num_genes; i++) {
         bool turn = getRandomNumber(0, 1);
@@ -70,34 +70,34 @@ Population uniform_crossover(std::vector<Gene> &parent1, std::vector<Gene> &pare
     return offspring;
 }
 
-Population crossover_similar(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec, int k, int begin, int end) {
+PopulationPoint crossover_similar(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec, int k, int begin, int end) {
     int num_population = population.size();
-    Population offspring;
+    PopulationPoint offspring;
     for (int p1 = 0; p1 < num_population; p1+=2) {
         int p2 = p1 + 1;
         if(p2 >= num_population)
             p2 = std::max(0, num_population-2);
-        Population children = crossover(population[p1], population[p2], k, begin, end);
+        PopulationPoint children = crossover(population[p1], population[p2], k, begin, end);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
 
-Population crossover_different(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec, int k, int begin, int end) {
+PopulationPoint crossover_different(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec, int k, int begin, int end) {
     int num_population = population.size();
-    Population offspring;
+    PopulationPoint offspring;
     for (int p1 = 0; p1 < num_population/2; p1++) {
         int p2 = num_population-1-p1;
-        Population children = crossover(population[p1], population[p2], k, begin, end);
+        PopulationPoint children = crossover(population[p1], population[p2], k, begin, end);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
-Population crossover_different2(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec, int k, int begin, int end) {
+PopulationPoint crossover_different2(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec, int k, int begin, int end) {
     int num_population = population.size();
-    Population offspring;
+    PopulationPoint offspring;
     for (int p1 = 0; p1 < num_population; p1++) {
         int p2 = 0.0;
         if(p1 < num_population/2){
@@ -105,17 +105,17 @@ Population crossover_different2(std::vector<std::vector<Gene>> &population, std:
         }else{
             p2 = 0;
         }
-        Population children = crossover(population[p1], population[p2], k, begin, end);
+        PopulationPoint children = crossover(population[p1], population[p2], k, begin, end);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
 //population отсортирован по функции приспособленности
-Population multi_fit_crossover(Population &population, std::vector<double> &fit_vec, int num_offspring) {
+PopulationPoint multi_fit_crossover(PopulationPoint &population, std::vector<double> &fit_vec, int num_offspring) {
     std::vector<int> rank = get_rank(fit_vec);
     std::vector<double> prefix = get_prefix(rank);
-    Population offspring(num_offspring, Genome(population[0].size()));
+    PopulationPoint offspring(num_offspring, GenomePoint(population[0].size()));
     for(int i = 0; i < num_offspring; i++){
         for(int j = 0; j < offspring[i].size(); j++){
             int k = roulette(prefix);
@@ -126,39 +126,39 @@ Population multi_fit_crossover(Population &population, std::vector<double> &fit_
     return offspring;
 }
 
-Population rank_fit_crossover(Population &population, std::vector<double> &fit_vec, int num_pairs_offspring){
+PopulationPoint rank_fit_crossover(PopulationPoint &population, std::vector<double> &fit_vec, int num_pairs_offspring){
     std::vector<int> rank = get_rank(fit_vec);
     std::vector<double> prefix = get_prefix(rank);
-    Population offspring;
+    PopulationPoint offspring;
     for(int i = 0; i < num_pairs_offspring; i++){
         int k = roulette(prefix);
         if(k == i)
             k = (k+1)%population.size();
-        Population children = crossover(population[i], population[k]);
+        PopulationPoint children = crossover(population[i], population[k]);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
 
-Population collision(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec) {
-    Population offspring;
+PopulationPoint collision(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec) {
+    PopulationPoint offspring;
     int num_population = population.size();
     for(int p1 = 0; p1 < num_population; p1++){
         int p2 = getRandomNumber(0, num_population - 1);
         if(p1 == p2)
             p2 = (p1 + 1)%num_population;
         //Population children = collision(population[p1], population[p2], getRandomNumber(1.0, fit_vec[p1]), getRandomNumber(1.0, fit_vec[p2]));
-        Population children = collision(population[p1], population[p2], 1.0, 1.0);
+        PopulationPoint children = collision(population[p1], population[p2], 1.0, 1.0);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
 
-Population collision(std::vector<Gene> &g1, std::vector<Gene> &g2, double velocity1, double velocity2) {
+PopulationPoint collision(std::vector<GenePoint> &g1, std::vector<GenePoint> &g2, double velocity1, double velocity2) {
     velocity2 = -velocity2;
-    Population offspring(2, Genome(g1.size()));
+    PopulationPoint offspring(2, GenomePoint(g1.size()));
     for(int i = 0; i < g1.size(); i++){
         double mass1 = get_distance(g1, i);
         double mass2 = get_distance(g2, i);
@@ -182,23 +182,23 @@ Population collision(std::vector<Gene> &g1, std::vector<Gene> &g2, double veloci
     return offspring;
 }
 
-Population ordered(std::vector<std::vector<Gene>> &population) {
+PopulationPoint ordered(std::vector<std::vector<GenePoint>> &population) {
     int num_population = population.size();
-    Population offspring;
+    PopulationPoint offspring;
     for(int p1 = 0; p1 < num_population; p1++){
         int p2 = getRandomNumber(0, num_population - 1);
         if(p1 == p2)
             p2 = (p1 + 1)%num_population;
         //Population children = collision(population[p1], population[p2], getRandomNumber(1.0, fit_vec[p1]), getRandomNumber(1.0, fit_vec[p2]));
-        Population children = ordered(population[p1], population[p2]);
+        PopulationPoint children = ordered(population[p1], population[p2]);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
 
-Population ordered(std::vector<Gene> &g1, std::vector<Gene> &g2) {
-    Population offspring(2, Genome(g1.size()));
+PopulationPoint ordered(std::vector<GenePoint> &g1, std::vector<GenePoint> &g2) {
+    PopulationPoint offspring(2, GenomePoint(g1.size()));
     int l = getRandomNumber(1, g1.size()-2);
     int r = getRandomNumber(1, g1.size()-2);
     if(l == r)
@@ -212,7 +212,7 @@ Population ordered(std::vector<Gene> &g1, std::vector<Gene> &g2) {
         used1[g1[i].getType()] = 1;
         used2[g2[i].getType()] = 1;
     }
-    Genome unused1, unused2;
+    GenomePoint unused1, unused2;
     for(int i = 0; i < g1.size(); i++){
         if(!used1[g2[i].getType()]){
             unused1.push_back(g2[i]);

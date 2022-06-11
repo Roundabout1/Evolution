@@ -1,8 +1,8 @@
 #include "Fix.h"
-void fix(Population &population, Genome &example, void (*fix_operator)(std::vector<Gene> &, std::vector<Gene> &)) {
+void fix(PopulationPoint &population, GenomePoint &example, void (*fix_operator)(std::vector<GenePoint> &, std::vector<GenePoint> &)) {
     for(int i = 0; i < population.size(); i++)
         fix_operator(population[i], example);
 }
-void fix(Population &population, Genome &example){
+void fix(PopulationPoint &population, GenomePoint &example){
     fix(population, example, fix_random);
 }

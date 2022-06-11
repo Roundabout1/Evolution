@@ -5,7 +5,7 @@
 #include <algorithm>
 #include "PopulationSort.h"
 
-void sort(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec, bool increase) {
+void sort(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec, bool increase) {
     std::vector<int> indexes(population.size());
     for(int i = 0; i < population.size(); i++)
         indexes[i] = i;
@@ -15,7 +15,7 @@ void sort(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_v
         else
             return fit_vec[a] > fit_vec[b];
     });
-    Population sorted;
+    PopulationPoint sorted;
     std::vector<double> sorted_fit;
     for(int i = 0; i < population.size(); i++){
         sorted.push_back(population[indexes[i]]);

@@ -4,8 +4,8 @@
 
 #ifndef EVOLUTIONALGORITHM_OTHER_H
 #define EVOLUTIONALGORITHM_OTHER_H
-#include "../../Gene/Gene.h"
+#include "../../Gene/GenePoint.h"
 #include "../../Fitness/Fitness.h"
-int getBest(Population &population, std::vector<double> &fit_vec);
-Genome getBest(Population &population);
+int getBest(PopulationPoint &population, std::vector<double> &fit_vec);
+GenomePoint getBest(PopulationPoint &population);
 #endif //EVOLUTIONALGORITHM_OTHER_H

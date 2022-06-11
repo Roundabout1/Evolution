@@ -6,9 +6,9 @@
 #include "../../Fitness/Fitness.h"
 
 int main(){
-    Genome points;
+    GenomePoint points;
     readData(points);
-    Genome answer = nearest(points);
+    GenomePoint answer = nearest(points);
     std::ofstream out(output_path + "/nearest_answer.txt");
     out << print(answer);
     out.close();

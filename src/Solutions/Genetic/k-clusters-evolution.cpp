@@ -15,7 +15,7 @@
 #include "../../Other/PopulationSort.h"
 #include "../Non-genetic/nearest.h"
 
-Genome k_clusters_evolution(int num_population, int num_iterations, Genome &points){
+GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomePoint &points){
     std::vector<int> labels;
     {
         int clusterID;
@@ -25,13 +25,13 @@ Genome k_clusters_evolution(int num_population, int num_iterations, Genome &poin
         }
         read.close();
     }
-    std::vector<Gene> centers;
+    std::vector<GenePoint> centers;
     {
         double x, y;
         int clusterID = 0;
         std::ifstream read(k_medoids_centers);
         while(read >> x >> y){
-            centers.push_back(Gene(clusterID, Point(x, y)));
+            centers.push_back(GenePoint(clusterID, Point(x, y)));
             clusterID++;
         }
         read.close();
@@ -43,18 +43,18 @@ Genome k_clusters_evolution(int num_population, int num_iterations, Genome &poin
     }*/
     //int k = std::round(std::sqrt(points.size()) + 0.5);
     int k = centers.size();
-    std::vector<Genome> clusters(k);
+    std::vector<GenomePoint> clusters(k);
     std::vector<std::vector<int> > originalID(k);
     for(int i = 0; i < points.size(); i++){
         int clusterID = labels[i];
         int cluster_points = clusters[clusterID].size();
-        Gene new_gene = Gene(cluster_points, points[i].getPoint());
+        GenePoint new_gene = GenePoint(cluster_points, points[i].getPoint());
         clusters[clusterID].push_back(new_gene);
         originalID[clusterID].push_back(points[i].getType());
         //std::cout << cluster_points << ' ' << points[i].getType() << '\n';
     }
     //ln
-    Population cluster_solutions;
+    PopulationPoint cluster_solutions;
     //int cnt = 0;
     for(auto i : clusters){
         int num_population = 2*i.size();
@@ -73,24 +73,24 @@ Genome k_clusters_evolution(int num_population, int num_iterations, Genome &poin
         }
     }
     //изначальные обходы кластеров
-    std::vector<std::vector<Gene> > cluster_tour;
+    std::vector<std::vector<GenePoint> > cluster_tour;
     for(int i = 0; i < k && i < num_population; i++){
         cluster_tour.push_back(nearest(centers, i));
     }
     //первёрнутые кластерные решения
-    Population cluster_solutions_reversed(k);
+    PopulationPoint cluster_solutions_reversed(k);
     for(int i = 0; i < k && i < num_population; i++){
         cluster_solutions_reversed[i] = cluster_solutions[i];
         inversion(cluster_solutions_reversed[i]);
     }
     //std::cout << 2 << std::endl;
     //формируем начальную популяцию
-    Population population(num_population, Genome(points.size()));
+    PopulationPoint population(num_population, GenomePoint(points.size()));
     for(int i = 0; i < 2*k && i < num_population; i++){
         //std::cout << i << ' ';
         for(int j = 0, g = 0; j < k; j++) {
             int clusterID =  cluster_tour[i%k][j].getType();
-            Genome cur_cluster_solution;
+            GenomePoint cur_cluster_solution;
             if(j > 0){
                 //int preClusterID = cluster_tour[i][j-1].getType();
                 //int preLastIndex = cluster_solutions[preClusterID].size()-1;
@@ -142,8 +142,8 @@ Genome k_clusters_evolution(int num_population, int num_iterations, Genome &poin
     std::vector<double> fit_vec = fitness(population);
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
-    Genome best = population[best_index];
-    Stat stat = Stat(num_iterations);
+    GenomePoint best = population[best_index];
+    //Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
     double mutation_chance = 0.1;
     //std::cout << mutation_chance << std::endl;
@@ -153,9 +153,9 @@ Genome k_clusters_evolution(int num_population, int num_iterations, Genome &poin
         int invs = std::max(1, num_population/10);
         for(int i = 0; i < invs; i++) {
             int j = getRandomNumber(0, num_population-1);
-            inversion(population[i]);
+            inversion(population[j]);
         }
-        Population mutants(num_population-1);
+        PopulationPoint mutants(num_population - 1);
         for(int i = 0; i < num_population-1; i++){
             mutants[i] = randomChoice(population[i]);
         }
@@ -168,11 +168,11 @@ Genome k_clusters_evolution(int num_population, int num_iterations, Genome &poin
         //Population offspring = crossover_similar(population, fit_vec);
         //Population offspring = ordered(population);
         //Population offspring = crossover_different2(population, fit_vec, 2);
-        Population offspring = crossover_random_parents(population);
+        PopulationPoint offspring = crossover_random_parents(population);
         fix(offspring, points, fix_greedy_left);
         //std::cout << terminator.getCurIteration() << " generation\n" << print(fitness(offspring)) << '\n';
-        std::vector<Population> populations = std::vector<Population> {offspring, mutants};
-        Population united = concat(populations);
+        std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
+        PopulationPoint united = concat(populations);
         fit_vec = fitness(united);
         int cur_best = getBest(united, fit_vec);
         bool isProgressed = fit_vec[cur_best] < best_fit;
@@ -192,7 +192,7 @@ Genome k_clusters_evolution(int num_population, int num_iterations, Genome &poin
         //sort(united, fit_vec, false);
         //population = rank2(united, num_population, fit_vec);
         terminator.update();
-        stat.gatherAll(population, fitness(population));
+        //stat.gatherAll(population, fit_vec);
     }
     //std::cout << best_fit << std::endl;
     //std::cout << "b\n";

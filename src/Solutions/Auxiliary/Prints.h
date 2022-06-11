@@ -1,9 +1,9 @@
 #ifndef EVOLUTIONALGORITHM_PRINTS_H
 #define EVOLUTIONALGORITHM_PRINTS_H
-#include "../../Gene/Gene.h"
+#include "../../Gene/GenePoint.h"
 #include <string>
-std::string print(Genome &genome);
-std::string print(Population &population);
+std::string print(GenomePoint &genome);
+std::string print(PopulationPoint &population);
 std::string print(std::vector<double> v);
 #define ln std::cout << '\n';
 #endif //EVOLUTIONALGORITHM_PRINTS_H

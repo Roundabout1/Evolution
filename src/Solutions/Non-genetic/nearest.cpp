@@ -1,13 +1,13 @@
 #include "nearest.h"
 #include "../../Fitness/Fitness.h"
 
-Genome nearest(Genome &points){
+GenomePoint nearest(GenomePoint &points){
     int num_points = points.size();
-    Genome best = points;
+    GenomePoint best = points;
     double best_result = fitness(points);
     for(int start = 0; start < num_points; start++){
         double cur_result = 0.0;
-        Genome cur = nearest(points, start, cur_result);
+        GenomePoint cur = nearest(points, start, cur_result);
         if(cur_result < best_result){
             best_result = cur_result;
             best = cur;
@@ -16,8 +16,8 @@ Genome nearest(Genome &points){
     return best;
 }
 
-Genome nearest(std::vector<Gene> &points, int start_point, double &result) {
-    Genome cur(points);
+GenomePoint nearest(std::vector<GenePoint> &points, int start_point, double &result) {
+    GenomePoint cur(points);
     std::swap(cur[0], cur[start_point]);
     double cur_result = 0.0;
     for(int i = 1; i < points.size(); i++){
@@ -36,7 +36,7 @@ Genome nearest(std::vector<Gene> &points, int start_point, double &result) {
     return cur;
 }
 
-Genome nearest(std::vector<Gene> &points, int start_point) {
+GenomePoint nearest(std::vector<GenePoint> &points, int start_point) {
     double a = 0;
     return nearest(points, start_point, a);
 }

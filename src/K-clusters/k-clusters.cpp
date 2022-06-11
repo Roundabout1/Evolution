@@ -70,7 +70,7 @@ std::vector<int> k_means(std::vector<Point> &points, int k, int num_iterations) 
 
 }
 
-std::vector<int> k_means(std::vector<Gene> &points, int k, int num_iterations) {
+std::vector<int> k_means(std::vector<GenePoint> &points, int k, int num_iterations) {
     std::vector<Point> p;
     for(int i = 0; i < points.size(); i++)
         p.push_back(points[i].getPoint());

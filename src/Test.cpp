@@ -1,6 +1,7 @@
 #include <iostream>
 #include <processthreadsapi.h>
-#include "Gene/Gene.h"
+#include <memory>
+#include "Gene/GenePoint.h"
 #include "Initialization/Init.h"
 #include "Crossover/Crossover.h"
 #include "Other/FileOperations.h"
@@ -15,15 +16,29 @@
 #include "Fix/Fix.h"
 #include "K-clusters/k-clusters.h"
 #include "Solutions/Genetic/GeneticSolutions.h"
-
+void g(std::vector<Gene *> &gene){
+    std::cout << gene[0]->getType();
+}
 int main(){
-    Genome points;
+    GenomePoint points;
     int num_population, num_iterations;
     readData(num_population, num_iterations, points);
     //k_clusters_evolution(num_population, num_iterations, points);
     std::cout << print(points);
-    inversion(points);
-    std::cout << print(points) << ' ';
+    ln
+    //advanced_k_clusters(num_population, num_iterations, points);
+    /*PopulationPoint p = clusterGA(num_iterations, num_population, points);
+    std::cout << print(p) << '\n';
+    std::cout << print(fitness(p));*/
+    advanced_k_clusters(num_population, num_iterations, points);
+    /*inversion(points);
+    std::cout << print(points);
+    ln
+    std::vector<Gene *> ge;
+    ge.push_back(&points[0]);
+    g(ge);
+    points[0].setType(-1);
+    g(ge);*/
     return 0;
 }
 /*Genome points;

@@ -10,16 +10,16 @@
 #include "../Solutions/Non-genetic/nearest.h"
 #include "../Solutions/Genetic/GeneticSolutions.h"
 
-void test(Genome (*solution)(int, int, Genome&), int num_population, int num_iterations, Genome &points, std::ofstream &time, std::ofstream &result){
+void test(GenomePoint (*solution)(int, int, GenomePoint&), int num_population, int num_iterations, GenomePoint &points, std::ofstream &time, std::ofstream &result){
     clock_t start = clock();
-    Genome res =  solution(num_population, num_iterations, points);
+    GenomePoint res =  solution(num_population, num_iterations, points);
     clock_t end = clock();
     time << end - start << '\n';
     result << fitness(res) << '\n';
 }
-void test(Genome (*solution)(Genome&), Genome &points, std::ofstream &time, std::ofstream &result){
+void test(GenomePoint (*solution)(GenomePoint&), GenomePoint &points, std::ofstream &time, std::ofstream &result){
     clock_t start = clock();
-    Genome res =  solution(points);
+    GenomePoint res =  solution(points);
     clock_t end = clock();
     time << end - start << '\n';
     result << fitness(res) << '\n';
@@ -37,7 +37,7 @@ int main(){
     std::ofstream num_points(tests_path+"/num_points.txt");
     for(int i = 0; i < num_tests; i++){
         int num_population, num_iterations;
-        Genome points;
+        GenomePoint points;
         std::string cur_path = tests_path + "/" + test_folder_pattern + std::to_string(i+1) + "/points.txt";
         readData(points, cur_path);
         test(nearest,points, time[0], ofstreams[0]);

@@ -1,7 +1,3 @@
-//
-// Created by mrsiv on 27.05.2022.
-//
-
 #include <algorithm>
 #include <numeric>
 #include <iostream>
@@ -15,7 +11,7 @@ Stat::Stat(int numIterations) : num_iterations(numIterations) {
     createFolders(output_path, generation_name, numIterations);
 }
 
-void Stat::gatherAll(std::vector<std::vector<Gene>> &population, std::vector<double> fit_vec) {
+void Stat::gatherAll(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec) {
     cur_output_path = output_path + "/" + generation_name + " " + std::to_string(cur_iteration+1) + "/";
     gatherGenomes(population);
     gatherBestGenome(population, fit_vec);
@@ -25,13 +21,13 @@ void Stat::gatherAll(std::vector<std::vector<Gene>> &population, std::vector<dou
     cur_iteration++;
 }
 
-void Stat::gatherGenomes(std::vector<std::vector<Gene>> &population) {
+void Stat::gatherGenomes(std::vector<std::vector<GenePoint>> &population) {
     std::ofstream out_g(cur_output_path + file_genomes);
     out_g << print(population);
     out_g.close();
 }
 
-void Stat::gatherBestGenome(std::vector<std::vector<Gene>> &population, std::vector<double> &fit_vec) {
+void Stat::gatherBestGenome(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec) {
     std::ofstream out(cur_output_path + file_best_solution);
     out << print(population[getBest(population, fit_vec)]);
     out.close();
@@ -57,7 +53,7 @@ void Stat::gatherFitnessStats(std::vector<double> &fit_vec) {
     out.close();
 }
 
-void Stat::gatherConvergence(std::vector<std::vector<Gene>> &population) {
+void Stat::gatherConvergence(std::vector<std::vector<GenePoint>> &population) {
     double convergence = 0.0;
     for(int i = 0; i < population.size() - 1; i++){
         for(int j = i + 1; j < population.size(); j++){
@@ -78,7 +74,7 @@ void Stat::gatherConvergence(std::vector<std::vector<Gene>> &population) {
 }
 
 
-void Stat::gatherGenome(std::vector<Gene> &genome) {
+void Stat::gatherGenome(std::vector<GenePoint> &genome) {
     std::ofstream out(solution_path);
     out << print(genome);
     out.close();

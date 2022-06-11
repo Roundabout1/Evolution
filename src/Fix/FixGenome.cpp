@@ -5,7 +5,7 @@
 #include "../Random/Random.h"
 #include "../Fitness/Fitness.h"
 
-void fix_random(Genome &genome, Genome &example) {
+void fix_random(GenomePoint &genome, GenomePoint &example) {
     int n = genome.size();
 
     std::vector<int>
@@ -39,7 +39,7 @@ void fix_random(Genome &genome, Genome &example) {
     }
 }
 
-void fix_greedy(std::vector<Gene> &genome, std::vector<Gene> &example) {
+void fix_greedy(std::vector<GenePoint> &genome, std::vector<GenePoint> &example) {
     int n = genome.size();
 
     std::vector<int>
@@ -88,7 +88,7 @@ void fix_greedy(std::vector<Gene> &genome, std::vector<Gene> &example) {
     }
 }
 //желательно ещё одну альтернативу придумать
-void fix_greedy2(std::vector<Gene> &genome, std::vector<Gene> &example) {
+void fix_greedy2(std::vector<GenePoint> &genome, std::vector<GenePoint> &example) {
     int n = genome.size();
 
     std::vector<int>
@@ -135,7 +135,7 @@ void fix_greedy2(std::vector<Gene> &genome, std::vector<Gene> &example) {
 }
 
 //жадно чинит гены, смотря только на левую сторону
-void fix_greedy_left(std::vector<Gene> &genome, std::vector<Gene> &example) {
+void fix_greedy_left(std::vector<GenePoint> &genome, std::vector<GenePoint> &example) {
     int n = genome.size();
 
     std::vector<int>
