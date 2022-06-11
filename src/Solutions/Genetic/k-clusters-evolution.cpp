@@ -155,8 +155,8 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
             int j = getRandomNumber(0, num_population-1);
             inversion(population[j]);
         }
-        PopulationPoint mutants(num_population - 1);
-        for(int i = 0; i < num_population-1; i++){
+        PopulationPoint mutants(num_population);
+        for(int i = 0; i < num_population; i++){
             mutants[i] = randomChoice(population[i]);
         }
         /*for(int i = 0; i < num_population/2; i++){
@@ -180,11 +180,6 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
             best = united[cur_best];
             best_fit = fit_vec[cur_best];
             //std::cout << terminator.getCurIteration() << std::endl;
-            united.push_back(randomChoice(population[getRandomNumber(0, num_population-1)]));
-            fit_vec.push_back(fitness(united[united.size()-1]));
-        }else{
-            united.push_back(best);
-            fit_vec.push_back(best_fit);
         }
         //truncation(united, num_population, fit_vec);
         tournament(united, num_population, fit_vec);

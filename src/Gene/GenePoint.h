@@ -43,6 +43,7 @@ class GeneCluster : public Gene{
 private:
     GenomePoint cluster;
     Point center;
+    bool reversed=0;
 public:
     GeneCluster(int type, const GenomePoint &cluster, const Point &center);
 
@@ -63,6 +64,16 @@ public:
     void setCluster(const std::vector<GenePoint> &cluster);
 
     void push_back(const GenePoint &point);
+
+    bool isReversed() const;
+
+    void setIsReversed(bool isReversed);
+
+    GenePoint getGenePoint(int index);
+
+    GenePoint getLastGenePoint();
+
+    void reverse();
 };
 #define GenomeCluster std::vector<GeneCluster>
 #define PopulationCluster std::vector<GenomeCluster>

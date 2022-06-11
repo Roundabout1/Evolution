@@ -55,11 +55,25 @@ GeneCluster::GeneCluster() {
 
 }
 
-GeneCluster::GeneCluster(int type, Point point) : Gene(type), center(center){}
+GeneCluster::GeneCluster(int type, Point point) : Gene(type), center(center){
+    reversed = false;
+}
 
-GeneCluster::GeneCluster(int type, const std::vector<GenePoint> &cluster, const Point &center) : Gene(type), cluster(cluster), center(center) {}
+GeneCluster::GeneCluster(int type, const std::vector<GenePoint> &cluster, const Point &center) : Gene(type), cluster(cluster), center(center) {
+    reversed = false;
+}
 
-GeneCluster::GeneCluster(int type, const std::vector<GenePoint> &cluster) : Gene(type), cluster(cluster){}
+GeneCluster::GeneCluster(int type, const std::vector<GenePoint> &cluster) : Gene(type), cluster(cluster){
+    reversed = false;
+}
+
+bool GeneCluster::isReversed() const {
+    return reversed;
+}
+
+void GeneCluster::setIsReversed(bool isReversed) {
+    GeneCluster::reversed = isReversed;
+}
 
 const Point &GeneCluster::getCenter() const {
     return center;
@@ -79,4 +93,21 @@ std::vector<GenePoint> &GeneCluster::getCluster() {
 
 void GeneCluster::setCluster(const std::vector<GenePoint> &cluster) {
     GeneCluster::cluster = cluster;
+}
+
+GenePoint GeneCluster::getGenePoint(int index) {
+    if(reversed) {
+        int lastIndex = GeneCluster::cluster.size()-1;
+        return GeneCluster::cluster[lastIndex - index];
+    }
+    return GeneCluster::cluster[index];
+}
+
+GenePoint GeneCluster::getLastGenePoint() {
+    int lastIndex = GeneCluster::cluster.size()-1;
+    return getGenePoint(lastIndex);
+}
+
+void GeneCluster::reverse() {
+    reversed = !reversed;
 }

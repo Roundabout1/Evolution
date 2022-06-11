@@ -7,6 +7,7 @@ std::vector<double> fitness(PopulationPoint &population){
     }
     return fitness_population;
 }
+
 /*std::generate(fitness_population.begin(), fitness_population.end(),
                   [&population](){
                     static int n = -1;

@@ -7,5 +7,5 @@
 #include "../../Gene/GenePoint.h"
 #include "../../Fitness/Fitness.h"
 int getBest(PopulationPoint &population, std::vector<double> &fit_vec);
-GenomePoint getBest(PopulationPoint &population);
+int getBest(std::vector<double> &fit_vec);
 #endif //EVOLUTIONALGORITHM_OTHER_H

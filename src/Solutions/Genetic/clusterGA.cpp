@@ -29,7 +29,7 @@ PopulationPoint clusterGA(int num_population, int num_iterations, GenomePoint &p
             inversion(population[j]);
         }
         PopulationPoint mutants;
-        for(int i = 0; i < num_population-1; i++){
+        for(int i = 0; i < num_population; i++){
             int j = getRandomNumber(0, num_population-1);
             mutants.push_back(randomChoice(population[j]));
         }
@@ -43,11 +43,6 @@ PopulationPoint clusterGA(int num_population, int num_iterations, GenomePoint &p
         if(isProgressed) {
             best = united[cur_best];
             best_fit = fit_vec[cur_best];
-            united.push_back(randomChoice(population[getRandomNumber(0, num_population-1)]));
-            fit_vec.push_back(fitness(united[united.size()-1]));
-        }else{
-            united.push_back(best);
-            fit_vec.push_back(best_fit);
         }
         //на последней итерации отбираются только лучшие решения
         if(terminator.getCurIteration() + 1 == terminator.getMaxIterations()){

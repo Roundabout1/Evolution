@@ -7,6 +7,9 @@
 #include "../Non-genetic/nearest.h"
 #include "../../Random/Random.h"
 #include "../../Termination/Terminator.h"
+#include "../../Mutation/Mutation.h"
+#include "../../Selection/Selection.h"
+#include "../Auxiliary/Other.h"
 
 GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePoint &points){
     std::vector<int> labels;
@@ -105,9 +108,75 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         }
         std::cout << '\n';
     }*/
+    std::vector<double> fit_vec(num_population);
+    for (int i = 0; i < fit_vec.size(); i++){
+        fit_vec[i] = fitness(population[i]);
+    }
+    /*PopulationPoint testPop(num_population);
+    for(int i = 0; i < num_population; i++){
+        for(int j = 0; j < population[i].size(); j++){
+            for(int h = 0; h < population[i][j].getCluster().size(); h++){
+                testPop[i].push_back(population[i][j].getCluster()[h]);
+                //std::cout << population[i][j].getCluster()[h].getType() << ' ';
+                int clusterID = population[i][j].getType();
+                //std::cout << testPop[i][testPop[i].size()-1].getType() << ' ';
+                testPop[i][testPop[i].size()-1].setType(originalID[clusterID][testPop[i][testPop[i].size()-1].getType()]);
+                //std::cout << testPop[i][testPop[i].size()-1].getType() << ' ';
+            }
+        }
+    }
+    std::cout << print(fitness(testPop));*/
+    int best_index = getBest(fit_vec);
+    double best_fit = fit_vec[best_index];
+    GenomeCluster best = population[best_index];
+    //количество мутаций, воздействующих на расположение кластеров
+    int num_mutants_perm = num_population;
+    //количество мутаций на отдельно взятый кластер
+    int num_mutants_single = num_population;
     Terminator terminator = Terminator(num_iterations);
     while(!terminator.isSatisfied()){
+        //PopulationCluster mutants;
+        for(int i = 0; i < num_mutants_perm; i++){
+            int j = getRandomNumber(0, num_population-1);
+            population.push_back(randomChoice(population[j]));
+        }
+        for(int i = 0; i < num_mutants_single; i++){
+            int j = getRandomNumber(0, num_population-1);
+            int c = getRandomNumber(0, k-1);
+            //std::cout << fitness(population[j][c].getCluster()) << '\n';
+            GenomeCluster mutant = population[j];
+            if(i < num_mutants_single/3) {
+                mutant[c].setCluster(randomChoice(mutant[c].getCluster()));
+            }else{
+                mutant[c].setCluster(endsSwap(mutant[c].getCluster()));
+            }
+            population.push_back(mutant);
+            //std::cout << fitness(mutant[c].getCluster()) << '\n';
+        }
+        //вычисление ФП
+        fit_vec.clear();
+        for (int i = 0; i < population.size(); i++){
+            fit_vec.push_back(fitness(population[i]));
+        }
+        int cur_best = getBest(fit_vec);
+        if(fit_vec[cur_best] < best_fit){
+            best_fit = fit_vec[cur_best];
+            best = population[cur_best];
+            std::cout << terminator.getCurIteration() << '\n';
+        }
+        tournament(population, num_population, fit_vec);
         terminator.update();
     }
-    return points;
+    GenomePoint result;
+    for(int i = 0; i < best.size(); i++){
+        for(int j = 0; j < best[i].getCluster().size(); j++){
+            GenePoint point = best[i].getGenePoint(j);
+            int clusterID = best[i].getType();
+            point.setType(originalID[clusterID][point.getType()]);
+            result.push_back(point);
+        }
+        std::cout << best[i].isReversed() << ' ';
+    }
+    std::cout << '\n';
+    return result;
 }

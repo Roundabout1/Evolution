@@ -10,4 +10,5 @@ void tournament(PopulationPoint &population, int num_selected, std::vector<doubl
 PopulationPoint roulette(PopulationPoint &population, int num_selected, std::vector<double> &fit_vec);
 PopulationPoint rank(PopulationPoint &population, int num_selected, std::vector<double> &fit_vec);
 PopulationPoint rank2(PopulationPoint &population, int num_selected, std::vector<double> &fit_vec);
+PopulationCluster tournament(PopulationCluster &population, int num_selected, std::vector<double> &fit_vec);
 #endif //EVOLUTIONALGORITHM_SELECTION_H
