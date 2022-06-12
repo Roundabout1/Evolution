@@ -1,5 +1,5 @@
 #include "Prints.h"
-std::string print(GenomePoint &genome){
+std::string print(GenomePoint genome){
     std::string output = "";
     for(int i = 0; i < genome.size(); i++){
         output += std::to_string(genome[i].getType()) + " ";

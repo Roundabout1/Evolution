@@ -17,4 +17,18 @@ int getBest(std::vector<double> &fit_vec) {
     return best;
 }
 
+GenomePoint convert(std::vector<GeneCluster> &cluster, std::vector<std::vector<int>> &originalID) {
+    GenomePoint result;
+    for(int i = 0; i < cluster.size(); i++){
+        for(int j = 0; j < cluster[i].getCluster().size(); j++){
+            GenePoint point = cluster[i].getGenePoint(j);
+            int clusterID = cluster[i].getType();
+            point.setType(originalID[clusterID][point.getType()]);
+            result.push_back(point);
+        }
+        //std::cout << cluster[i].isReversed() << ' ';
+    }
+    return result;
+}
+
 

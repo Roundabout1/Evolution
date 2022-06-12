@@ -8,4 +8,6 @@
 #include "../../Fitness/Fitness.h"
 int getBest(PopulationPoint &population, std::vector<double> &fit_vec);
 int getBest(std::vector<double> &fit_vec);
+
+std::vector<GenePoint> convert(std::vector<GeneCluster> &cluster, std::vector<std::vector<int>> &originalID);
 #endif //EVOLUTIONALGORITHM_OTHER_H

@@ -245,7 +245,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         terminator.update();
     }
     std::cout << fitness(best) << '\n';
-    GenomePoint result;
+    /*GenomePoint result;
     for(int i = 0; i < best.size(); i++){
         for(int j = 0; j < best[i].getCluster().size(); j++){
             GenePoint point = best[i].getGenePoint(j);
@@ -256,5 +256,8 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         std::cout << best[i].isReversed() << ' ';
     }
     std::cout << '\n';
-    return result;
+    std::cout << print(result) << '\n';
+    std::cout << "|\n";
+    std::cout << print(convert(best, originalID)) << '\n';*/
+    return convert(best, originalID);
 }
