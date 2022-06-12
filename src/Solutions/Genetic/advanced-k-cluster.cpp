@@ -49,8 +49,10 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     for(int i = 0; i < points.size(); i++){
         int clusterID = labels[i];
         originalID[clusterID].push_back(points[i].getType());
-        points[i].setType(clusters[clusterID].getCluster().size());
-        clusters[clusterID].push_back(points[i]);
+        //points[i].setType(clusters[clusterID].getCluster().size());
+        GenePoint point = points[i];
+        point.setType(clusters[clusterID].getCluster().size());
+        clusters[clusterID].push_back(point);
     }
 
     //запуск генетического алгоритма на кластерах
@@ -167,7 +169,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     //количество мутаций на отдельно взятый кластер
     int num_mutants_single = num_population;
     Terminator terminator = Terminator(num_iterations);
-    Stat stat = Stat(num_iterations);
+    //Stat stat = Stat(num_iterations);
     while(!terminator.isSatisfied()){
         //добавление потомков
         for(int i = 0; i < num_population; i++){
@@ -240,24 +242,34 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
                 flip(population[i]);
             }
         }
-        stat.gatherFitness(fit_vec);
-        stat.update();
+        //stat.gatherFitness(fit_vec);
+        //stat.update();
         terminator.update();
     }
     std::cout << fitness(best) << '\n';
-    /*GenomePoint result;
-    for(int i = 0; i < best.size(); i++){
-        for(int j = 0; j < best[i].getCluster().size(); j++){
-            GenePoint point = best[i].getGenePoint(j);
-            int clusterID = best[i].getType();
-            point.setType(originalID[clusterID][point.getType()]);
-            result.push_back(point);
+    //удаление дубликаторв
+    int r = population.size();
+    for(int i = 0; i < r - 1; i++){
+        int j = i + 1;
+        while(j < r){
+            if(isEqual(fit_vec[i], fit_vec[j])){
+                std::swap(population[j], population[r-1]);
+                std::swap(fit_vec[j], fit_vec[r-1]);
+                r--;
+            }else{
+                j++;
+            }
         }
-        std::cout << best[i].isReversed() << ' ';
     }
-    std::cout << '\n';
-    std::cout << print(result) << '\n';
-    std::cout << "|\n";
-    std::cout << print(convert(best, originalID)) << '\n';*/
-    return convert(best, originalID);
+    if(r != population.size())
+        population.resize(r);
+    std::cout << r << '\n';
+    PopulationPoint init_population;
+    for(int i = 0; i < r; i++){
+        init_population.push_back(convert(population[i], originalID));
+        //std::cout << print(init_population[i]) << '\n';
+    }
+    std::cout << print(points) << '\n';
+    return clusterGA(num_population, num_iterations, points, init_population);
+    //return convert(best, originalID);
 }
