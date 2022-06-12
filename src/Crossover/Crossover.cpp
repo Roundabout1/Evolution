@@ -231,5 +231,6 @@ PopulationPoint ordered(std::vector<GenePoint> &g1, std::vector<GenePoint> &g2) 
         if(i == l-1)
             i = r;
     }
+    //123123
     return offspring;
 }
