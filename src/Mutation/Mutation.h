@@ -17,9 +17,10 @@ void inversion(std::vector<GenePoint> &genome);
 GenomePoint single_migration(GenomePoint &genome, int begin=0, int end=0);
 PopulationPoint mutation(PopulationPoint &population, int num_mutants, double probability, int begin=0, int end=0);
 PopulationPoint mutation(PopulationPoint &population, int num_mutants, int begin=0, int end=0);
-GenomeCluster flip(GenomeCluster &cluster, int begin=0, int end=0);
-GenomeCluster neighbourSwap(GenomeCluster &cluster, int begin=0, int end=0);
-GenomeCluster single_migration(GenomeCluster &cluster, int begin=0, int end=0);
-GenomeCluster randomChoice(GenomeCluster &genome, int begin=0, int end=0);
+void flip(GenomeCluster &cluster, int begin=0, int end=0);
+void neighbourSwap(GenomeCluster &cluster, int begin=0, int end=0);
+void single_migration(GenomeCluster &cluster, int begin=0, int end=0);
+void randomReverse(GenomeCluster &cluster, int begin=0, int end=0);
+void randomChoice(GenomeCluster &genome, int begin=0, int end=0);
 void flip_void(GenomeCluster &cluster, int begin=0, int end=0);
 #endif //EVOLUTIONALGORITHM_MUTATION_H

@@ -130,33 +130,26 @@ GenomePoint randomChoice(std::vector<GenePoint> &genome, int begin, int end) {
         case 2: return neighbourSwap(genome, begin, end);
     }
 }
-GenomeCluster flip(GenomeCluster &genome, int begin, int end){
+void flip(GenomeCluster &genome, int begin, int end){
     int a = getRandomNumber(begin, genome.size()-1-end);
     int b = getRandomNumber(begin, genome.size()-1-end);
     if(a == b)
         b = (a + 1)%genome.size();
     if(a > b)
         std::swap(a, b);
-    GenomeCluster mutant = GenomeCluster(genome.size());
-    for(int i = 0; i < genome.size(); i++)
-        mutant[i] = genome[i];
-    for(int i = 0; i <= b-a; i++){
-        mutant[a+i] = genome[b-i];
+    for(int i = a, j = b; i < j; i++, j--){
+        std::swap(genome[i], genome[j]);
     }
-    return mutant;
 }
 
-GenomeCluster neighbourSwap(std::vector<GeneCluster> &genome, int begin, int end) {
+void neighbourSwap(std::vector<GeneCluster> &genome, int begin, int end) {
     int a = getRandomNumber(begin, genome.size()-1-end);
     int b = (a+1)%(genome.size()-end) + begin;
-    GenomeCluster mutant = GenomeCluster(genome);
-    std::swap(mutant[a], mutant[b]);
-    return mutant;
+    std::swap(genome[a], genome[b]);
 }
 
-GenomeCluster single_migration(std::vector<GeneCluster> &genome, int begin, int end) {
-    GenomeCluster mutant = GenomeCluster(genome);
-    int ending = genome.size()-1-end;
+void single_migration(std::vector<GeneCluster> &mutant, int begin, int end) {
+    int ending = mutant.size()-1-end;
     int dir = getRandomNumber(0, 1) ? 1 : -1;
     //позиция откуда мигрируют гены
     int pos_from;
@@ -175,15 +168,23 @@ GenomeCluster single_migration(std::vector<GeneCluster> &genome, int begin, int 
         //std::cout << cur << ' ' << next << '\n';
         std::swap(mutant[cur], mutant[next]);
     }
-    return mutant;
 }
 
-GenomeCluster randomChoice(std::vector<GeneCluster> &genome, int begin, int end) {
-    int mut = getRandomNumber(0, 2);
+void randomChoice(std::vector<GeneCluster> &genome, int begin, int end) {
+    int mut = getRandomNumber(0, 3);
     switch (mut) {
-        case 0: return flip(genome, begin, end);
-        case 1: return single_migration(genome, begin, end);
-        case 2: return neighbourSwap(genome, begin, end);
+        case 0:
+            flip(genome, begin, end);
+            break;
+        case 1:
+            single_migration(genome, begin, end);
+            break;
+        case 2:
+            neighbourSwap(genome, begin, end);
+            break;
+        case 3:
+            randomReverse(genome, begin, end);
+            break;
     }
 }
 
@@ -206,6 +207,11 @@ GenomePoint endsSwap(std::vector<GenePoint> &genome, int begin, int end) {
     b = getRandomNumber(begin, genome.size() - end - 1);
     if(b == a)
         b = (a + 1)%(genome.size() - end) + begin;
-    std::swap(mutant[a], mutant[b]);
     return mutant;
 }
+
+void randomReverse(std::vector<GeneCluster> &cluster, int begin, int end) {
+    int c = getRandomNumber(begin, cluster.size()-1-end);
+    cluster[c].reverse();
+}
+

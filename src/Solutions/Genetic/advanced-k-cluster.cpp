@@ -167,10 +167,16 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     int num_mutants_single = num_population;
     Terminator terminator = Terminator(num_iterations);
     while(!terminator.isSatisfied()){
-        //PopulationCluster mutants;
-        for(int i = 0; i < num_mutants_perm; i++){
-            int j = getRandomNumber(0, num_population-1);
-            randomChoice(population[j]);
+        //добавление потомков
+        for(int i = 0; i < num_population; i++){
+            int j = getRandomNumber(0, num_population);
+            if(i == j){
+                j = (i+1)%num_population;
+            }
+            PopulationCluster offspring = uniform(population[i], population[j]);
+            for(int i = 0; i < offspring.size(); i++){
+                population.push_back(offspring[i]);
+            }
         }
         for(int i = 0; i < num_mutants_single; i++){
             int j = getRandomNumber(0, num_population-1);
@@ -189,6 +195,11 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             population.push_back(mutant);
             //std::cout << fitness(mutant[c].getCluster()) << '\n';
         }
+
+        for(int i = 0; i < num_mutants_perm; i++){
+            int j = getRandomNumber(0, num_population-1);
+            randomChoice(population[j]);
+        }
         //вычисление ФП
         fit_vec.clear();
         for (int i = 0; i < population.size(); i++){
@@ -200,6 +211,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             if(fit_vec[cur_best] < best_fit){
                 best_fit = fit_vec[cur_best];
                 best = population[cur_best];
+                std::cout << terminator.getCurIteration() << '\n';
             }else{
                 int j = getRandomNumber(0, num_population-1);
                 fit_vec[j] = best_fit;
