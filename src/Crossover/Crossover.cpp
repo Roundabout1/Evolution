@@ -231,6 +231,35 @@ PopulationPoint ordered(std::vector<GenePoint> &g1, std::vector<GenePoint> &g2) 
         if(i == l-1)
             i = r;
     }
-    //123123
+    return offspring;
+}
+
+PopulationCluster uniform(std::vector<GeneCluster> &p1, std::vector<GeneCluster> &p2) {
+    PopulationCluster offspring(4);
+    std::vector<int> cluster_order1(p1.size()), cluster_order2(p2.size());
+    for(int i = 0; i < p1.size(); i++){
+        cluster_order1[p1[i].getType()] = i;
+        cluster_order2[p2[i].getType()] = i;
+    }
+    for(int i = 0; i < 4; i+=2) {
+        for (int j = 0; j < p1.size(); j++) {
+            int id1;
+            int id2;
+            if(i < 2){
+                id1 = j;
+                id2 = cluster_order2[p1[id1].getType()];
+            }else{
+                id2 = j;
+                id1 = cluster_order1[p2[id2].getType()];
+            }
+            if (getRandomNumber(0, 1)) {
+                offspring[i].push_back(p1[id1]);
+                offspring[i+1].push_back(p2[id2]);
+            }else{
+                offspring[i].push_back(p2[id2]);
+                offspring[i+1].push_back(p1[id1]);
+            }
+        }
+    }
     return offspring;
 }

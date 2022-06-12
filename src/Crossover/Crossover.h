@@ -21,4 +21,5 @@ PopulationPoint collision(PopulationPoint &population, std::vector<double> &fit_
 PopulationPoint collision(GenomePoint &g1, GenomePoint &g2, double velocity1, double velocity2);
 PopulationPoint ordered(PopulationPoint &population);
 PopulationPoint ordered(GenomePoint &g1, GenomePoint &g2);
+PopulationCluster uniform(GenomeCluster &p1, GenomeCluster &g2);
 #endif //EVOLUTIONALGORITHM_CROSSOVER_H
