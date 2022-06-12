@@ -15,6 +15,11 @@
 #include "../../Other/DoubleOperations.h"
 
 PopulationPoint clusterGA(int num_population, int num_iterations, GenomePoint &points){
+    if(num_population <= 2){
+        PopulationPoint res;
+        res.push_back(points);
+        return res;
+    }
     PopulationPoint population = greedy_init(points, num_population);
     std::vector<double> fit_vec = fitness(population);
     int best_index = getBest(population, fit_vec);

@@ -10,6 +10,8 @@
 #include "../../Mutation/Mutation.h"
 #include "../../Selection/Selection.h"
 #include "../Auxiliary/Other.h"
+#include "../../Crossover/Crossover.h"
+#include "../../Other/DoubleOperations.h"
 
 GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePoint &points){
     std::vector<int> labels;
@@ -117,6 +119,25 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             }
         }
     }
+    PopulationCluster offspring = uniform(population[0], population[1]);
+
+        for(int j = 0; j < offspring[0].size(); j++) {
+            //std::cout << print(offspring[i][j].getCluster());
+            std::cout << population[0][j].getType() << " [ " << print(population[0][j].getCluster()) << "] ";
+        }
+        std::cout << '\n';
+    for(int j = 0; j < offspring[1].size(); j++) {
+        std::cout << population[1][j].getType() << " [ " << print(population[1][j].getCluster()) << "] ";
+        //std::cout << population[1][j].getType() << ' ';
+    }
+    std::cout << '\n';
+    for(int i = 0; i < offspring.size(); i++){
+        for(int j = 0; j < offspring[i].size(); j++) {
+            std::cout << offspring[i][j].getType() << " [ " << print(offspring[i][j].getCluster()) << "] ";
+            //std::cout << offspring[i][j].getType() << ' ';
+        }
+        std::cout << '\n';
+    }
     /*std::cout << print(fit_vec) << '\n';
     std::vector<double> f_test;
     for (int i = 0; i < population.size(); i++){
@@ -156,10 +177,14 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             int c = getRandomNumber(0, k-1);
             //std::cout << fitness(population[j][c].getCluster()) << '\n';
             GenomeCluster mutant = population[j];
-            if(i < num_mutants_single/3) {
-                mutant[c].setCluster(randomChoice(mutant[c].getCluster()));
+            if(population[j][c].getCluster().size() > 2) {
+                if (i < num_mutants_single / 3) {
+                    mutant[c].setCluster(randomChoice(mutant[c].getCluster()));
+                } else {
+                    mutant[c].setCluster(endsSwap(mutant[c].getCluster()));
+                }
             }else{
-                mutant[c].setCluster(endsSwap(mutant[c].getCluster()));
+                mutant[c].reverse();
             }
             population.push_back(mutant);
             //std::cout << fitness(mutant[c].getCluster()) << '\n';
@@ -169,18 +194,17 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         for (int i = 0; i < population.size(); i++){
             fit_vec.push_back(fitness(population[i]));
         }
-        int cur_best = getBest(fit_vec);
-        bool isProgressed = fit_vec[cur_best] < best_fit;
-        if(isProgressed){
-            best_fit = fit_vec[cur_best];
-            best = population[cur_best];
-            std::cout << terminator.getCurIteration() << '\n';
-        }
         tournament(population, num_population, fit_vec);
-        if(!isProgressed){
-            int j = getRandomNumber(0, num_population-1);
-            population[j] = best;
-            fit_vec[j] = best_fit;
+        int cur_best = getBest(fit_vec);
+        if(!isEqual(fit_vec[cur_best], best_fit)){
+            if(fit_vec[cur_best] < best_fit){
+                best_fit = fit_vec[cur_best];
+                best = population[cur_best];
+            }else{
+                int j = getRandomNumber(0, num_population-1);
+                fit_vec[j] = best_fit;
+                population[j] = best;
+            }
         }
         terminator.update();
     }

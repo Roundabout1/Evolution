@@ -203,7 +203,9 @@ GenomePoint endsSwap(std::vector<GenePoint> &genome, int begin, int end) {
     }else{
         a = genome.size() - 1 - end;
     }
-    b = getRandomNumber(begin+1, genome.size() - end - 2);
+    b = getRandomNumber(begin, genome.size() - end - 1);
+    if(b == a)
+        b = (a + 1)%(genome.size() - end) + begin;
     std::swap(mutant[a], mutant[b]);
     return mutant;
 }
