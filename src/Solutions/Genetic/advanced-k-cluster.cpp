@@ -120,7 +120,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             }
         }
     }
-    PopulationCluster offspring = uniform(population[0], population[1]);
+    /*PopulationCluster offspring = uniform(population[0], population[1]);
 
         for(int j = 0; j < offspring[0].size(); j++) {
             //std::cout << print(offspring[i][j].getCluster());
@@ -138,7 +138,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             //std::cout << offspring[i][j].getType() << ' ';
         }
         std::cout << '\n';
-    }
+    }*/
     /*std::cout << print(fit_vec) << '\n';
     std::vector<double> f_test;
     for (int i = 0; i < population.size(); i++){
