@@ -1,10 +1,10 @@
-
 #ifndef EVOLUTIONALGORITHM_FITNESS_H
 #define EVOLUTIONALGORITHM_FITNESS_H
 
 #include "../Gene/GenePoint.h"
 
 double fitness(GenomePoint &genome);
+double fitness(GenomeCluster &cluster);
 std::vector<double> fitness(PopulationPoint &population);
 double distance(const Point &a, const Point &b);
 double get_distance(GenomePoint &genome, GenomePoint &example, int pos_genome, int pos_example);

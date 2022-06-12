@@ -130,3 +130,35 @@ PopulationPoint rank2(std::vector<std::vector<GenePoint>> &population, int num_s
     return selected;
 }
 
+PopulationCluster tournament(std::vector<std::vector<GeneCluster>> &population, int num_selected,
+                             std::vector<double> &fit_vec) {
+    int num_population = population.size();
+    int num_participated = num_population/num_selected;
+    int rounds = num_population/num_participated;
+    if(num_population%num_participated != 0)
+        rounds++;
+    for(int l = 0, r = num_population-1; l < rounds; l++){
+        int i = r;
+        while(l <= i && r - i < num_participated){
+            int j = getRandomNumber(l, i);
+            std::swap(population[j], population[i]);
+            std::swap(fit_vec[j], fit_vec[i]);
+            i--;
+        }
+        i++;
+        int best = i;
+        for(int j = i+1; j <= r; j++){
+            if(fit_vec[j] < fit_vec[best])
+                best = j;
+        }
+        std::swap(population[best], population[i]);
+        std::swap(fit_vec[best], fit_vec[i]);
+        std::swap(population[l], population[i]);
+        std::swap(fit_vec[l], fit_vec[i]);
+        r = i;
+    }
+    population.resize(rounds);
+    fit_vec.resize(rounds);
+    return std::vector<std::vector<GeneCluster>>();
+}
+

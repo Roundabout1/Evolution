@@ -21,7 +21,7 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     GenomePoint best = population[best_index];
-    //Stat stat = Stat(num_iterations);
+    Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
     double mutation_chance = 0.1;
     //std::cout << mutation_chance << std::endl;
@@ -35,7 +35,7 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
             inversion(population[j]);
         }
         PopulationPoint mutants;
-        for(int i = 0; i < num_population-1; i++){
+        for(int i = 0; i < num_population; i++){
             int j = getRandomNumber(0, num_population-1);
             mutants.push_back(randomChoice(population[j]));
         }
@@ -57,12 +57,12 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
             best = united[cur_best];
             best_fit = fit_vec[cur_best];
             //std::cout << terminator.getCurIteration() << std::endl;
-            united.push_back(randomChoice(population[getRandomNumber(0, num_population-1)]));
-            fit_vec.push_back(fitness(united[united.size()-1]));
-        }else{
+            //united.push_back(randomChoice(population[getRandomNumber(0, num_population-1)]));
+            //fit_vec.push_back(fitness(united[united.size()-1]));
+        }/*else{
             united.push_back(best);
             fit_vec.push_back(best_fit);
-        }
+        }*/
         //truncation(united, num_population, fit_vec);
         //std::cout << "uni = " << united.size() << '\n';
         tournament(united, num_population, fit_vec);
@@ -71,7 +71,7 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
         //sort(united, fit_vec, false);
         //population = rank2(united, num_population, fit_vec);
         terminator.update();
-        //stat.gatherAll(population, fitness(population));
+        stat.gatherAll(population, fit_vec);
     }
     //std::cout << best_fit << std::endl;
     //std::cout << "b\n";

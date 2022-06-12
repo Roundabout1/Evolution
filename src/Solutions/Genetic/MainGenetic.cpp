@@ -12,10 +12,11 @@ int main() {
     GenomePoint points;
     readData(num_population, num_iterations, points);
     //Genome result = first_evolution(num_population, num_iterations, points);
-    //Genome result = second_evolution(num_population, num_iterations, points);
-    GenomePoint result = k_clusters_evolution(num_population, num_iterations, points);
+    //GenomePoint result = second_evolution(num_population, num_iterations, points);
+    //GenomePoint result = k_clusters_evolution(num_population, num_iterations, points);
     //Genome result = mutation_based(num_population, num_iterations, points);
-    //Genome result = nearest(points);
+    //GenomePoint result = nearest(points);
+    GenomePoint result = advanced_k_clusters(num_population, num_iterations, points);
     Stat::gatherGenome(result);
     Stat::gatherFitness(fitness(result));
     return 0;
