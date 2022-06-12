@@ -267,6 +267,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     PopulationPoint init_population;
     for(int i = 0; i < r; i++){
         init_population.push_back(convert(population[i], originalID));
+        //init_population.push_back();
         //std::cout << print(init_population[i]) << '\n';
     }
     std::cout << print(points) << '\n';
