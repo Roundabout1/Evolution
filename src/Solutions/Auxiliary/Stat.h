@@ -21,7 +21,7 @@ public:
     void gatherFitness(std::vector<double> &fit_vec);
     void gatherFitnessStats(std::vector<double> &fit_vec);
     void gatherConvergence(PopulationPoint &population);
-
+    void update();
     static void gatherGenome(GenomePoint &genome);
     static void gatherFitness(double fitness_value);
 };

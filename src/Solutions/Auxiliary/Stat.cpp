@@ -8,18 +8,22 @@
 #include "../../Other/FileOperations.h"
 Stat::Stat(int numIterations) : num_iterations(numIterations) {
     cur_iteration = 0;
+    cur_output_path = output_path + "/" + generation_name + " " + std::to_string(cur_iteration+1) + "/";
     createFolders(output_path, generation_name, numIterations);
 }
 
 void Stat::gatherAll(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec) {
-    cur_output_path = output_path + "/" + generation_name + " " + std::to_string(cur_iteration+1) + "/";
+    //cur_output_path = output_path + "/" + generation_name + " " + std::to_string(cur_iteration+1) + "/";
     gatherGenomes(population);
     gatherBestGenome(population, fit_vec);
     gatherFitness(fit_vec);
     gatherFitnessStats(fit_vec);
     gatherConvergence(population);
-    cur_iteration++;
+    //cur_iteration++;
+    update();
 }
+
+
 
 void Stat::gatherGenomes(std::vector<std::vector<GenePoint>> &population) {
     std::ofstream out_g(cur_output_path + file_genomes);
@@ -85,3 +89,9 @@ void Stat::gatherFitness(double fitness_value) {
     out << fitness_value;
     out.close();
 }
+
+void Stat::update() {
+    cur_iteration++;
+    cur_output_path = output_path + "/" + generation_name + " " + std::to_string(cur_iteration+1) + "/";
+}
+

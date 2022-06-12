@@ -23,4 +23,5 @@ void single_migration(GenomeCluster &cluster, int begin=0, int end=0);
 void randomReverse(GenomeCluster &cluster, int begin=0, int end=0);
 void randomChoice(GenomeCluster &genome, int begin=0, int end=0);
 void flip_void(GenomeCluster &cluster, int begin=0, int end=0);
+void clustersMutation(GenomeCluster &cluster, int num_mutations, int begin=0, int end=0);
 #endif //EVOLUTIONALGORITHM_MUTATION_H

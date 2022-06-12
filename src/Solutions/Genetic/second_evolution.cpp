@@ -21,7 +21,7 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     GenomePoint best = population[best_index];
-    Stat stat = Stat(num_iterations);
+    //Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
     double mutation_chance = 0.1;
     //std::cout << mutation_chance << std::endl;
@@ -71,7 +71,7 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
         //sort(united, fit_vec, false);
         //population = rank2(united, num_population, fit_vec);
         terminator.update();
-        stat.gatherAll(population, fit_vec);
+        //stat.gatherAll(population, fit_vec);
     }
     //std::cout << best_fit << std::endl;
     //std::cout << "b\n";

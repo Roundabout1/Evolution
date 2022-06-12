@@ -157,8 +157,8 @@ PopulationCluster tournament(std::vector<std::vector<GeneCluster>> &population, 
         std::swap(fit_vec[l], fit_vec[i]);
         r = i;
     }
-    population.resize(rounds);
-    fit_vec.resize(rounds);
-    return std::vector<std::vector<GeneCluster>>();
+    population.resize(num_selected);
+    fit_vec.resize(num_selected);
+    return population;
 }
 

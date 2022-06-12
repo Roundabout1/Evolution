@@ -28,5 +28,13 @@ with open("../cmake-build-debug/data/input/k-meansPy.txt", "w") as external_file
     print(labels[1:-1], file=external_file)
     external_file.close()
 
+centers = kmeans.cluster_centers_
+centers_str = ''
+for i in range(k):
+    centers_str += str(centers[i][0]) + ' ' + str(centers[i][1]) + '\n'
+#print(centers)
+with open("../cmake-build-debug/data/input/k-centersPy.txt", "w") as external_file:
+    print(centers_str, file=external_file)
+    external_file.close()
 
 

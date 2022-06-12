@@ -12,6 +12,7 @@
 #include "../Auxiliary/Other.h"
 #include "../../Crossover/Crossover.h"
 #include "../../Other/DoubleOperations.h"
+#include "../Auxiliary/Stat.h"
 
 GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePoint &points){
     std::vector<int> labels;
@@ -166,17 +167,29 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     //количество мутаций на отдельно взятый кластер
     int num_mutants_single = num_population;
     Terminator terminator = Terminator(num_iterations);
+    Stat stat = Stat(num_iterations);
     while(!terminator.isSatisfied()){
         //добавление потомков
         for(int i = 0; i < num_population; i++){
-            int j = getRandomNumber(0, num_population);
+            int j = getRandomNumber(0, num_population-1);
             if(i == j){
                 j = (i+1)%num_population;
+            }
+            //std::cout << fit_vec[i] << ' ' << fit_vec[j] << ' ';
+            if(isEqual(fit_vec[i], fit_vec[j])){
+                //std::cout << fit_vec[i] << ' ' << fit_vec[j] << ' ';
+                clustersMutation(population[j], std::max(1, k/2));
+                randomChoice(population[i]);
+                fit_vec[i] = fitness(population[i]);
+                fit_vec[j] = fitness(population[j]);
+                //std::cout << fit_vec[i] << ' ' << fit_vec[j] << '\n';
             }
             PopulationCluster offspring = uniform(population[i], population[j]);
             for(int i = 0; i < offspring.size(); i++){
                 population.push_back(offspring[i]);
+                //std::cout << fitness(offspring[i]) << ' ';
             }
+            //std::cout << '\n';
         }
         for(int i = 0; i < num_mutants_single; i++){
             int j = getRandomNumber(0, num_population-1);
@@ -205,7 +218,9 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         for (int i = 0; i < population.size(); i++){
             fit_vec.push_back(fitness(population[i]));
         }
+        //std::cout << population.size() << ' ';
         tournament(population, num_population, fit_vec);
+        //std::cout << population.size() <<'\n';
         int cur_best = getBest(fit_vec);
         if(!isEqual(fit_vec[cur_best], best_fit)){
             if(fit_vec[cur_best] < best_fit){
@@ -218,6 +233,15 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
                 population[j] = best;
             }
         }
+        for(int i = 0; i < population.size(); i++){
+            if(i == cur_best)
+                continue;
+            if(isEqual(fit_vec[i], fit_vec[cur_best])){
+                flip(population[i]);
+            }
+        }
+        stat.gatherFitness(fit_vec);
+        stat.update();
         terminator.update();
     }
     std::cout << fitness(best) << '\n';

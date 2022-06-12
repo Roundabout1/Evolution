@@ -8,8 +8,8 @@ for i in range (0, len(coordinates), 2):
     points.append([coordinates[i], coordinates[i+1]])
 f.close()
 #f = open('../cmake-build-debug/data/input/clusters.txt')
-#f = open('../cmake-build-debug/data/input/k-meansPy.txt')
-f = open('../cmake-build-debug/data/input/k-medoidsPy.txt')
+f = open('../cmake-build-debug/data/input/k-meansPy.txt')
+#f = open('../cmake-build-debug/data/input/k-medoidsPy.txt')
 clusters = [int(x) for x in f.read().split()]
 
 num_points = len(points)

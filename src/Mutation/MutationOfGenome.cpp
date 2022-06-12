@@ -215,3 +215,10 @@ void randomReverse(std::vector<GeneCluster> &cluster, int begin, int end) {
     cluster[c].reverse();
 }
 
+void clustersMutation(std::vector<GeneCluster> &cluster, int num_mutations, int begin, int end) {
+    for(int i = 0; i < num_mutations; i++){
+        int j = getRandomNumber(begin, cluster.size() - 1 - end);
+        cluster[j].setCluster(randomChoice(cluster[j].getCluster()));
+    }
+}
+
