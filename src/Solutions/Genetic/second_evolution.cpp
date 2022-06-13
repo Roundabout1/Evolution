@@ -12,18 +12,20 @@
 #include "../Auxiliary/Other.h"
 #include "../Auxiliary/Stat.h"
 #include "../../Other/PopulationSort.h"
+#include "../../Distance_measures.h"
 
-GenomePoint second_evolution(int num_population, int num_iterations, std::vector<GenePoint> &points) {
+GenomePoint second_evolution(int num_population, int num_iterations, std::vector<GenePoint> &points, bool isClosed, measures distance_measure) {
     int num_points = points.size();
     //Population population = random_init(points, num_population);
-    PopulationPoint population = greedy_init(points, num_population);
-    std::vector<double> fit_vec = fitness(population);
+    PopulationPoint population = greedy_init(points, num_population, isClosed, distance_measure);
+    std::vector<double> fit_vec = fitness(population, isClosed, distance_measure);
+    std::cout << print(fit_vec) << '\n';
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     GenomePoint best = population[best_index];
     //Stat stat = Stat(num_iterations);
     Terminator terminator = Terminator(num_iterations);
-    double mutation_chance = 0.1;
+    //double mutation_chance = 0.1;
     //std::cout << mutation_chance << std::endl;
     //std::cout << "a\n";
     //std::cout << fit_vec[best_index] << std::endl;
@@ -46,11 +48,11 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
         PopulationPoint offspring = crossover_random_parents(population);
         //Population offspring = crossover_different2(population, fit_vec, 2);
         //Population offspring = crossover_random_parents(population, 2);
-        fix(offspring, points, fix_greedy_left);
+        fix(offspring, points, fix_greedy_left, isClosed, distance_measure);
         //std::cout << terminator.getCurIteration() << " generation\n" << print(fitness(offspring)) << '\n';
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
         PopulationPoint united = concat(populations);
-        fit_vec = fitness(united);
+        fit_vec = fitness(united, isClosed, distance_measure);
         int cur_best = getBest(united, fit_vec);
         bool isProgressed = fit_vec[cur_best] < best_fit;
         if(isProgressed) {

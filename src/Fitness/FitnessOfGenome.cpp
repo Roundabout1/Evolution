@@ -1,11 +1,13 @@
 #include <vector>
 #include "Fitness.h"
+#include "../Distance_measures.h"
+
 //оценка для задачи Коммивояжёра
 double fitness(GenomePoint &genome) {
     //double sum = distance(genome[0].getPoint(), genome[genome.size()-1].getPoint());
     double sum = 0;
     for(int i = 1; i < genome.size(); i++){
-        sum += distance(genome[i-1].getPoint(), genome[i].getPoint());
+        sum += distance(genome[i - 1].getPoint(), genome[i].getPoint());
     }
     return sum;
 }
@@ -44,6 +46,18 @@ double fitness(GenomeCluster &cluster){
         Point p2_begin = cluster[i].getGenePoint(0).getPoint();
         double dis = distance(p1_end, p2_begin);
         sum += dis;
+    }
+    return sum;
+}
+
+double fitness(GenomePoint &genome, bool isClosed, measures distance_measure){
+    //double sum = distance(genome[0].getPoint(), genome[genome.size()-1].getPoint());
+    double sum = 0;
+    if(isClosed){
+        sum = distance(genome[0].getPoint(), genome[genome.size() - 1].getPoint());
+    }
+    for(int i = 1; i < genome.size(); i++){
+        sum += distance(genome[i - 1].getPoint(), genome[i].getPoint(), isClosed, distance_measure);
     }
     return sum;
 }

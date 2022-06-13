@@ -30,7 +30,7 @@ std::vector<int> k_means(std::vector<Point> &points, int k, int num_iterations) 
         //назначем точку к кластеру
         for(int c = 0; c < k; c++){
             for(int p = 0; p < points.size(); p++){
-                double dis = euclideanSquare(points[p], centroids[c]);
+                double dis = euclidean_square(points[p], centroids[c]);
                 if(dis < min_dist[p] || isEqual(dis, min_dist[p])){
                     //std::cout << i << '\n';
                     min_dist[p] = dis;
@@ -61,7 +61,7 @@ std::vector<int> k_means(std::vector<Point> &points, int k, int num_iterations) 
         }
         double v = 0.0;
         for(int p = 0; p < points.size(); p++){
-            v += euclideanSquare(points[p], centroids[cluster[p]]);
+            v += euclidean_square(points[p], centroids[cluster[p]]);
         }
         std::cout << i << ' ' << v << std::endl;
     }

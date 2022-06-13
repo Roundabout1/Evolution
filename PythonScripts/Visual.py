@@ -53,6 +53,14 @@ def showSolution(points, vis):
     length = f.read()
     f.close()
     plt.title('Расстояние = ' + length)
+    f = open(conf_path)
+    isClosed = int(f.read().split()[2])
+    f.close()
+    #print('\n')
+    #print("isClosed = ", isClosed)
+    if isClosed:
+        solution.append(solution[0])
+        #print(solution[0])
     if vis == 1:
         solutionEuclid(points, solution)
     else:
@@ -134,6 +142,6 @@ f.close()
 #showPoints(points)
 #showKmeans(points)
 #showKmedoids(points)
-#showSolution(points, 2)
+showSolution(points, 1)
 #showFitness()
-showConvergence()
+#showConvergence()

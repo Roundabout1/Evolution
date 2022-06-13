@@ -36,6 +36,19 @@ PopulationPoint greedy_init(std::vector<GenePoint> &possible_genes, int num_popu
 PopulationPoint k_cluster_init(std::vector<GenePoint> &possible_genes, int num_population) {
     return std::vector<std::vector<GenePoint>>();
 }
+
+PopulationPoint greedy_init(std::vector<GenePoint> &possible_genes, int num_population, bool isClosed,
+                            measures distance_measure) {
+    int num_genes = possible_genes.size();
+    PopulationPoint population;
+    for(int i = 0; i < num_population && i < num_genes; i++)
+        population.push_back(nearest(possible_genes, i, isClosed, distance_measure));
+    for(int i = num_genes; i < num_population; i++){
+        int j = getRandomNumber(0, num_genes-1);
+        population.push_back(mutation(population[j]));
+    }
+    return population;
+}
 /*
  #include "Init.h"
 Population init(Genome &possible_genes, int num_population){
