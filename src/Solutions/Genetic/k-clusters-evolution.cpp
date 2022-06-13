@@ -15,7 +15,7 @@
 #include "../../Other/PopulationSort.h"
 #include "../Non-genetic/nearest.h"
 
-GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomePoint &points){
+GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomePoint &points, bool  isClosed, measures distance_measure){
     std::vector<int> labels;
     {
         int clusterID;
@@ -59,7 +59,7 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
     for(auto i : clusters){
         int num_population = 2*i.size();
         int num_iterations = 2*i.size();
-        cluster_solutions.push_back(second_evolution(num_population, num_iterations, i, 0, manhattan));
+        cluster_solutions.push_back(second_evolution(num_population, num_iterations, i, isClosed, distance_measure));
         //std::cout << cnt<< '\n';
         //cnt++;
         //cluster_solutions.push_back(mutation_based(num_population, num_iterations, i));
@@ -75,7 +75,7 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
     //изначальные обходы кластеров
     std::vector<std::vector<GenePoint> > cluster_tour;
     for(int i = 0; i < k && i < num_population; i++){
-        cluster_tour.push_back(nearest(centers, i));
+        cluster_tour.push_back(nearest(centers, i, isClosed, distance_measure));
     }
     //первёрнутые кластерные решения
     PopulationPoint cluster_solutions_reversed(k);
@@ -100,7 +100,7 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
                 Point prePointEnd = population[i][std::max(0,g-1)].getPoint();
                 Point curPointBegin = cluster_solutions[clusterID][0].getPoint();
                 Point curPointEnd = cluster_solutions[clusterID][curLastIndex].getPoint();
-                if(distance(prePointEnd, curPointEnd) > distance(prePointEnd, curPointBegin)){
+                if(distance(prePointEnd, curPointEnd, isClosed, distance_measure) > distance(prePointEnd, curPointBegin, isClosed, distance_measure)){
                     cur_cluster_solution = cluster_solutions[clusterID];
                 }else{
                     cur_cluster_solution = cluster_solutions_reversed[clusterID];
@@ -138,8 +138,8 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
 //        //pref += sz;
 //    }
     //std::cout << print(population) << '\n';
-    std::cout << print(fitness(population)) << '\n';
-    std::vector<double> fit_vec = fitness(population);
+    std::cout << print(fitness(population, isClosed, distance_measure)) << '\n';
+    std::vector<double> fit_vec = fitness(population, isClosed, distance_measure);
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     GenomePoint best = population[best_index];
@@ -169,11 +169,11 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
         //Population offspring = ordered(population);
         //Population offspring = crossover_different2(population, fit_vec, 2);
         PopulationPoint offspring = crossover_random_parents(population);
-        fix(offspring, points, fix_greedy_left);
+        fix(offspring, points, fix_greedy_left, isClosed, distance_measure);
         //std::cout << terminator.getCurIteration() << " generation\n" << print(fitness(offspring)) << '\n';
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
         PopulationPoint united = concat(populations);
-        fit_vec = fitness(united);
+        fit_vec = fitness(united, isClosed, distance_measure);
         int cur_best = getBest(united, fit_vec);
         bool isProgressed = fit_vec[cur_best] < best_fit;
         if(isProgressed) {
@@ -181,7 +181,7 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
             best_fit = fit_vec[cur_best];
             //std::cout << terminator.getCurIteration() << std::endl;
             united.push_back(randomChoice(population[getRandomNumber(0, num_population-1)]));
-            fit_vec.push_back(fitness(united[united.size()-1]));
+            fit_vec.push_back(fitness(united[united.size()-1], isClosed, distance_measure));
         }else{
             united.push_back(best);
             fit_vec.push_back(best_fit);

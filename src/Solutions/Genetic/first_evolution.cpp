@@ -11,10 +11,10 @@
 #include "../../Fitness/Fitness.h"
 #include "../Auxiliary/Stat.h"
 
-GenomePoint first_evolution(int num_population, int num_iterations, GenomePoint &points){
+GenomePoint first_evolution(int num_population, int num_iterations, GenomePoint &points, bool  isClosed, measures distance_measure){
     int num_points = points.size();
     PopulationPoint population = random_init(points, num_population);
-    //Stat stat = Stat(num_iterations);
+    Stat stat = Stat(num_iterations);
     //double best_fit = fitness(population[0]);
     Terminator terminator = Terminator(num_iterations);
     while(!terminator.isSatisfied()){
@@ -24,11 +24,12 @@ GenomePoint first_evolution(int num_population, int num_iterations, GenomePoint 
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {population, offspring, mutants};
         PopulationPoint united = concat(populations);
         //если предпосчитать fit_vec, то вычисления идут примерно в два раза быстрее
-        std::vector<double> fit_vec = fitness(united);
+        std::vector<double> fit_vec = fitness(united, isClosed, distance_measure);
         population = rank(united, num_population, fit_vec);
         //population = united;
         terminator.update();
-        //stat.gatherAll(population, fitness(population));
+        fit_vec = fitness(population, isClosed, distance_measure);
+        stat.gatherAll(population, fit_vec);
     }
     return population[0];
 }

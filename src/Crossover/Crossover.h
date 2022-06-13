@@ -1,6 +1,7 @@
 #ifndef EVOLUTIONALGORITHM_CROSSOVER_H
 #define EVOLUTIONALGORITHM_CROSSOVER_H
 #include "../Gene/GenePoint.h"
+#include "../Distance_measures.h"
 #include <vector>
 //begin - минимальное количество генов, которые гарантированно достанутся первому родителю
 //end - второму
@@ -17,8 +18,8 @@ PopulationPoint crossover_different2(std::vector<std::vector<GenePoint>> &popula
 //population отсортирован по функции приспособленности
 PopulationPoint multi_fit_crossover(PopulationPoint &population, std::vector<double> &fit_vec, int num_offspring);
 PopulationPoint rank_fit_crossover(PopulationPoint &population, std::vector<double> &fit_vec, int num_pairs_offspring);
-PopulationPoint collision(PopulationPoint &population, std::vector<double> &fit_vec);
-PopulationPoint collision(GenomePoint &g1, GenomePoint &g2, double velocity1, double velocity2);
+PopulationPoint collision(PopulationPoint &population, std::vector<double> &fit_vec, bool isClosed, measures distance_measure);
+PopulationPoint collision(GenomePoint &g1, GenomePoint &g2, double velocity1, double velocity2, bool isClosed, measures distance_measure);
 PopulationPoint ordered(PopulationPoint &population);
 PopulationPoint ordered(GenomePoint &g1, GenomePoint &g2);
 PopulationCluster uniform(GenomeCluster &p1, GenomeCluster &g2);

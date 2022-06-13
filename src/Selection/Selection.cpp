@@ -8,14 +8,13 @@
 #include "../Solutions/Auxiliary/Prints.h"
 #include "../Pathes.h"
 #include "../Other/Roulette.h"
-//элитарный отбор, отбираются лучшие select особей
-PopulationPoint selection(PopulationPoint population, int num_selected){
+/*PopulationPoint selection(PopulationPoint population, int num_selected){
     std::sort(population.begin(), population.end(),[&](GenomePoint &a, GenomePoint &b){
         return fitness(a) < fitness(b);
     });
     population.resize(num_selected);
     return population;
-}
+}*/
 
 void truncation(std::vector<std::vector<GenePoint>> &population, int num_selected, std::vector<double> &fit_vec) {
     std::vector<int> indexes(population.size());

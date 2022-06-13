@@ -1,39 +1,8 @@
 #include "Fitness.h"
-double distance(const Point &a, const Point &b) {
-    return std::abs(a.getX() - b.getX()) + std::abs(a.getY() - b.getY());
-}
 double manhattan_distance(const Point &a, const Point &b){
     return std::abs(a.getX() - b.getX()) + std::abs(a.getY() - b.getY());
 }
-double get_distance(GenomePoint &genome, GenomePoint &example, int pos_genome, int pos_example) {
-    double res = 0.0;
-    if(pos_genome != 0){
-        res += distance(genome[pos_genome - 1].getPoint(), example[pos_example].getPoint());
-    }
-    if(pos_genome != genome.size()-1){
-        res += distance(genome[pos_genome + 1].getPoint(), example[pos_example].getPoint());
-    }
-    return res;
-}
 
-double get_distance(std::vector<GenePoint> &genome, int pos) {
-    double res = 0.0;
-    if(pos != 0){
-        res += distance(genome[pos - 1].getPoint(), genome[pos].getPoint());
-    }
-    if(pos != genome.size()-1){
-        res += distance(genome[pos + 1].getPoint(), genome[pos].getPoint());
-    }
-    return res;
-}
-
-double get_left_distance(GenomePoint &genome, GenomePoint &example, int pos_genome, int pos_example) {
-    double res = 0.0;
-    if(pos_genome != 0){
-        res += distance(genome[pos_genome - 1].getPoint(), example[pos_example].getPoint());
-    }
-    return res;
-}
 double euclidean_distance(const Point &p1, const Point &p2){
     return std::sqrt(euclidean_square(p1, p2));
 }

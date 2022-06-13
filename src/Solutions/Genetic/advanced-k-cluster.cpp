@@ -14,7 +14,7 @@
 #include "../../Other/DoubleOperations.h"
 #include "../Auxiliary/Stat.h"
 
-GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePoint &points){
+GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePoint &points, bool  isClosed, measures distance_measure){
     std::vector<int> labels;
     {
         int clusterID;
@@ -60,7 +60,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     for(auto i : clusters){
         int num_population = 2*i.getCluster().size();
         int num_iterations = i.getCluster().size();
-        PopulationPoint cur_solutions = clusterGA(num_population, num_iterations, i.getCluster());
+        PopulationPoint cur_solutions = clusterGA(num_population, num_iterations, i.getCluster(), isClosed, distance_measure);
         for(auto j : cur_solutions) {
             cluster_solutions[i.getType()].push_back(GeneCluster(i.getType(), j, i.getCenter()));
         }
@@ -68,7 +68,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     //порядок обхода кластеров
     std::vector<std::vector<int>> cluster_path(k, std::vector<int>(k));
     for(int i = 0; i < num_population && i < k; i++){
-        GenomePoint path = nearest(centers, i);
+        GenomePoint path = nearest(centers, i, isClosed, distance_measure);
         for(int j = 0; j < path.size(); j++){
             cluster_path[i][j] = (path[j].getType());
         }
@@ -92,7 +92,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     for(int j = 0; j < num_population; j++) {
         fit_vec[j] = 0;
         for(int i = 0; i < population[j].size(); i++){
-            fit_vec[j] += fitness(population[j][i].getCluster());
+            fit_vec[j] += fitness(population[j][i].getCluster(), isClosed, distance_measure);
         }
         if(population[j].size() >= 2) {
             Point p1_begin, p1_end, p2_begin, p2_end;
@@ -100,10 +100,10 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             p1_end = population[j][0].getLastGenePoint().getPoint();
             p2_begin = population[j][1].getGenePoint(0).getPoint();
             p2_end = population[j][1].getLastGenePoint().getPoint();
-            double dis1 = distance(p1_begin, p2_begin);
-            double dis2 = distance(p1_begin, p2_end);
-            double dis3 = distance(p1_end, p2_begin);
-            double dis4 = distance(p1_end, p2_end);
+            double dis1 = distance(p1_begin, p2_begin, isClosed, distance_measure);
+            double dis2 = distance(p1_begin, p2_end, isClosed, distance_measure);
+            double dis3 = distance(p1_end, p2_begin, isClosed, distance_measure);
+            double dis4 = distance(p1_end, p2_end, isClosed, distance_measure);
             if(dis3 < dis1 && dis3 < dis2 || dis4 < dis1 && dis4 < dis2){
                 population[j][0].reverse();
             }
@@ -112,8 +112,8 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
             Point p1_end = population[j][i - 1].getLastGenePoint().getPoint();
             Point p2_begin = population[j][i].getGenePoint(0).getPoint();
             Point p2_end = population[j][i].getLastGenePoint().getPoint();
-            double dis1 = distance(p1_end, p2_begin);
-            double dis2 = distance(p1_end, p2_end);
+            double dis1 = distance(p1_end, p2_begin, isClosed, distance_measure);
+            double dis2 = distance(p1_end, p2_end, isClosed, distance_measure);
             if (dis2 < dis1) {
                 population[j][i].reverse();
                 fit_vec[j] += dis2;
@@ -182,8 +182,8 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
                 //std::cout << fit_vec[i] << ' ' << fit_vec[j] << ' ';
                 clustersMutation(population[j], std::max(1, k/2));
                 randomChoice(population[i]);
-                fit_vec[i] = fitness(population[i]);
-                fit_vec[j] = fitness(population[j]);
+                fit_vec[i] = fitness(population[i], isClosed, distance_measure);
+                fit_vec[j] = fitness(population[j], isClosed, distance_measure);
                 //std::cout << fit_vec[i] << ' ' << fit_vec[j] << '\n';
             }
             PopulationCluster offspring = uniform(population[i], population[j]);
@@ -218,7 +218,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         //вычисление ФП
         fit_vec.clear();
         for (int i = 0; i < population.size(); i++){
-            fit_vec.push_back(fitness(population[i]));
+            fit_vec.push_back(fitness(population[i], isClosed, distance_measure));
         }
         //std::cout << population.size() << ' ';
         tournament(population, num_population, fit_vec);
@@ -246,7 +246,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         //stat.update();
         terminator.update();
     }
-    std::cout << fitness(best) << '\n';
+    std::cout << fitness(best, isClosed, distance_measure) << '\n';
     //удаление дубликаторв
     int r = population.size();
     for(int i = 0; i < r - 1; i++){
@@ -271,6 +271,6 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
         //std::cout << print(init_population[i]) << '\n';
     }
     std::cout << print(points) << '\n';
-    return clusterGA(num_population, num_iterations, points, init_population);
+    return clusterGA(num_population, num_iterations, points, isClosed, distance_measure, init_population);
     //return convert(best, originalID);
 }

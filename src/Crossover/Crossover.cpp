@@ -141,7 +141,7 @@ PopulationPoint rank_fit_crossover(PopulationPoint &population, std::vector<doub
     return offspring;
 }
 
-PopulationPoint collision(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec) {
+PopulationPoint collision(std::vector<std::vector<GenePoint>> &population, std::vector<double> &fit_vec, bool isClosed, measures distance_measure) {
     PopulationPoint offspring;
     int num_population = population.size();
     for(int p1 = 0; p1 < num_population; p1++){
@@ -149,19 +149,19 @@ PopulationPoint collision(std::vector<std::vector<GenePoint>> &population, std::
         if(p1 == p2)
             p2 = (p1 + 1)%num_population;
         //Population children = collision(population[p1], population[p2], getRandomNumber(1.0, fit_vec[p1]), getRandomNumber(1.0, fit_vec[p2]));
-        PopulationPoint children = collision(population[p1], population[p2], 1.0, 1.0);
+        PopulationPoint children = collision(population[p1], population[p2], 1.0, 1.0, isClosed, distance_measure);
         offspring.push_back(children[0]);
         offspring.push_back(children[1]);
     }
     return offspring;
 }
 
-PopulationPoint collision(std::vector<GenePoint> &g1, std::vector<GenePoint> &g2, double velocity1, double velocity2) {
+PopulationPoint collision(std::vector<GenePoint> &g1, std::vector<GenePoint> &g2, double velocity1, double velocity2, bool isClosed, measures distance_measure) {
     velocity2 = -velocity2;
     PopulationPoint offspring(2, GenomePoint(g1.size()));
     for(int i = 0; i < g1.size(); i++){
-        double mass1 = get_distance(g1, i);
-        double mass2 = get_distance(g2, i);
+        double mass1 = get_distance(g1, i, isClosed, distance_measure);
+        double mass2 = get_distance(g2, i, isClosed, distance_measure);
         double sum = mass1 + mass2;
         double dif = mass1 - mass2;
         double v1 = dif/sum*velocity1 + 2*mass2/sum*velocity2;

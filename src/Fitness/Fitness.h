@@ -3,15 +3,9 @@
 
 #include "../Gene/GenePoint.h"
 #include "../Distance_measures.h"
-double fitness(GenomePoint &genome);
 double fitness(GenomePoint &genome, bool isClosed, measures distance_measure);
-double fitness(GenomeCluster &cluster);
-std::vector<double> fitness(PopulationPoint &population);
+double fitness(GenomeCluster &cluster, bool isClosed, measures distance_measure);
 std::vector<double> fitness(PopulationPoint &population, bool isClosed, measures distance_measure);
-double distance(const Point &a, const Point &b);
-double get_distance(GenomePoint &genome, GenomePoint &example, int pos_genome, int pos_example);
-double get_left_distance(GenomePoint &genome, GenomePoint &example, int pos_genome, int pos_example);
-double get_distance(GenomePoint &genome, int pos);
 double distance(const Point &a, const Point &b, bool isClosed, measures distance_measure);
 double get_distance(GenomePoint &genome, GenomePoint &example, int pos_genome, int pos_example, bool isClosed, measures distance_measure);
 double get_left_distance(GenomePoint &genome, GenomePoint &example, int pos_genome, int pos_example, bool isClosed, measures distance_measure);

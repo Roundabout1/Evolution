@@ -15,7 +15,7 @@
 #include "../../Other/DoubleOperations.h"
 #include "../Non-genetic/nearest.h"
 
-GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &points, PopulationPoint &init_population){
+GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &points, bool isClosed, measures distance_measure, PopulationPoint &init_population){
     if(points.size() <= 2){
         return points;
     }
@@ -23,11 +23,11 @@ GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &point
     while(population.size() < num_population){
         int j = getRandomNumber(0, population.size()-1);
         population.push_back(mutation(population[j]));
-        population.push_back(nearest(points, getRandomNumber(0, points.size()-1)));
+        population.push_back(nearest(points, getRandomNumber(0, points.size()-1), isClosed, distance_measure));
         //population.push_back(mutation(population[j], 0.1));
         //std::cout << fitness(population[j]) << '\n';
     }
-    std::vector<double> fit_vec = fitness(population);
+    std::vector<double> fit_vec = fitness(population, isClosed, distance_measure);
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     GenomePoint best = population[best_index];
@@ -54,7 +54,7 @@ GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &point
             //std::cout << fit_vec[i] << ' ' << fit_vec[j] << ' ';
             if(isEqual(fit_vec[i], fit_vec[j])){
                 population[j] = randomChoice(population[j]);
-                fit_vec[j] = fitness(population[j]);
+                fit_vec[j] = fitness(population[j], isClosed, distance_measure);
                 //std::cout << fit_vec[i] << ' ' << fit_vec[j] << '\n';
             }
             //PopulationPoint off = crossover(population[i], population[j]);
@@ -65,7 +65,7 @@ GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &point
         //fix(offspring, points, fix_greedy_left);
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
         PopulationPoint united = concat(populations);
-        fit_vec = fitness(united);
+        fit_vec = fitness(united, isClosed, distance_measure);
         tournament(united, num_population, fit_vec);
         int cur_best = getBest(united, fit_vec);
         bool isProgressed = fit_vec[cur_best] < best_fit;
@@ -94,7 +94,7 @@ GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &point
         }
         truncation(united, num_population, fit_vec);
         population = united;*/
-        std::vector<double> fitn = fitness(population);
+        std::vector<double> fitn = fitness(population, isClosed, distance_measure);
         //std::cout << fitn.size() << '\n';
         stat.gatherAll(population, fitn);
         //stat.update();
@@ -102,14 +102,14 @@ GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &point
     }
     return best;
 }
-PopulationPoint clusterGA(int num_population, int num_iterations, GenomePoint &points){
+PopulationPoint clusterGA(int num_population, int num_iterations, GenomePoint &points, bool  isClosed, measures distance_measure){
     if(points.size() <= 2){
         PopulationPoint res;
         res.push_back(points);
         return res;
     }
-    PopulationPoint population = greedy_init(points, num_population);
-    std::vector<double> fit_vec = fitness(population);
+    PopulationPoint population = greedy_init(points, num_population, isClosed, distance_measure);
+    std::vector<double> fit_vec = fitness(population, isClosed, distance_measure);
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     GenomePoint best = population[best_index];
@@ -127,10 +127,10 @@ PopulationPoint clusterGA(int num_population, int num_iterations, GenomePoint &p
             mutants.push_back(randomChoice(population[j]));
         }
         PopulationPoint offspring = crossover_random_parents(population);
-        fix(offspring, points, fix_greedy_left);
+        fix(offspring, points, fix_greedy_left, isClosed, distance_measure);
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
         PopulationPoint united = concat(populations);
-        fit_vec = fitness(united);
+        fit_vec = fitness(united, isClosed, distance_measure);
         int cur_best = getBest(united, fit_vec);
         bool isProgressed = fit_vec[cur_best] < best_fit;
         if(isProgressed) {
