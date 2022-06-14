@@ -50,5 +50,11 @@ double fitness(GenomeCluster &cluster,bool isClosed, measures distance_measure){
         double dis = distance(p1_end, p2_begin, isClosed, distance_measure);
         sum += dis;
     }
+    if(isClosed){
+        Point p1_end = cluster[cluster.size()-1].getLastGenePoint().getPoint();
+        Point p2_begin = cluster[0].getGenePoint(0).getPoint();
+        double dis = distance(p1_end, p2_begin, isClosed, distance_measure);
+        sum += dis;
+    }
     return sum;
 }

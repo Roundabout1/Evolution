@@ -21,12 +21,14 @@ GenomePoint first_evolution(int num_population, int num_iterations, GenomePoint 
         PopulationPoint mutants = mutation(population, num_population, 2.0 / num_points);
         PopulationPoint offspring = crossover_random_parents(population);
         fix(offspring, points);
-        std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {population, offspring, mutants};
+        std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
         PopulationPoint united = concat(populations);
         //если предпосчитать fit_vec, то вычисления идут примерно в два раза быстрее
         std::vector<double> fit_vec = fitness(united, isClosed, distance_measure);
-        population = rank(united, num_population, fit_vec);
-        //population = united;
+        //population = rank(united, num_population, fit_vec);
+        tournament(united, num_population, fit_vec);
+        //truncation(united, num_population, fit_vec);
+        population = united;
         terminator.update();
         fit_vec = fitness(population, isClosed, distance_measure);
         stat.gatherAll(population, fit_vec);

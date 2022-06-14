@@ -30,20 +30,19 @@ points_int = points_string.astype(np.int)
 
 results0 = read_results(results_file0)
 results1 = read_results(results_file1)
-results2 = read_results(results_file2)
+#results2 = read_results(results_file2)
 
 plt.xlabel('Количество точек')
 plt.ylabel('Результат')
 #ax = plt.gca()
 #ax.set_xlim([3, 33])
-plt.plot(points_int, results0, label='АБС')
-plt.plot(points_int, results2, label='ГА со старой инициализацией')
-plt.plot(points_int, results1, label='ГА с новой инициализацией')
-
+plt.plot(points_int, results0, label='Точка разрыва')
+plt.plot(points_int, results1, label='Коллизия')
+#plt.plot(points_int, results1, label='ГА с новой инициализацией')
 mn = 100.0
 mx = 0.0
 mean = 0.0
-l = len(results0)
+l = len(results1)
 for i in range(0, len(results0)):
     p = (results0[i] - results1[i])/(results0[i]*0.01)
     mn = min(mn, p)
@@ -51,7 +50,7 @@ for i in range(0, len(results0)):
     mean += p
 mean /= l
 print("1: min = ", mn, "max = ", mx, "mean = ", mean)
-
+'''
 mn = 100.0
 mx = 0.0
 mean = 0.0
@@ -63,5 +62,6 @@ for i in range(0, len(results0)):
     mean += p
 mean /= l
 print("2: min = ", mn, "max = ", mx, "mean = ", mean)
+'''
 plt.legend()
 plt.show()

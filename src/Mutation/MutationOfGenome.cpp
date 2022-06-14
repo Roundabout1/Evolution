@@ -17,7 +17,7 @@ GenomePoint mutation(std::vector<GenePoint> &genome, double probability, int beg
     return mutant;
 }
 
-//выбирается случайный отрезок, который затем перворачивается
+//выбирается случайный отрезок, который затем переворачивается
 GenomePoint mutation(std::vector<GenePoint> &genome, int begin, int end) {
     int a = getRandomNumber(begin, genome.size()-1-end);
     int b = getRandomNumber(begin, genome.size()-1-end);
@@ -35,64 +35,64 @@ GenomePoint mutation(std::vector<GenePoint> &genome, int begin, int end) {
 }
 
 
-GenomePoint migration(GenomePoint &genome, int begin, int end){
-    /*Genome mutant = Genome(genome);
-    int ending = genome.size()-1-end;
-    //количество мигрирующих генов
-    int k = getRandomNumber(1, ending-begin);
-    int steps = getRandomNumber(1, ending-begin-2);
-    //позиция откуда мигрируют гены
-    int pos_from = getRandomNumber(begin, ending);
-    for(int i = 0; i < k; i++){
-        for(int j = 0; j < steps; j++){
-            int cur = (pos_from+j)%ending+begin;
-            int next = (cur+1)%ending+begin;
-            std::swap(mutant[cur], mutant[next]);
-        }
-    }*/
-    GenomePoint mutant = GenomePoint(genome);
-    int ending = genome.size()-1-end;
-    //позиция откуда мигрируют гены
-    int pos_from = getRandomNumber(begin+1, ending-1);
-    //количество мигрирующих генов
-    int k = 0;
-    int steps = 0;
-    bool forward = getRandomNumber(0, 1);
-    if(forward){
-        k = getRandomNumber(1, ending-pos_from);
-        steps = getRandomNumber(1, ending-pos_from-k+1);
-    }else{
-        k = getRandomNumber(1, pos_from - begin);
-        steps = getRandomNumber(-(pos_from - begin - k + 1), -1);
-    }
-    int first = pos_from + steps;
-    int last = pos_from;
-    std::vector<bool> used(genome.size());
-    for(int i = 0; i < k; i++){
-        int j = (forward) ? i : -i;
-        int cur = pos_from+j;
-        int next = cur+steps;
-        mutant[next] = genome[cur];
-        last = next;
-        used[genome[cur].getType()] = 1;
-    }
-    if(first > last)
-        std::swap(first, last);
-    for(int i = 0, j = 0; i < genome.size(); i++, j++){
-        mutant[i] = genome[j];
-        if(i+1 == first)
-            i = last;
-    }
-
-    for(int i = 0; i < k; i++){
-        int cur = (pos_from+i)%ending+begin;
-        int next = (cur+steps)%ending+begin;
-        mutant[next] = genome[cur];
-        used[genome[cur].getType()] = true;
-    }
-    std::cout << pos_from << ' ' << k << ' ' << steps << '\n';
-    return mutant;
-}
+//GenomePoint migration(GenomePoint &genome, int begin, int end){
+//    /*Genome mutant = Genome(genome);
+//    int ending = genome.size()-1-end;
+//    //количество мигрирующих генов
+//    int k = getRandomNumber(1, ending-begin);
+//    int steps = getRandomNumber(1, ending-begin-2);
+//    //позиция откуда мигрируют гены
+//    int pos_from = getRandomNumber(begin, ending);
+//    for(int i = 0; i < k; i++){
+//        for(int j = 0; j < steps; j++){
+//            int cur = (pos_from+j)%ending+begin;
+//            int next = (cur+1)%ending+begin;
+//            std::swap(mutant[cur], mutant[next]);
+//        }
+//    }*/
+//    GenomePoint mutant = GenomePoint(genome);
+//    int ending = genome.size()-1-end;
+//    //позиция откуда мигрируют гены
+//    int pos_from = getRandomNumber(begin+1, ending-1);
+//    //количество мигрирующих генов
+//    int k = 0;
+//    int steps = 0;
+//    bool forward = getRandomNumber(0, 1);
+//    if(forward){
+//        k = getRandomNumber(1, ending-pos_from);
+//        steps = getRandomNumber(1, ending-pos_from-k+1);
+//    }else{
+//        k = getRandomNumber(1, pos_from - begin);
+//        steps = getRandomNumber(-(pos_from - begin - k + 1), -1);
+//    }
+//    int first = pos_from + steps;
+//    int last = pos_from;
+//    std::vector<bool> used(genome.size());
+//    for(int i = 0; i < k; i++){
+//        int j = (forward) ? i : -i;
+//        int cur = pos_from+j;
+//        int next = cur+steps;
+//        mutant[next] = genome[cur];
+//        last = next;
+//        used[genome[cur].getType()] = 1;
+//    }
+//    if(first > last)
+//        std::swap(first, last);
+//    for(int i = 0, j = 0; i < genome.size(); i++, j++){
+//        mutant[i] = genome[j];
+//        if(i+1 == first)
+//            i = last;
+//    }
+//
+//    for(int i = 0; i < k; i++){
+//        int cur = (pos_from+i)%ending+begin;
+//        int next = (cur+steps)%ending+begin;
+//        mutant[next] = genome[cur];
+//        used[genome[cur].getType()] = true;
+//    }
+//    std::cout << pos_from << ' ' << k << ' ' << steps << '\n';
+//    return mutant;
+//}
 
 GenomePoint single_migration(GenomePoint &genome, int begin, int end){
     GenomePoint mutant = GenomePoint(genome);
@@ -123,11 +123,11 @@ void inversion(std::vector<GenePoint> &genome) {
 }
 
 GenomePoint randomChoice(std::vector<GenePoint> &genome, int begin, int end) {
-    int mut = getRandomNumber(0, 2);
+    int mut = getRandomNumber(0, 1);
     switch (mut) {
         case 0: return mutation(genome, begin, end);
         case 1: return single_migration(genome, begin, end);
-        case 2: return neighbourSwap(genome, begin, end);
+        //case 2: return neighbourSwap(genome, begin, end);
     }
 }
 void flip(GenomeCluster &genome, int begin, int end){

@@ -59,7 +59,7 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
     for(auto i : clusters){
         int num_population = 2*i.size();
         int num_iterations = 2*i.size();
-        cluster_solutions.push_back(second_evolution(num_population, num_iterations, i, isClosed, distance_measure));
+        cluster_solutions.push_back(second_evolution(num_population, num_iterations, i, 0, distance_measure));
         //std::cout << cnt<< '\n';
         //cnt++;
         //cluster_solutions.push_back(mutation_based(num_population, num_iterations, i));

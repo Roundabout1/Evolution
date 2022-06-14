@@ -16,10 +16,10 @@
 
 GenomePoint second_evolution(int num_population, int num_iterations, std::vector<GenePoint> &points, bool isClosed, measures distance_measure) {
     int num_points = points.size();
-    //Population population = random_init(points, num_population);
-    PopulationPoint population = greedy_init(points, num_population, isClosed, distance_measure);
+    PopulationPoint population = random_init(points, num_population);
+    //PopulationPoint population = greedy_init(points, num_population, isClosed, distance_measure);
     std::vector<double> fit_vec = fitness(population, isClosed, distance_measure);
-    std::cout << print(fit_vec) << '\n';
+    //std::cout << print(fit_vec) << '\n';
     int best_index = getBest(population, fit_vec);
     double best_fit = fit_vec[best_index];
     GenomePoint best = population[best_index];
@@ -30,25 +30,27 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
     //std::cout << "a\n";
     //std::cout << fit_vec[best_index] << std::endl;
     while(!terminator.isSatisfied()){
-        //инверсия действительно может улучшить результат!
-        int invs = std::max(1, num_population/10);
+        /*int invs = std::max(1, num_population/10);
         for(int i = 0; i < invs; i++) {
             int j = getRandomNumber(0, num_population-1);
             inversion(population[j]);
-        }
+        }*/
         PopulationPoint mutants;
         for(int i = 0; i < num_population; i++){
             int j = getRandomNumber(0, num_population-1);
-            mutants.push_back(randomChoice(population[j]));
+            //mutants.push_back(randomChoice(population[j]));
+            mutants.push_back(mutation(population[j]));
         }
-        //fit_vec = fitness(population);
+        //fit_vec = fitness(population, isClosed, distance_measure);
         //sort(population, fit_vec, true);
         //Population offspring = crossover_similar(population, fit_vec);
-        //Population offspring = ordered(population);
+        //PopulationPoint offspring = ordered(population);
         PopulationPoint offspring = crossover_random_parents(population);
         //Population offspring = crossover_different2(population, fit_vec, 2);
-        //Population offspring = crossover_random_parents(population, 2);
+        //PopulationPoint offspring = collision(population, fit_vec, isClosed, distance_measure);
+        //PopulationPoint offspring = rank_fit_crossover(population, fit_vec, num_population);
         fix(offspring, points, fix_greedy_left, isClosed, distance_measure);
+        //fix(offspring, points);
         //std::cout << terminator.getCurIteration() << " generation\n" << print(fitness(offspring)) << '\n';
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
         PopulationPoint united = concat(populations);

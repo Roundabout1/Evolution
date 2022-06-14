@@ -23,7 +23,7 @@ GenomePoint clusterGA(int num_population, int num_iterations, GenomePoint &point
     while(population.size() < num_population){
         int j = getRandomNumber(0, population.size()-1);
         population.push_back(mutation(population[j]));
-        population.push_back(nearest(points, getRandomNumber(0, points.size()-1), isClosed, distance_measure));
+        //population.push_back(nearest(points, getRandomNumber(0, points.size()-1), isClosed, distance_measure));
         //population.push_back(mutation(population[j], 0.1));
         //std::cout << fitness(population[j]) << '\n';
     }

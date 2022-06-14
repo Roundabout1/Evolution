@@ -60,7 +60,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     for(auto i : clusters){
         int num_population = 2*i.getCluster().size();
         int num_iterations = i.getCluster().size();
-        PopulationPoint cur_solutions = clusterGA(num_population, num_iterations, i.getCluster(), isClosed, distance_measure);
+        PopulationPoint cur_solutions = clusterGA(num_population, num_iterations, i.getCluster(), 0, distance_measure);
         for(auto j : cur_solutions) {
             cluster_solutions[i.getType()].push_back(GeneCluster(i.getType(), j, i.getCenter()));
         }
