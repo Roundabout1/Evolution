@@ -18,7 +18,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     std::vector<int> labels;
     {
         int clusterID;
-        std::ifstream read(k_medoids_labels);
+        std::ifstream read(k_labels);
         while(read >> clusterID){
             labels.push_back(clusterID);
         }
@@ -29,7 +29,7 @@ GenomePoint advanced_k_clusters(int num_population, int num_iterations, GenomePo
     {
         double x, y;
         int clusterID = 0;
-        std::ifstream read(k_medoids_centers);
+        std::ifstream read(k_centers);
         while(read >> x >> y){
             centers.push_back(GenePoint(clusterID, Point(x, y)));
             clusterID++;

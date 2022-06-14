@@ -139,9 +139,9 @@ f.close()
 
 #чтение значения функции приспособленности
 
-showPoints(points)
+#showPoints(points)
 #showKmeans(points)
 #showKmedoids(points)
-#showSolution(points, 1)
+showSolution(points, 1)
 #showFitness()
 #showConvergence()

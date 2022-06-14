@@ -14,6 +14,7 @@
 #include "../Auxiliary/Stat.h"
 #include "../../Other/PopulationSort.h"
 #include "../Non-genetic/nearest.h"
+#include "../../Other/DoubleOperations.h"
 
 GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomePoint &points, bool  isClosed, measures distance_measure){
     std::vector<int> labels;
@@ -150,14 +151,14 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
     //std::cout << "a\n";
     //std::cout << fit_vec[best_index] << std::endl;
     while(!terminator.isSatisfied()){
-        int invs = std::max(1, num_population/10);
+        /*int invs = std::max(1, num_population/10);
         for(int i = 0; i < invs; i++) {
             int j = getRandomNumber(0, num_population-1);
             inversion(population[j]);
-        }
+        }*/
         PopulationPoint mutants(num_population - 1);
         for(int i = 0; i < num_population-1; i++){
-            mutants[i] = randomChoice(population[i]);
+            mutants[i] = mutation(population[i]);
         }
         /*for(int i = 0; i < num_population/2; i++){
             int j = getRandomNumber(0, num_population-1);
@@ -168,7 +169,18 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
         //Population offspring = crossover_similar(population, fit_vec);
         //Population offspring = ordered(population);
         //Population offspring = crossover_different2(population, fit_vec, 2);
-        PopulationPoint offspring = crossover_random_parents(population);
+        //PopulationPoint offspring = crossover_random_parents(population);
+        PopulationPoint offspring;
+        for(int p1 = 0; p1 < num_population; p1++){
+            int p2 = getRandomNumber(0, num_population - 1);
+            if(p1 == p2)
+                p2 = (p1 + 1)%num_population;
+            if(isEqual(fit_vec[p1], fit_vec[p2]))
+                population[p2] = mutation(population[p2]);
+            PopulationPoint children = crossover(population[p1], population[p2]);
+            offspring.push_back(children[0]);
+            offspring.push_back(children[1]);
+        }
         fix(offspring, points, fix_greedy_left, isClosed, distance_measure);
         //std::cout << terminator.getCurIteration() << " generation\n" << print(fitness(offspring)) << '\n';
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
@@ -180,11 +192,11 @@ GenomePoint k_clusters_evolution(int num_population, int num_iterations, GenomeP
             best = united[cur_best];
             best_fit = fit_vec[cur_best];
             //std::cout << terminator.getCurIteration() << std::endl;
-            united.push_back(randomChoice(population[getRandomNumber(0, num_population-1)]));
-            fit_vec.push_back(fitness(united[united.size()-1], isClosed, distance_measure));
+            //united.push_back(randomChoice(population[getRandomNumber(0, num_population-1)]));
+            //fit_vec.push_back(fitness(united[united.size()-1], isClosed, distance_measure));
         }else{
-            united.push_back(best);
-            fit_vec.push_back(best_fit);
+            //united.push_back(best);
+            //fit_vec.push_back(best_fit);
         }
         //truncation(united, num_population, fit_vec);
         tournament(united, num_population, fit_vec);

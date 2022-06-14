@@ -36,7 +36,7 @@ int main(){
 //        ofstreams.push_back(std::ofstream(tests_path + "/results" + std::to_string(i) + ".txt"));
 //        time.push_back(std::ofstream(tests_path + "/time" + std::to_string(i) + ".txt"));
 //    }
-    int num =1;
+    int num = 2;
     ofstreams.push_back(std::ofstream(tests_path + "/results" + std::to_string(num) + ".txt"));
     time.push_back(std::ofstream(tests_path + "/time" + std::to_string(num) + ".txt"));
     std::ofstream num_points(tests_path+"/num_points.txt");

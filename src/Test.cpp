@@ -16,21 +16,26 @@
 #include "Fix/Fix.h"
 #include "K-clusters/k-clusters.h"
 #include "Solutions/Genetic/GeneticSolutions.h"
+//#include "Python.h"
 void g(std::vector<Gene *> &gene){
     std::cout << gene[0]->getType();
 }
 int main(){
+    //std::cout << py_exe + " " + k_medoids_script << std::endl;
+    //system((py_exe + " " + k_medoids_script).c_str());
+    //system("../venv2/Scripts/python.exe ../PythonScripts/k-medoids.py");
     GenomePoint points;
     int num_population, num_iterations;
-    readData(num_population, num_iterations, points);
+    system("cd .. venv2/Scripts/python.exe PythonScripts/k-medoids.py");
+    //readData(num_population, num_iterations, points);
     //k_clusters_evolution(num_population, num_iterations, points);
-    std::cout << print(points);
-    ln
+    //std::cout << print(points);
+    //ln
     //advanced_k_clusters(num_population, num_iterations, points);
     /*PopulationPoint p = clusterGA(num_iterations, num_population, points);
     std::cout << print(p) << '\n';
     std::cout << print(fitness(p));*/
-    advanced_k_clusters(num_population, num_iterations, points);
+    //advanced_k_clusters(num_population, num_iterations, points);
     /*inversion(points);
     std::cout << print(points);
     ln

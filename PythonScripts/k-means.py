@@ -1,5 +1,4 @@
 import math
-
 from sklearn.cluster import KMeans
 import numpy as np
 f = open('../cmake-build-debug/data/input/points.txt', 'r')
@@ -14,17 +13,17 @@ print(k)
 kmeans = KMeans(
     init="k-means++",
     n_clusters=k,
-    n_init=2*k,
-    max_iter=2*n,
+    n_init=k,
+    max_iter=n,
     algorithm="lloyd"
 )
 kmeans.fit(points)
 labels = np.array2string(kmeans.labels_)
-print(points)
-print(labels)
-print(kmeans.n_iter_)
-print(kmeans.inertia_)
-with open("../cmake-build-debug/data/input/k-meansPy.txt", "w") as external_file:
+#print(points)
+#print(labels)
+#print(kmeans.n_iter_)
+#print(kmeans.inertia_)
+with open("../cmake-build-debug/data/input/k-labelsPy.txt", "w") as external_file:
     print(labels[1:-1], file=external_file)
     external_file.close()
 

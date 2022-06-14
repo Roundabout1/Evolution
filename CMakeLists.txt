@@ -43,3 +43,7 @@ add_executable(non-evolution  src/Solutions/Non-genetic/Main-non-evolution.cpp s
         src/Pathes.h src/Solutions/Non-genetic/nearest.cpp src/Solutions/Non-genetic/nearest.h src/Other/Point.cpp
         src/Other/Point.h src/Solutions/Auxiliary/Prints.cpp src/Solutions/Auxiliary/Prints.h
         src/Solutions/Auxiliary/ReadData.h src/Solutions/Auxiliary/ReadData.cpp src/Other/PopulationSort.cpp src/Other/PopulationSort.h src/Solutions/Genetic/third_evolution.cpp src/Other/Roulette.cpp src/Other/Roulette.h src/Other/DoubleOperations.cpp src/Other/DoubleOperations.h src/Solutions/Genetic/GeneticSolutions.h src/K-clusters/k-clusters.cpp src/K-clusters/k-clusters.h src/Fitness/Euclidean.cpp src/Distance_measures.h)
+
+#find_package(PythonLibs v)
+#include_directories(venv2/Scripts/python.exe)
+#target_link_libraries(Test venv2/Lib)

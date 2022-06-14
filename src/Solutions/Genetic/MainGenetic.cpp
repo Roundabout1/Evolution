@@ -15,11 +15,11 @@ int main() {
     GenomePoint points;
     readData(num_population, num_iterations, points, isClosed, distance_measure);
     //GenomePoint result = first_evolution(num_population, num_iterations, points, isClosed, distance_measure);
-    //GenomePoint result = second_evolution(num_population, num_iterations, points, isClosed, distance_measure);
+    GenomePoint result = second_evolution(num_population, num_iterations, points, isClosed, distance_measure);
     //GenomePoint result = k_clusters_evolution(num_population, num_iterations, points, isClosed, distance_measure);
     //GenomePoint result = mutation_based(num_population, num_iterations, points, isClosed, distance_measure);
     //GenomePoint result = nearest(points, isClosed, distance_measure);
-    GenomePoint result = advanced_k_clusters(num_population, num_iterations, points, isClosed, distance_measure);
+    //GenomePoint result = advanced_k_clusters(num_population, num_iterations, points, isClosed, distance_measure);
     Stat::gatherGenome(result);
     Stat::gatherFitness(fitness(result, isClosed, distance_measure));
     return 0;

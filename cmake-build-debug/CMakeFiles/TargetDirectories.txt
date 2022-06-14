@@ -1,5 +1,4 @@
 D:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/cmake-build-debug/CMakeFiles/main_genetic.dir
-D:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/cmake-build-debug/CMakeFiles/First_generator.dir
 D:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/cmake-build-debug/CMakeFiles/Test.dir
 D:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/cmake-build-debug/CMakeFiles/Testing.dir
 D:/Users/mrsiv/CLionProjects/EvolutionAlgorithm/cmake-build-debug/CMakeFiles/Main_generator.dir

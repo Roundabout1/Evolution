@@ -13,6 +13,7 @@
 #include "../Auxiliary/Stat.h"
 #include "../../Other/PopulationSort.h"
 #include "../../Distance_measures.h"
+#include "../../Other/DoubleOperations.h"
 
 GenomePoint second_evolution(int num_population, int num_iterations, std::vector<GenePoint> &points, bool isClosed, measures distance_measure) {
     int num_points = points.size();
@@ -45,11 +46,22 @@ GenomePoint second_evolution(int num_population, int num_iterations, std::vector
         //sort(population, fit_vec, true);
         //Population offspring = crossover_similar(population, fit_vec);
         //PopulationPoint offspring = ordered(population);
-        PopulationPoint offspring = crossover_random_parents(population);
+        //PopulationPoint offspring = crossover_random_parents(population);
         //Population offspring = crossover_different2(population, fit_vec, 2);
         //PopulationPoint offspring = collision(population, fit_vec, isClosed, distance_measure);
         //PopulationPoint offspring = rank_fit_crossover(population, fit_vec, num_population);
-        fix(offspring, points, fix_greedy_left, isClosed, distance_measure);
+        PopulationPoint offspring;
+        for(int p1 = 0; p1 < num_population; p1++){
+            int p2 = getRandomNumber(0, num_population - 1);
+            if(p1 == p2)
+                p2 = (p1 + 1)%num_population;
+            if(isEqual(fit_vec[p1], fit_vec[p2]))
+                population[p2] = mutation(population[p2]);
+            PopulationPoint children = crossover(population[p1], population[p2]);
+            offspring.push_back(children[0]);
+            offspring.push_back(children[1]);
+        }
+        fix(offspring, points, fix_greedy2, isClosed, distance_measure);
         //fix(offspring, points);
         //std::cout << terminator.getCurIteration() << " generation\n" << print(fitness(offspring)) << '\n';
         std::vector<PopulationPoint> populations = std::vector<PopulationPoint> {offspring, mutants};
